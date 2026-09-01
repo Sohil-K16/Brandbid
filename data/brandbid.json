@@ -1,0 +1,1386 @@
+{
+  "brands": [
+    {
+      "id": "brand_synthetix",
+      "websiteUrl": "https://synthetix.ai",
+      "canonicalUrl": "synthetix.ai",
+      "slug": "synthetix-ai",
+      "name": "Synthetix AI",
+      "category": "AI",
+      "logoUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80",
+      "description": "Autonomous intelligence infrastructure for next-gen reasoning models.",
+      "tagline": "Autonomous Reasoning at Scale",
+      "totalBid": 10000,
+      "status": "published",
+      "managementTokenHash": "fcb8ec8212a07b22f7a0b494cab82121b2c9df10971a2d652c00aee5e91bdf2d",
+      "template": "typography",
+      "clickCount": 32,
+      "createdAt": "2026-08-18T14:35:15.449Z",
+      "updatedAt": "2026-08-18T14:35:15.449Z"
+    },
+    {
+      "id": "brand_veloce",
+      "websiteUrl": "https://veloce.dev",
+      "canonicalUrl": "veloce.dev",
+      "slug": "veloce-dev",
+      "name": "Veloce Dev",
+      "category": "Developer Tools",
+      "logoUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=200&auto=format&fit=crop&q=80",
+      "description": "Zero-latency build system and incremental compilation engine for TypeScript.",
+      "tagline": "Lightning Fast Rust Builds",
+      "totalBid": 7500,
+      "status": "published",
+      "managementTokenHash": "3d48fe400e3b5d4fc3a22bc7770c832b46690ad797d29434a82132f39bcbd565",
+      "template": "logo_dominant",
+      "clickCount": 5,
+      "createdAt": "2026-08-20T15:35:15.449Z",
+      "updatedAt": "2026-08-20T15:35:15.449Z"
+    },
+    {
+      "id": "brand_hyperflow",
+      "websiteUrl": "https://hyperflow.io",
+      "canonicalUrl": "hyperflow.io",
+      "slug": "hyperflow",
+      "name": "HyperFlow",
+      "category": "SaaS",
+      "logoUrl": "https://images.unsplash.com/photo-1557683316-973673baf926?w=200&auto=format&fit=crop&q=80",
+      "description": "Real-time collaborative canvas for engineering and product architecture.",
+      "tagline": "Visual Systems for Engineering",
+      "totalBid": 5800,
+      "status": "published",
+      "managementTokenHash": "7761172795d9363c4664f40506c55c02ec7a2c713358731fd32cf7493f01d01c",
+      "template": "editorial",
+      "clickCount": 32,
+      "createdAt": "2026-08-22T16:35:15.449Z",
+      "updatedAt": "2026-08-22T16:35:15.449Z"
+    },
+    {
+      "id": "brand_payzen",
+      "websiteUrl": "https://payzen.finance",
+      "canonicalUrl": "payzen.finance",
+      "slug": "payzen",
+      "name": "PayZen",
+      "category": "Fintech",
+      "logoUrl": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=200&auto=format&fit=crop&q=80",
+      "description": "Modern global treasury management and cross-border settlement rails.",
+      "tagline": "Borderless Financial Rails",
+      "totalBid": 4200,
+      "status": "published",
+      "managementTokenHash": "872d251d3cc8dc2780bb031d5804ead2deaf925f39776a2cb16b0842a0f02694",
+      "template": "minimal",
+      "clickCount": 38,
+      "createdAt": "2026-08-23T17:35:15.449Z",
+      "updatedAt": "2026-08-23T17:35:15.449Z"
+    },
+    {
+      "id": "brand_kubecraft",
+      "websiteUrl": "https://kubecraft.cloud",
+      "canonicalUrl": "kubecraft.cloud",
+      "slug": "kubecraft",
+      "name": "KubeCraft",
+      "category": "Developer Tools",
+      "logoUrl": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200&auto=format&fit=crop&q=80",
+      "description": "Effortless multi-cloud Kubernetes orchestration with automated autoscaling.",
+      "tagline": "Kubernetes Without the Tears",
+      "totalBid": 3500,
+      "status": "published",
+      "managementTokenHash": "4c4299a1c2aab1d3857cf9c9ca1471d8c6ecfaee0881a71753c4637998ddf033",
+      "template": "typography",
+      "clickCount": 45,
+      "createdAt": "2026-08-24T18:35:15.449Z",
+      "updatedAt": "2026-08-24T18:35:15.449Z"
+    },
+    {
+      "id": "brand_omnitrack",
+      "websiteUrl": "https://omnitrack.so",
+      "canonicalUrl": "omnitrack.so",
+      "slug": "omnitrack",
+      "name": "OmniTrack",
+      "category": "SaaS",
+      "logoUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&auto=format&fit=crop&q=80",
+      "description": "All-in-one product analytics and session replay built for privacy-first teams.",
+      "tagline": "Privacy-First Product Analytics",
+      "totalBid": 2800,
+      "status": "published",
+      "managementTokenHash": "0fcfe3b75a15c7a4994a8beead0501d4ceb3fbaf458bac975088829b7e80a85b",
+      "template": "editorial",
+      "clickCount": 14,
+      "createdAt": "2026-08-25T19:35:15.449Z",
+      "updatedAt": "2026-08-25T19:35:15.449Z"
+    },
+    {
+      "id": "brand_draftwave",
+      "websiteUrl": "https://draftwave.studio",
+      "canonicalUrl": "draftwave.studio",
+      "slug": "draftwave",
+      "name": "DraftWave",
+      "category": "Agency",
+      "logoUrl": "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=200&auto=format&fit=crop&q=80",
+      "description": "Brand identity and tactile digital experiences for bold category creators.",
+      "tagline": "Tactile Digital Brands",
+      "totalBid": 2200,
+      "status": "published",
+      "managementTokenHash": "37b33bc6f075b650eb97822d0b7a5588f6acbaeb3dc605f9207bbf6c5e746209",
+      "template": "logo_dominant",
+      "clickCount": 5,
+      "createdAt": "2026-08-26T20:35:15.449Z",
+      "updatedAt": "2026-08-26T20:35:15.449Z"
+    },
+    {
+      "id": "brand_zenithos",
+      "websiteUrl": "https://zenithos.co",
+      "canonicalUrl": "zenithos.co",
+      "slug": "zenith-os",
+      "name": "Zenith OS",
+      "category": "Consumer",
+      "logoUrl": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=200&auto=format&fit=crop&q=80",
+      "description": "A focused, distraction-free spatial computing environment for deep work.",
+      "tagline": "Spatial Computing for Deep Work",
+      "totalBid": 1800,
+      "status": "published",
+      "managementTokenHash": "f9df88540d3492bfda07bb8a9c75c3060e4e05581a90b5b1447461dd7924759f",
+      "template": "minimal",
+      "clickCount": 37,
+      "createdAt": "2026-08-27T21:35:15.449Z",
+      "updatedAt": "2026-08-27T21:35:15.449Z"
+    },
+    {
+      "id": "brand_pulsegraph",
+      "websiteUrl": "https://pulsegraph.ai",
+      "canonicalUrl": "pulsegraph.ai",
+      "slug": "pulsegraph",
+      "name": "PulseGraph",
+      "category": "AI",
+      "logoUrl": "https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=200&auto=format&fit=crop&q=80",
+      "description": "Graph neural networks for predictive biosensors and health metrics.",
+      "tagline": "Predictive Neural Health",
+      "totalBid": 1500,
+      "status": "published",
+      "managementTokenHash": "8570c3192abf05cdd4b98ffde0afb9b3e91768406ec1945d814a87e2db6a7421",
+      "template": "typography",
+      "clickCount": 8,
+      "createdAt": "2026-08-27T22:35:15.449Z",
+      "updatedAt": "2026-08-27T22:35:15.449Z"
+    },
+    {
+      "id": "brand_cartlogic",
+      "websiteUrl": "https://cartlogic.shop",
+      "canonicalUrl": "cartlogic.shop",
+      "slug": "cartlogic",
+      "name": "CartLogic",
+      "category": "E-commerce",
+      "logoUrl": "https://images.unsplash.com/photo-1556742049-0a67e5572293?w=200&auto=format&fit=crop&q=80",
+      "description": "High-conversion headless checkout engine with 1-click international payments.",
+      "tagline": "Headless E-commerce Checkout",
+      "totalBid": 1200,
+      "status": "published",
+      "managementTokenHash": "da5c3d5598c09dec859cddfa9c7defed71d2e44b2e42f7058672264588835c33",
+      "template": "editorial",
+      "clickCount": 29,
+      "createdAt": "2026-08-28T23:35:15.449Z",
+      "updatedAt": "2026-08-28T23:35:15.449Z"
+    },
+    {
+      "id": "brand_skillforge",
+      "websiteUrl": "https://skillforge.academy",
+      "canonicalUrl": "skillforge.academy",
+      "slug": "skillforge",
+      "name": "SkillForge",
+      "category": "Education",
+      "logoUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=200&auto=format&fit=crop&q=80",
+      "description": "Interactive browser-based simulators for mastering backend systems.",
+      "tagline": "Master Real Backend Systems",
+      "totalBid": 1000,
+      "status": "published",
+      "managementTokenHash": "2393938e3b3ebc79f22609149190e7bd5d451ef886f99e8aed6e244caa2702f0",
+      "template": "typography",
+      "clickCount": 16,
+      "createdAt": "2026-08-29T00:35:15.449Z",
+      "updatedAt": "2026-08-29T00:35:15.449Z"
+    },
+    {
+      "id": "brand_byteforge",
+      "websiteUrl": "https://byteforge.dev",
+      "canonicalUrl": "byteforge.dev",
+      "slug": "byteforge",
+      "name": "ByteForge",
+      "category": "Developer Tools",
+      "logoUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&auto=format&fit=crop&q=80",
+      "description": "WebAssembly execution runtime for micro-services with instant cold starts.",
+      "tagline": "Instant WASM Microservices",
+      "totalBid": 850,
+      "status": "published",
+      "managementTokenHash": "9dc994e65697642ed55735951587c8e63e159de66cfe0802015541d1cd61261d",
+      "template": "minimal",
+      "clickCount": 31,
+      "createdAt": "2026-08-30T01:35:15.449Z",
+      "updatedAt": "2026-08-30T01:35:15.449Z"
+    },
+    {
+      "id": "brand_aeromail",
+      "websiteUrl": "https://aeromail.app",
+      "canonicalUrl": "aeromail.app",
+      "slug": "aeromail",
+      "name": "AeroMail",
+      "category": "SaaS",
+      "logoUrl": "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=200&auto=format&fit=crop&q=80",
+      "description": "Keyboard-driven email client designed for ultra high-volume founders.",
+      "tagline": "Inbox Zero in 60 Seconds",
+      "totalBid": 750,
+      "status": "published",
+      "managementTokenHash": "8c023dcc192ad991a36e18f2546bf8f85834df108504da5d303be38b27d3c1a7",
+      "template": "logo_dominant",
+      "clickCount": 24,
+      "createdAt": "2026-08-30T02:35:15.449Z",
+      "updatedAt": "2026-08-30T02:35:15.449Z"
+    },
+    {
+      "id": "brand_lumina",
+      "websiteUrl": "https://lumina.vision",
+      "canonicalUrl": "lumina.vision",
+      "slug": "lumina-ai",
+      "name": "Lumina AI",
+      "category": "AI",
+      "logoUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=200&auto=format&fit=crop&q=80",
+      "description": "Generative video relighting and camera control for cinema VFX.",
+      "tagline": "Cinema-Grade AI Relighting",
+      "totalBid": 650,
+      "status": "published",
+      "managementTokenHash": "5b5275b1b10b5a0137010470cb542a2b4f27d70315d9eefc73b52bcbeeb473e3",
+      "template": "editorial",
+      "clickCount": 45,
+      "createdAt": "2026-08-31T03:35:15.449Z",
+      "updatedAt": "2026-08-31T03:35:15.449Z"
+    },
+    {
+      "id": "brand_finstack",
+      "websiteUrl": "https://finstack.xyz",
+      "canonicalUrl": "finstack.xyz",
+      "slug": "finstack",
+      "name": "FinStack",
+      "category": "Fintech",
+      "logoUrl": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=200&auto=format&fit=crop&q=80",
+      "description": "Programmable corporate credit cards and automated expense reconciliation.",
+      "tagline": "Programmable Spend Control",
+      "totalBid": 550,
+      "status": "published",
+      "managementTokenHash": "6a3891859a4fb1441e2b1debe6d253a5544a83940778cc693be82d6075b82f5c",
+      "template": "typography",
+      "clickCount": 13,
+      "createdAt": "2026-08-31T04:35:15.449Z",
+      "updatedAt": "2026-08-31T04:35:15.449Z"
+    },
+    {
+      "id": "brand_nordic",
+      "websiteUrl": "https://nordicdesign.co",
+      "canonicalUrl": "nordicdesign.co",
+      "slug": "nordic-design",
+      "name": "Nordic Design",
+      "category": "Agency",
+      "logoUrl": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=200&auto=format&fit=crop&q=80",
+      "description": "Minimalist Scandinavian digital product design and design systems.",
+      "tagline": "Pure Scandinavian UI/UX",
+      "totalBid": 480,
+      "status": "published",
+      "managementTokenHash": "970297892447170ba90ec18b4c6c05010e21788e8721257d39b1e721dcb3deb2",
+      "template": "minimal",
+      "clickCount": 47,
+      "createdAt": "2026-08-31T05:35:15.449Z",
+      "updatedAt": "2026-08-31T05:35:15.449Z"
+    },
+    {
+      "id": "brand_pixelcraft",
+      "websiteUrl": "https://pixelcraft.design",
+      "canonicalUrl": "pixelcraft.design",
+      "slug": "pixelcraft",
+      "name": "PixelCraft",
+      "category": "Consumer",
+      "logoUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=200&auto=format&fit=crop&q=80",
+      "description": "Generative retro pixel art editor and animation suite for indie game devs.",
+      "tagline": "Retro Pixel Art Suite",
+      "totalBid": 420,
+      "status": "published",
+      "managementTokenHash": "f37cc27238500de0b071c913e38c19080ff8ac2a43d116522e0394a6c5032ee9",
+      "template": "logo_dominant",
+      "clickCount": 32,
+      "createdAt": "2026-09-01T06:35:15.449Z",
+      "updatedAt": "2026-09-01T06:35:15.449Z"
+    },
+    {
+      "id": "brand_cloudnest",
+      "websiteUrl": "https://cloudnest.io",
+      "canonicalUrl": "cloudnest.io",
+      "slug": "cloudnest",
+      "name": "CloudNest",
+      "category": "Developer Tools",
+      "logoUrl": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=200&auto=format&fit=crop&q=80",
+      "description": "Instant ephemeral dev environments spawned in under 2 seconds.",
+      "tagline": "Ephemeral Dev Sandboxes",
+      "totalBid": 360,
+      "status": "published",
+      "managementTokenHash": "ff56ff564ff4d000576ad62dda576f50b9ca39b508016f265f603742a9adfad0",
+      "template": "typography",
+      "clickCount": 23,
+      "createdAt": "2026-09-01T07:35:15.449Z",
+      "updatedAt": "2026-09-01T07:35:15.449Z"
+    },
+    {
+      "id": "brand_nexuspay",
+      "websiteUrl": "https://nexuspay.co",
+      "canonicalUrl": "nexuspay.co",
+      "slug": "nexuspay",
+      "name": "NexusPay",
+      "category": "Fintech",
+      "logoUrl": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=200&auto=format&fit=crop&q=80",
+      "description": "Unified recurring billing and subscription optimization.",
+      "tagline": "Smarter Recurring Revenue",
+      "totalBid": 300,
+      "status": "published",
+      "managementTokenHash": "f64deae1f2d22f42cd9fa202a9d4615c0e691213d10d4a8b38be47a8b709c283",
+      "template": "editorial",
+      "clickCount": 32,
+      "createdAt": "2026-09-01T08:35:15.449Z",
+      "updatedAt": "2026-09-01T08:35:15.449Z"
+    },
+    {
+      "id": "brand_algotutor",
+      "websiteUrl": "https://algotutor.io",
+      "canonicalUrl": "algotutor.io",
+      "slug": "algotutor",
+      "name": "AlgoTutor",
+      "category": "Education",
+      "logoUrl": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=200&auto=format&fit=crop&q=80",
+      "description": "Visual step-by-step debugger for complex graph and dynamic programming algorithms.",
+      "tagline": "Visual Algorithm Mastery",
+      "totalBid": 250,
+      "status": "published",
+      "managementTokenHash": "ea998dc7f38786cc195e78a95a1c20c88b9dca1cd5811e1672cba5171ef50a36",
+      "template": "minimal",
+      "clickCount": 21,
+      "createdAt": "2026-09-01T09:35:15.449Z",
+      "updatedAt": "2026-09-01T09:35:15.449Z"
+    },
+    {
+      "id": "brand_shopvibe",
+      "websiteUrl": "https://shopvibe.store",
+      "canonicalUrl": "shopvibe.store",
+      "slug": "shopvibe",
+      "name": "ShopVibe",
+      "category": "E-commerce",
+      "logoUrl": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=200&auto=format&fit=crop&q=80",
+      "description": "AI-curated shopping assistant embedded directly in social feeds.",
+      "tagline": "Social Commerce AI",
+      "totalBid": 200,
+      "status": "published",
+      "managementTokenHash": "481a819a3b9f6c58e6acc189a03be0cac9ca067ef859434ee2b1040c047e28b1",
+      "template": "typography",
+      "clickCount": 47,
+      "createdAt": "2026-09-01T10:35:15.449Z",
+      "updatedAt": "2026-09-01T10:35:15.449Z"
+    },
+    {
+      "id": "brand_datapulse",
+      "websiteUrl": "https://datapulse.net",
+      "canonicalUrl": "datapulse.net",
+      "slug": "datapulse",
+      "name": "DataPulse",
+      "category": "AI",
+      "logoUrl": "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=200&auto=format&fit=crop&q=80",
+      "description": "Automated anomaly detection for streaming time-series data.",
+      "tagline": "Stream Anomaly Detection",
+      "totalBid": 160,
+      "status": "published",
+      "managementTokenHash": "3abdf4619b63db62b015d1e873e02025cad79d25bfbd2639dd24da827721835c",
+      "template": "logo_dominant",
+      "clickCount": 30,
+      "createdAt": "2026-09-02T11:35:15.449Z",
+      "updatedAt": "2026-09-02T11:35:15.449Z"
+    },
+    {
+      "id": "brand_vectorstudio",
+      "websiteUrl": "https://vectorstudio.design",
+      "canonicalUrl": "vectorstudio.design",
+      "slug": "vectorstudio",
+      "name": "VectorStudio",
+      "category": "Agency",
+      "logoUrl": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=200&auto=format&fit=crop&q=80",
+      "description": "Custom 3D shaders and WebGL interactions for high-end digital agency portfolios.",
+      "tagline": "WebGL & 3D Shaders",
+      "totalBid": 120,
+      "status": "published",
+      "managementTokenHash": "47ba7ba215b3ec4c58591e50582676dbbdea88e717330f9d8e9067e8cc44d1f0",
+      "template": "editorial",
+      "clickCount": 9,
+      "createdAt": "2026-09-02T12:35:15.449Z",
+      "updatedAt": "2026-09-02T12:35:15.449Z"
+    },
+    {
+      "id": "brand_codesprint",
+      "websiteUrl": "https://codesprint.dev",
+      "canonicalUrl": "codesprint.dev",
+      "slug": "codesprint",
+      "name": "CodeSprint",
+      "category": "Education",
+      "logoUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&auto=format&fit=crop&q=80",
+      "description": "Gamified multiplayer coding battles and live technical tournaments.",
+      "tagline": "Multiplayer Coding Battles",
+      "totalBid": 90,
+      "status": "published",
+      "managementTokenHash": "35dc5a88ceabb21ba7d02242ed87eb66607d8256ddd4af6c8ee9e4c6076d1c60",
+      "template": "minimal",
+      "clickCount": 41,
+      "createdAt": "2026-09-02T13:35:15.449Z",
+      "updatedAt": "2026-09-02T13:35:15.449Z"
+    },
+    {
+      "id": "brand_launchpad",
+      "websiteUrl": "https://launchpad.tools",
+      "canonicalUrl": "launchpad.tools",
+      "slug": "launchpad",
+      "name": "LaunchPad",
+      "category": "Other",
+      "logoUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200&auto=format&fit=crop&q=80",
+      "description": "Boilerplate templates and marketing toolkit for indie hackers.",
+      "tagline": "Ship in 48 Hours",
+      "totalBid": 60,
+      "status": "published",
+      "managementTokenHash": "b90d093fc4cb26d56af69312bddffda419891a20f980319d4c29a53fad267add",
+      "template": "typography",
+      "clickCount": 24,
+      "createdAt": "2026-09-02T14:35:15.449Z",
+      "updatedAt": "2026-09-02T14:35:15.449Z"
+    },
+    {
+      "id": "brand_syncpoint",
+      "websiteUrl": "https://syncpoint.io",
+      "canonicalUrl": "syncpoint.io",
+      "slug": "syncpoint",
+      "name": "SyncPoint",
+      "category": "SaaS",
+      "logoUrl": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=200&auto=format&fit=crop&q=80",
+      "description": "CRDT sync engine for offline-first React applications.",
+      "tagline": "Offline-First CRDT Sync",
+      "totalBid": 30,
+      "status": "published",
+      "managementTokenHash": "f0b4c8f24b54ab9fac66e55c0f734771e5b0448267ee219e734efeab39c98112",
+      "template": "typography",
+      "clickCount": 36,
+      "createdAt": "2026-09-02T15:35:15.449Z",
+      "updatedAt": "2026-09-02T15:35:15.449Z"
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay_seed_synthetix",
+      "brandId": "brand_synthetix",
+      "providerPaymentId": "pay_seed_synthetix",
+      "providerOrderId": "order_seed_synthetix",
+      "amount": 10000,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-18T14:35:15.449Z",
+      "verifiedAt": "2026-08-18T14:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_veloce",
+      "brandId": "brand_veloce",
+      "providerPaymentId": "pay_seed_veloce",
+      "providerOrderId": "order_seed_veloce",
+      "amount": 7500,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-20T15:35:15.449Z",
+      "verifiedAt": "2026-08-20T15:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_hyperflow",
+      "brandId": "brand_hyperflow",
+      "providerPaymentId": "pay_seed_hyperflow",
+      "providerOrderId": "order_seed_hyperflow",
+      "amount": 5800,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-22T16:35:15.449Z",
+      "verifiedAt": "2026-08-22T16:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_payzen",
+      "brandId": "brand_payzen",
+      "providerPaymentId": "pay_seed_payzen",
+      "providerOrderId": "order_seed_payzen",
+      "amount": 4200,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-23T17:35:15.449Z",
+      "verifiedAt": "2026-08-23T17:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_kubecraft",
+      "brandId": "brand_kubecraft",
+      "providerPaymentId": "pay_seed_kubecraft",
+      "providerOrderId": "order_seed_kubecraft",
+      "amount": 3500,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-24T18:35:15.449Z",
+      "verifiedAt": "2026-08-24T18:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_omnitrack",
+      "brandId": "brand_omnitrack",
+      "providerPaymentId": "pay_seed_omnitrack",
+      "providerOrderId": "order_seed_omnitrack",
+      "amount": 2800,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-25T19:35:15.449Z",
+      "verifiedAt": "2026-08-25T19:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_draftwave",
+      "brandId": "brand_draftwave",
+      "providerPaymentId": "pay_seed_draftwave",
+      "providerOrderId": "order_seed_draftwave",
+      "amount": 2200,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-26T20:35:15.449Z",
+      "verifiedAt": "2026-08-26T20:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_zenithos",
+      "brandId": "brand_zenithos",
+      "providerPaymentId": "pay_seed_zenithos",
+      "providerOrderId": "order_seed_zenithos",
+      "amount": 1800,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-27T21:35:15.449Z",
+      "verifiedAt": "2026-08-27T21:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_pulsegraph",
+      "brandId": "brand_pulsegraph",
+      "providerPaymentId": "pay_seed_pulsegraph",
+      "providerOrderId": "order_seed_pulsegraph",
+      "amount": 1500,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-27T22:35:15.449Z",
+      "verifiedAt": "2026-08-27T22:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_cartlogic",
+      "brandId": "brand_cartlogic",
+      "providerPaymentId": "pay_seed_cartlogic",
+      "providerOrderId": "order_seed_cartlogic",
+      "amount": 1200,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-28T23:35:15.449Z",
+      "verifiedAt": "2026-08-28T23:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_skillforge",
+      "brandId": "brand_skillforge",
+      "providerPaymentId": "pay_seed_skillforge",
+      "providerOrderId": "order_seed_skillforge",
+      "amount": 1000,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-29T00:35:15.449Z",
+      "verifiedAt": "2026-08-29T00:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_byteforge",
+      "brandId": "brand_byteforge",
+      "providerPaymentId": "pay_seed_byteforge",
+      "providerOrderId": "order_seed_byteforge",
+      "amount": 850,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-30T01:35:15.449Z",
+      "verifiedAt": "2026-08-30T01:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_aeromail",
+      "brandId": "brand_aeromail",
+      "providerPaymentId": "pay_seed_aeromail",
+      "providerOrderId": "order_seed_aeromail",
+      "amount": 750,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-30T02:35:15.449Z",
+      "verifiedAt": "2026-08-30T02:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_lumina",
+      "brandId": "brand_lumina",
+      "providerPaymentId": "pay_seed_lumina",
+      "providerOrderId": "order_seed_lumina",
+      "amount": 650,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-31T03:35:15.449Z",
+      "verifiedAt": "2026-08-31T03:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_finstack",
+      "brandId": "brand_finstack",
+      "providerPaymentId": "pay_seed_finstack",
+      "providerOrderId": "order_seed_finstack",
+      "amount": 550,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-31T04:35:15.449Z",
+      "verifiedAt": "2026-08-31T04:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_nordic",
+      "brandId": "brand_nordic",
+      "providerPaymentId": "pay_seed_nordic",
+      "providerOrderId": "order_seed_nordic",
+      "amount": 480,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-08-31T05:35:15.449Z",
+      "verifiedAt": "2026-08-31T05:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_pixelcraft",
+      "brandId": "brand_pixelcraft",
+      "providerPaymentId": "pay_seed_pixelcraft",
+      "providerOrderId": "order_seed_pixelcraft",
+      "amount": 420,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-01T06:35:15.449Z",
+      "verifiedAt": "2026-09-01T06:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_cloudnest",
+      "brandId": "brand_cloudnest",
+      "providerPaymentId": "pay_seed_cloudnest",
+      "providerOrderId": "order_seed_cloudnest",
+      "amount": 360,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-01T07:35:15.449Z",
+      "verifiedAt": "2026-09-01T07:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_nexuspay",
+      "brandId": "brand_nexuspay",
+      "providerPaymentId": "pay_seed_nexuspay",
+      "providerOrderId": "order_seed_nexuspay",
+      "amount": 300,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-01T08:35:15.449Z",
+      "verifiedAt": "2026-09-01T08:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_algotutor",
+      "brandId": "brand_algotutor",
+      "providerPaymentId": "pay_seed_algotutor",
+      "providerOrderId": "order_seed_algotutor",
+      "amount": 250,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-01T09:35:15.449Z",
+      "verifiedAt": "2026-09-01T09:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_shopvibe",
+      "brandId": "brand_shopvibe",
+      "providerPaymentId": "pay_seed_shopvibe",
+      "providerOrderId": "order_seed_shopvibe",
+      "amount": 200,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-01T10:35:15.449Z",
+      "verifiedAt": "2026-09-01T10:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_datapulse",
+      "brandId": "brand_datapulse",
+      "providerPaymentId": "pay_seed_datapulse",
+      "providerOrderId": "order_seed_datapulse",
+      "amount": 160,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-02T11:35:15.449Z",
+      "verifiedAt": "2026-09-02T11:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_vectorstudio",
+      "brandId": "brand_vectorstudio",
+      "providerPaymentId": "pay_seed_vectorstudio",
+      "providerOrderId": "order_seed_vectorstudio",
+      "amount": 120,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-02T12:35:15.449Z",
+      "verifiedAt": "2026-09-02T12:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_codesprint",
+      "brandId": "brand_codesprint",
+      "providerPaymentId": "pay_seed_codesprint",
+      "providerOrderId": "order_seed_codesprint",
+      "amount": 90,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-02T13:35:15.449Z",
+      "verifiedAt": "2026-09-02T13:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_launchpad",
+      "brandId": "brand_launchpad",
+      "providerPaymentId": "pay_seed_launchpad",
+      "providerOrderId": "order_seed_launchpad",
+      "amount": 60,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-02T14:35:15.449Z",
+      "verifiedAt": "2026-09-02T14:35:15.449Z"
+    },
+    {
+      "id": "pay_seed_syncpoint",
+      "brandId": "brand_syncpoint",
+      "providerPaymentId": "pay_seed_syncpoint",
+      "providerOrderId": "order_seed_syncpoint",
+      "amount": 30,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-02T15:35:15.449Z",
+      "verifiedAt": "2026-09-02T15:35:15.449Z"
+    }
+  ],
+  "bidHistory": [
+    {
+      "id": "hist_pay_seed_synthetix",
+      "brandId": "brand_synthetix",
+      "paymentId": "pay_seed_synthetix",
+      "amountAdded": 10000,
+      "previousTotal": 0,
+      "newTotal": 10000,
+      "previousRank": null,
+      "newRank": 1,
+      "createdAt": "2026-08-18T14:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_veloce",
+      "brandId": "brand_veloce",
+      "paymentId": "pay_seed_veloce",
+      "amountAdded": 7500,
+      "previousTotal": 0,
+      "newTotal": 7500,
+      "previousRank": null,
+      "newRank": 2,
+      "createdAt": "2026-08-20T15:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_hyperflow",
+      "brandId": "brand_hyperflow",
+      "paymentId": "pay_seed_hyperflow",
+      "amountAdded": 5800,
+      "previousTotal": 0,
+      "newTotal": 5800,
+      "previousRank": null,
+      "newRank": 3,
+      "createdAt": "2026-08-22T16:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_payzen",
+      "brandId": "brand_payzen",
+      "paymentId": "pay_seed_payzen",
+      "amountAdded": 4200,
+      "previousTotal": 0,
+      "newTotal": 4200,
+      "previousRank": null,
+      "newRank": 4,
+      "createdAt": "2026-08-23T17:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_kubecraft",
+      "brandId": "brand_kubecraft",
+      "paymentId": "pay_seed_kubecraft",
+      "amountAdded": 3500,
+      "previousTotal": 0,
+      "newTotal": 3500,
+      "previousRank": null,
+      "newRank": 5,
+      "createdAt": "2026-08-24T18:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_omnitrack",
+      "brandId": "brand_omnitrack",
+      "paymentId": "pay_seed_omnitrack",
+      "amountAdded": 2800,
+      "previousTotal": 0,
+      "newTotal": 2800,
+      "previousRank": null,
+      "newRank": 6,
+      "createdAt": "2026-08-25T19:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_draftwave",
+      "brandId": "brand_draftwave",
+      "paymentId": "pay_seed_draftwave",
+      "amountAdded": 2200,
+      "previousTotal": 0,
+      "newTotal": 2200,
+      "previousRank": null,
+      "newRank": 7,
+      "createdAt": "2026-08-26T20:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_zenithos",
+      "brandId": "brand_zenithos",
+      "paymentId": "pay_seed_zenithos",
+      "amountAdded": 1800,
+      "previousTotal": 0,
+      "newTotal": 1800,
+      "previousRank": null,
+      "newRank": 8,
+      "createdAt": "2026-08-27T21:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_pulsegraph",
+      "brandId": "brand_pulsegraph",
+      "paymentId": "pay_seed_pulsegraph",
+      "amountAdded": 1500,
+      "previousTotal": 0,
+      "newTotal": 1500,
+      "previousRank": null,
+      "newRank": 9,
+      "createdAt": "2026-08-27T22:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_cartlogic",
+      "brandId": "brand_cartlogic",
+      "paymentId": "pay_seed_cartlogic",
+      "amountAdded": 1200,
+      "previousTotal": 0,
+      "newTotal": 1200,
+      "previousRank": null,
+      "newRank": 10,
+      "createdAt": "2026-08-28T23:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_skillforge",
+      "brandId": "brand_skillforge",
+      "paymentId": "pay_seed_skillforge",
+      "amountAdded": 1000,
+      "previousTotal": 0,
+      "newTotal": 1000,
+      "previousRank": null,
+      "newRank": 11,
+      "createdAt": "2026-08-29T00:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_byteforge",
+      "brandId": "brand_byteforge",
+      "paymentId": "pay_seed_byteforge",
+      "amountAdded": 850,
+      "previousTotal": 0,
+      "newTotal": 850,
+      "previousRank": null,
+      "newRank": 12,
+      "createdAt": "2026-08-30T01:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_aeromail",
+      "brandId": "brand_aeromail",
+      "paymentId": "pay_seed_aeromail",
+      "amountAdded": 750,
+      "previousTotal": 0,
+      "newTotal": 750,
+      "previousRank": null,
+      "newRank": 13,
+      "createdAt": "2026-08-30T02:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_lumina",
+      "brandId": "brand_lumina",
+      "paymentId": "pay_seed_lumina",
+      "amountAdded": 650,
+      "previousTotal": 0,
+      "newTotal": 650,
+      "previousRank": null,
+      "newRank": 14,
+      "createdAt": "2026-08-31T03:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_finstack",
+      "brandId": "brand_finstack",
+      "paymentId": "pay_seed_finstack",
+      "amountAdded": 550,
+      "previousTotal": 0,
+      "newTotal": 550,
+      "previousRank": null,
+      "newRank": 15,
+      "createdAt": "2026-08-31T04:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_nordic",
+      "brandId": "brand_nordic",
+      "paymentId": "pay_seed_nordic",
+      "amountAdded": 480,
+      "previousTotal": 0,
+      "newTotal": 480,
+      "previousRank": null,
+      "newRank": 16,
+      "createdAt": "2026-08-31T05:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_pixelcraft",
+      "brandId": "brand_pixelcraft",
+      "paymentId": "pay_seed_pixelcraft",
+      "amountAdded": 420,
+      "previousTotal": 0,
+      "newTotal": 420,
+      "previousRank": null,
+      "newRank": 17,
+      "createdAt": "2026-09-01T06:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_cloudnest",
+      "brandId": "brand_cloudnest",
+      "paymentId": "pay_seed_cloudnest",
+      "amountAdded": 360,
+      "previousTotal": 0,
+      "newTotal": 360,
+      "previousRank": null,
+      "newRank": 18,
+      "createdAt": "2026-09-01T07:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_nexuspay",
+      "brandId": "brand_nexuspay",
+      "paymentId": "pay_seed_nexuspay",
+      "amountAdded": 300,
+      "previousTotal": 0,
+      "newTotal": 300,
+      "previousRank": null,
+      "newRank": 19,
+      "createdAt": "2026-09-01T08:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_algotutor",
+      "brandId": "brand_algotutor",
+      "paymentId": "pay_seed_algotutor",
+      "amountAdded": 250,
+      "previousTotal": 0,
+      "newTotal": 250,
+      "previousRank": null,
+      "newRank": 20,
+      "createdAt": "2026-09-01T09:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_shopvibe",
+      "brandId": "brand_shopvibe",
+      "paymentId": "pay_seed_shopvibe",
+      "amountAdded": 200,
+      "previousTotal": 0,
+      "newTotal": 200,
+      "previousRank": null,
+      "newRank": 21,
+      "createdAt": "2026-09-01T10:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_datapulse",
+      "brandId": "brand_datapulse",
+      "paymentId": "pay_seed_datapulse",
+      "amountAdded": 160,
+      "previousTotal": 0,
+      "newTotal": 160,
+      "previousRank": null,
+      "newRank": 22,
+      "createdAt": "2026-09-02T11:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_vectorstudio",
+      "brandId": "brand_vectorstudio",
+      "paymentId": "pay_seed_vectorstudio",
+      "amountAdded": 120,
+      "previousTotal": 0,
+      "newTotal": 120,
+      "previousRank": null,
+      "newRank": 23,
+      "createdAt": "2026-09-02T12:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_codesprint",
+      "brandId": "brand_codesprint",
+      "paymentId": "pay_seed_codesprint",
+      "amountAdded": 90,
+      "previousTotal": 0,
+      "newTotal": 90,
+      "previousRank": null,
+      "newRank": 24,
+      "createdAt": "2026-09-02T13:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_launchpad",
+      "brandId": "brand_launchpad",
+      "paymentId": "pay_seed_launchpad",
+      "amountAdded": 60,
+      "previousTotal": 0,
+      "newTotal": 60,
+      "previousRank": null,
+      "newRank": 25,
+      "createdAt": "2026-09-02T14:35:15.449Z"
+    },
+    {
+      "id": "hist_pay_seed_syncpoint",
+      "brandId": "brand_syncpoint",
+      "paymentId": "pay_seed_syncpoint",
+      "amountAdded": 30,
+      "previousTotal": 0,
+      "newTotal": 30,
+      "previousRank": null,
+      "newRank": 26,
+      "createdAt": "2026-09-02T15:35:15.449Z"
+    }
+  ],
+  "activity": [
+    {
+      "id": "act_climb_1",
+      "brandId": "brand_veloce",
+      "eventType": "rank_climbed",
+      "metadata": {
+        "brandName": "Veloce Dev",
+        "previousRank": 5,
+        "newRank": 2,
+        "slug": "veloce-dev"
+      },
+      "createdAt": "2026-09-01T14:20:15.449Z"
+    },
+    {
+      "id": "act_bid_1",
+      "brandId": "brand_synthetix",
+      "eventType": "bid_increased",
+      "metadata": {
+        "brandName": "Synthetix AI",
+        "amountAdded": 2500,
+        "newTotal": 10000,
+        "slug": "synthetix-ai"
+      },
+      "createdAt": "2026-09-01T13:50:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_synthetix",
+      "brandId": "brand_synthetix",
+      "eventType": "became_number_one",
+      "metadata": {
+        "brandName": "Synthetix AI",
+        "rank": 1,
+        "amount": 10000,
+        "slug": "synthetix-ai"
+      },
+      "createdAt": "2026-08-18T14:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_veloce",
+      "brandId": "brand_veloce",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "Veloce Dev",
+        "rank": 2,
+        "amount": 7500,
+        "slug": "veloce-dev"
+      },
+      "createdAt": "2026-08-20T15:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_hyperflow",
+      "brandId": "brand_hyperflow",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "HyperFlow",
+        "rank": 3,
+        "amount": 5800,
+        "slug": "hyperflow"
+      },
+      "createdAt": "2026-08-22T16:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_payzen",
+      "brandId": "brand_payzen",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "PayZen",
+        "rank": 4,
+        "amount": 4200,
+        "slug": "payzen"
+      },
+      "createdAt": "2026-08-23T17:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_kubecraft",
+      "brandId": "brand_kubecraft",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "KubeCraft",
+        "rank": 5,
+        "amount": 3500,
+        "slug": "kubecraft"
+      },
+      "createdAt": "2026-08-24T18:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_omnitrack",
+      "brandId": "brand_omnitrack",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "OmniTrack",
+        "rank": 6,
+        "amount": 2800,
+        "slug": "omnitrack"
+      },
+      "createdAt": "2026-08-25T19:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_draftwave",
+      "brandId": "brand_draftwave",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "DraftWave",
+        "rank": 7,
+        "amount": 2200,
+        "slug": "draftwave"
+      },
+      "createdAt": "2026-08-26T20:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_zenithos",
+      "brandId": "brand_zenithos",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "Zenith OS",
+        "rank": 8,
+        "amount": 1800,
+        "slug": "zenith-os"
+      },
+      "createdAt": "2026-08-27T21:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_pulsegraph",
+      "brandId": "brand_pulsegraph",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "PulseGraph",
+        "rank": 9,
+        "amount": 1500,
+        "slug": "pulsegraph"
+      },
+      "createdAt": "2026-08-27T22:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_cartlogic",
+      "brandId": "brand_cartlogic",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "CartLogic",
+        "rank": 10,
+        "amount": 1200,
+        "slug": "cartlogic"
+      },
+      "createdAt": "2026-08-28T23:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_skillforge",
+      "brandId": "brand_skillforge",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "SkillForge",
+        "rank": 11,
+        "amount": 1000,
+        "slug": "skillforge"
+      },
+      "createdAt": "2026-08-29T00:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_byteforge",
+      "brandId": "brand_byteforge",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "ByteForge",
+        "rank": 12,
+        "amount": 850,
+        "slug": "byteforge"
+      },
+      "createdAt": "2026-08-30T01:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_aeromail",
+      "brandId": "brand_aeromail",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "AeroMail",
+        "rank": 13,
+        "amount": 750,
+        "slug": "aeromail"
+      },
+      "createdAt": "2026-08-30T02:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_lumina",
+      "brandId": "brand_lumina",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "Lumina AI",
+        "rank": 14,
+        "amount": 650,
+        "slug": "lumina-ai"
+      },
+      "createdAt": "2026-08-31T03:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_finstack",
+      "brandId": "brand_finstack",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "FinStack",
+        "rank": 15,
+        "amount": 550,
+        "slug": "finstack"
+      },
+      "createdAt": "2026-08-31T04:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_nordic",
+      "brandId": "brand_nordic",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "Nordic Design",
+        "rank": 16,
+        "amount": 480,
+        "slug": "nordic-design"
+      },
+      "createdAt": "2026-08-31T05:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_pixelcraft",
+      "brandId": "brand_pixelcraft",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "PixelCraft",
+        "rank": 17,
+        "amount": 420,
+        "slug": "pixelcraft"
+      },
+      "createdAt": "2026-09-01T06:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_cloudnest",
+      "brandId": "brand_cloudnest",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "CloudNest",
+        "rank": 18,
+        "amount": 360,
+        "slug": "cloudnest"
+      },
+      "createdAt": "2026-09-01T07:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_nexuspay",
+      "brandId": "brand_nexuspay",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "NexusPay",
+        "rank": 19,
+        "amount": 300,
+        "slug": "nexuspay"
+      },
+      "createdAt": "2026-09-01T08:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_algotutor",
+      "brandId": "brand_algotutor",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "AlgoTutor",
+        "rank": 20,
+        "amount": 250,
+        "slug": "algotutor"
+      },
+      "createdAt": "2026-09-01T09:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_shopvibe",
+      "brandId": "brand_shopvibe",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "ShopVibe",
+        "rank": 21,
+        "amount": 200,
+        "slug": "shopvibe"
+      },
+      "createdAt": "2026-09-01T10:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_datapulse",
+      "brandId": "brand_datapulse",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "DataPulse",
+        "rank": 22,
+        "amount": 160,
+        "slug": "datapulse"
+      },
+      "createdAt": "2026-09-02T11:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_vectorstudio",
+      "brandId": "brand_vectorstudio",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "VectorStudio",
+        "rank": 23,
+        "amount": 120,
+        "slug": "vectorstudio"
+      },
+      "createdAt": "2026-09-02T12:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_codesprint",
+      "brandId": "brand_codesprint",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "CodeSprint",
+        "rank": 24,
+        "amount": 90,
+        "slug": "codesprint"
+      },
+      "createdAt": "2026-09-02T13:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_launchpad",
+      "brandId": "brand_launchpad",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "LaunchPad",
+        "rank": 25,
+        "amount": 60,
+        "slug": "launchpad"
+      },
+      "createdAt": "2026-09-02T14:35:15.449Z"
+    },
+    {
+      "id": "act_pay_seed_syncpoint",
+      "brandId": "brand_syncpoint",
+      "eventType": "brand_entered",
+      "metadata": {
+        "brandName": "SyncPoint",
+        "rank": 26,
+        "amount": 30,
+        "slug": "syncpoint"
+      },
+      "createdAt": "2026-09-02T15:35:15.449Z"
+    }
+  ]
+}
