@@ -1,38 +1,99 @@
 import { NextResponse } from "next/server";
 import { db, Payment, BidHistoryItem, ActivityItem } from "@/lib/db";
-import { verifyWebhookSignature } from "@/lib/payments/razorpay";
+import { verifyDodoWebhook } from "@/lib/payments/dodo";
+import { verifyWebhookSignature as verifyRazorpayWebhook } from "@/lib/payments/razorpay";
 import { calculateRankings } from "@/lib/ranking/ranking-engine";
 import crypto from "crypto";
 
 export async function POST(request: Request) {
   try {
     const rawBody = await request.text();
-    const signature = request.headers.get("x-razorpay-signature") || "";
+    const dodoSignature =
+      request.headers.get("webhook-signature") ||
+      request.headers.get("Webhook-Signature");
+    const razorpaySignature = request.headers.get("x-razorpay-signature");
 
-    // Verify webhook signature
-    const isValid = verifyWebhookSignature(rawBody, signature);
-    if (!isValid && process.env.NODE_ENV === "production") {
-      return NextResponse.json(
-        { success: false, error: "Invalid webhook signature" },
-        { status: 400 }
-      );
+    let event: any = null;
+
+    if (dodoSignature || request.headers.get("webhook-id")) {
+      // Dodo Payments Webhook
+      const headersObj = {
+        "webhook-id": request.headers.get("webhook-id"),
+        "webhook-signature": dodoSignature,
+        "webhook-timestamp": request.headers.get("webhook-timestamp"),
+      };
+
+      const verification = verifyDodoWebhook({ rawBody, headers: headersObj });
+      if (!verification.isValid && process.env.NODE_ENV === "production") {
+        return NextResponse.json(
+          { success: false, error: "Invalid Dodo webhook signature" },
+          { status: 400 }
+        );
+      }
+      event = verification.event || JSON.parse(rawBody);
+    } else if (razorpaySignature) {
+      // Legacy Webhook
+      const isValid = verifyRazorpayWebhook(rawBody, razorpaySignature);
+      if (!isValid && process.env.NODE_ENV === "production") {
+        return NextResponse.json(
+          { success: false, error: "Invalid Razorpay webhook signature" },
+          { status: 400 }
+        );
+      }
+      event = JSON.parse(rawBody);
+    } else {
+      // Development fallback
+      try {
+        event = JSON.parse(rawBody);
+      } catch {
+        return NextResponse.json(
+          { success: false, error: "Invalid JSON body" },
+          { status: 400 }
+        );
+      }
     }
 
-    const event = JSON.parse(rawBody);
+    const eventType = event?.type || event?.event;
 
-    if (event.event === "payment.captured" || event.event === "order.paid") {
-      const paymentEntity = event.payload?.payment?.entity;
-      if (!paymentEntity) {
-        return NextResponse.json({ success: true, message: "No payment entity found" });
+    // Handle Dodo Payments (payment.succeeded) or Legacy (payment.captured / order.paid)
+    if (
+      eventType === "payment.succeeded" ||
+      eventType === "checkout.session.completed" ||
+      eventType === "payment.captured" ||
+      eventType === "order.paid"
+    ) {
+      const dodoData = event.data;
+      const razorpayEntity = event.payload?.payment?.entity;
+
+      const providerPaymentId =
+        dodoData?.payment_id ||
+        dodoData?.id ||
+        razorpayEntity?.id ||
+        `pay_${Date.now()}`;
+
+      const providerOrderId =
+        dodoData?.session_id ||
+        dodoData?.order_id ||
+        razorpayEntity?.order_id ||
+        `ord_${Date.now()}`;
+
+      // Amount conversion: Dodo total_amount is in cents
+      let amount: number = 0;
+      if (typeof dodoData?.total_amount === "number") {
+        amount = dodoData.total_amount / 100;
+      } else if (typeof dodoData?.amount === "number") {
+        amount = dodoData.amount > 1000 ? dodoData.amount / 100 : dodoData.amount;
+      } else if (typeof razorpayEntity?.amount === "number") {
+        amount = razorpayEntity.amount / 100;
       }
 
-      const providerPaymentId = paymentEntity.id;
-      const providerOrderId = paymentEntity.order_id;
-      const amount = paymentEntity.amount / 100; // Convert from cents to USD
-      const brandId = paymentEntity.notes?.brandId;
+      const brandId =
+        dodoData?.metadata?.brandId ||
+        dodoData?.metadata?.brand_id ||
+        razorpayEntity?.notes?.brandId;
 
       if (!brandId) {
-        return NextResponse.json({ success: true, message: "No brandId in notes" });
+        return NextResponse.json({ success: true, message: "No brandId found in metadata" });
       }
 
       // Idempotency check: if payment already processed, acknowledge without re-applying

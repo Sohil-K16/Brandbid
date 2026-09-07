@@ -7,7 +7,7 @@ import { Input } from "../ui/Input";
 import { Select } from "../ui/Select";
 import { CATEGORIES, TEMPLATES, TemplateType } from "@/lib/validation/schemas";
 import LiveRankEstimator from "./LiveRankEstimator";
-import RazorpayCheckoutModal, { CheckoutData } from "./RazorpayCheckoutModal";
+import DodoCheckoutModal, { DodoCheckoutData } from "./DodoCheckoutModal";
 import { RankedBrand } from "@/lib/ranking/ranking-engine";
 import { Globe, ArrowRight, Loader2, Sparkles, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
@@ -33,7 +33,7 @@ export default function ClaimForm({ existingBrands }: ClaimFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [checkoutData, setCheckoutData] = useState<CheckoutData | null>(null);
+  const [checkoutData, setCheckoutData] = useState<DodoCheckoutData | null>(null);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   // Auto-fetch website metadata when user stops typing URL
@@ -124,13 +124,14 @@ export default function ClaimForm({ existingBrands }: ClaimFormProps) {
       const json = await res.json();
       if (json.success) {
         setCheckoutData({
-          orderId: json.data.orderId,
+          sessionId: json.data.sessionId || json.data.orderId,
+          checkoutUrl: json.data.checkoutUrl,
           amount: json.data.amount,
           currency: json.data.currency,
           brandId: json.data.brandId,
           brandName: name,
           managementToken: json.data.managementToken,
-          keyId: json.data.keyId,
+          isMock: json.data.isMock,
         });
         setIsCheckoutOpen(true);
       } else {
@@ -373,8 +374,8 @@ export default function ClaimForm({ existingBrands }: ClaimFormProps) {
         </div>
       </form>
 
-      {/* Razorpay Checkout Modal */}
-      <RazorpayCheckoutModal
+      {/* Dodo Payments Checkout Modal */}
+      <DodoCheckoutModal
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
         checkoutData={checkoutData}

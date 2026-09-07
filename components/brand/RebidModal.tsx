@@ -5,7 +5,7 @@ import { RankedBrand, estimateRankForBid } from "@/lib/ranking/ranking-engine";
 import { Modal } from "../ui/Modal";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
-import RazorpayCheckoutModal, { CheckoutData } from "../claim/RazorpayCheckoutModal";
+import DodoCheckoutModal, { DodoCheckoutData } from "../claim/DodoCheckoutModal";
 import { TrendingUp, AlertCircle } from "lucide-react";
 
 export interface RebidModalProps {
@@ -27,7 +27,7 @@ export default function RebidModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const [checkoutData, setCheckoutData] = useState<CheckoutData | null>(null);
+  const [checkoutData, setCheckoutData] = useState<DodoCheckoutData | null>(null);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   const projectedTotal = brand.totalBid + (additionalBid || 0);
@@ -60,12 +60,13 @@ export default function RebidModal({
       const json = await res.json();
       if (json.success) {
         setCheckoutData({
-          orderId: json.data.orderId,
+          sessionId: json.data.sessionId || json.data.orderId,
+          checkoutUrl: json.data.checkoutUrl,
           amount: additionalBid,
           currency: json.data.currency,
           brandId: brand.id,
           brandName: brand.name,
-          keyId: json.data.keyId,
+          isMock: json.data.isMock,
         });
         setIsCheckoutOpen(true);
       } else {
@@ -188,7 +189,7 @@ export default function RebidModal({
         </form>
       </Modal>
 
-      <RazorpayCheckoutModal
+      <DodoCheckoutModal
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
         checkoutData={checkoutData}

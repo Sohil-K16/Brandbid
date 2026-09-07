@@ -14,9 +14,9 @@
       "status": "published",
       "managementTokenHash": "fcb8ec8212a07b22f7a0b494cab82121b2c9df10971a2d652c00aee5e91bdf2d",
       "template": "typography",
-      "clickCount": 32,
-      "createdAt": "2026-08-18T14:35:15.449Z",
-      "updatedAt": "2026-08-18T14:35:15.449Z"
+      "clickCount": 34,
+      "createdAt": "2026-08-24T16:08:55.090Z",
+      "updatedAt": "2026-08-24T16:08:55.090Z"
     },
     {
       "id": "brand_veloce",
@@ -32,9 +32,9 @@
       "status": "published",
       "managementTokenHash": "3d48fe400e3b5d4fc3a22bc7770c832b46690ad797d29434a82132f39bcbd565",
       "template": "logo_dominant",
-      "clickCount": 5,
-      "createdAt": "2026-08-20T15:35:15.449Z",
-      "updatedAt": "2026-08-20T15:35:15.449Z"
+      "clickCount": 22,
+      "createdAt": "2026-08-26T17:08:55.090Z",
+      "updatedAt": "2026-08-26T17:08:55.090Z"
     },
     {
       "id": "brand_hyperflow",
@@ -50,9 +50,9 @@
       "status": "published",
       "managementTokenHash": "7761172795d9363c4664f40506c55c02ec7a2c713358731fd32cf7493f01d01c",
       "template": "editorial",
-      "clickCount": 32,
-      "createdAt": "2026-08-22T16:35:15.449Z",
-      "updatedAt": "2026-08-22T16:35:15.449Z"
+      "clickCount": 38,
+      "createdAt": "2026-08-28T18:08:55.090Z",
+      "updatedAt": "2026-08-28T18:08:55.090Z"
     },
     {
       "id": "brand_payzen",
@@ -68,9 +68,9 @@
       "status": "published",
       "managementTokenHash": "872d251d3cc8dc2780bb031d5804ead2deaf925f39776a2cb16b0842a0f02694",
       "template": "minimal",
-      "clickCount": 38,
-      "createdAt": "2026-08-23T17:35:15.449Z",
-      "updatedAt": "2026-08-23T17:35:15.449Z"
+      "clickCount": 48,
+      "createdAt": "2026-08-29T19:08:55.090Z",
+      "updatedAt": "2026-08-29T19:08:55.090Z"
     },
     {
       "id": "brand_kubecraft",
@@ -86,9 +86,9 @@
       "status": "published",
       "managementTokenHash": "4c4299a1c2aab1d3857cf9c9ca1471d8c6ecfaee0881a71753c4637998ddf033",
       "template": "typography",
-      "clickCount": 45,
-      "createdAt": "2026-08-24T18:35:15.449Z",
-      "updatedAt": "2026-08-24T18:35:15.449Z"
+      "clickCount": 38,
+      "createdAt": "2026-08-30T20:08:55.090Z",
+      "updatedAt": "2026-08-30T20:08:55.090Z"
     },
     {
       "id": "brand_omnitrack",
@@ -104,9 +104,9 @@
       "status": "published",
       "managementTokenHash": "0fcfe3b75a15c7a4994a8beead0501d4ceb3fbaf458bac975088829b7e80a85b",
       "template": "editorial",
-      "clickCount": 14,
-      "createdAt": "2026-08-25T19:35:15.449Z",
-      "updatedAt": "2026-08-25T19:35:15.449Z"
+      "clickCount": 36,
+      "createdAt": "2026-08-31T21:08:55.090Z",
+      "updatedAt": "2026-08-31T21:08:55.090Z"
     },
     {
       "id": "brand_draftwave",
@@ -122,9 +122,9 @@
       "status": "published",
       "managementTokenHash": "37b33bc6f075b650eb97822d0b7a5588f6acbaeb3dc605f9207bbf6c5e746209",
       "template": "logo_dominant",
-      "clickCount": 5,
-      "createdAt": "2026-08-26T20:35:15.449Z",
-      "updatedAt": "2026-08-26T20:35:15.449Z"
+      "clickCount": 6,
+      "createdAt": "2026-09-01T22:08:55.090Z",
+      "updatedAt": "2026-09-01T22:08:55.090Z"
     },
     {
       "id": "brand_zenithos",
@@ -140,9 +140,9 @@
       "status": "published",
       "managementTokenHash": "f9df88540d3492bfda07bb8a9c75c3060e4e05581a90b5b1447461dd7924759f",
       "template": "minimal",
-      "clickCount": 37,
-      "createdAt": "2026-08-27T21:35:15.449Z",
-      "updatedAt": "2026-08-27T21:35:15.449Z"
+      "clickCount": 23,
+      "createdAt": "2026-09-02T23:08:55.090Z",
+      "updatedAt": "2026-09-02T23:08:55.090Z"
     },
     {
       "id": "brand_pulsegraph",
@@ -158,9 +158,9 @@
       "status": "published",
       "managementTokenHash": "8570c3192abf05cdd4b98ffde0afb9b3e91768406ec1945d814a87e2db6a7421",
       "template": "typography",
-      "clickCount": 8,
-      "createdAt": "2026-08-27T22:35:15.449Z",
-      "updatedAt": "2026-08-27T22:35:15.449Z"
+      "clickCount": 7,
+      "createdAt": "2026-09-03T00:08:55.090Z",
+      "updatedAt": "2026-09-03T00:08:55.090Z"
     },
     {
       "id": "brand_cartlogic",
@@ -176,9 +176,9 @@
       "status": "published",
       "managementTokenHash": "da5c3d5598c09dec859cddfa9c7defed71d2e44b2e42f7058672264588835c33",
       "template": "editorial",
-      "clickCount": 29,
-      "createdAt": "2026-08-28T23:35:15.449Z",
-      "updatedAt": "2026-08-28T23:35:15.449Z"
+      "clickCount": 16,
+      "createdAt": "2026-09-04T01:08:55.090Z",
+      "updatedAt": "2026-09-04T01:08:55.090Z"
     },
     {
       "id": "brand_skillforge",
@@ -194,9 +194,9 @@
       "status": "published",
       "managementTokenHash": "2393938e3b3ebc79f22609149190e7bd5d451ef886f99e8aed6e244caa2702f0",
       "template": "typography",
-      "clickCount": 16,
-      "createdAt": "2026-08-29T00:35:15.449Z",
-      "updatedAt": "2026-08-29T00:35:15.449Z"
+      "clickCount": 6,
+      "createdAt": "2026-09-04T02:08:55.090Z",
+      "updatedAt": "2026-09-04T02:08:55.090Z"
     },
     {
       "id": "brand_byteforge",
@@ -212,9 +212,9 @@
       "status": "published",
       "managementTokenHash": "9dc994e65697642ed55735951587c8e63e159de66cfe0802015541d1cd61261d",
       "template": "minimal",
-      "clickCount": 31,
-      "createdAt": "2026-08-30T01:35:15.449Z",
-      "updatedAt": "2026-08-30T01:35:15.449Z"
+      "clickCount": 5,
+      "createdAt": "2026-09-05T03:08:55.090Z",
+      "updatedAt": "2026-09-05T03:08:55.090Z"
     },
     {
       "id": "brand_aeromail",
@@ -230,9 +230,9 @@
       "status": "published",
       "managementTokenHash": "8c023dcc192ad991a36e18f2546bf8f85834df108504da5d303be38b27d3c1a7",
       "template": "logo_dominant",
-      "clickCount": 24,
-      "createdAt": "2026-08-30T02:35:15.449Z",
-      "updatedAt": "2026-08-30T02:35:15.449Z"
+      "clickCount": 48,
+      "createdAt": "2026-09-05T04:08:55.090Z",
+      "updatedAt": "2026-09-05T04:08:55.090Z"
     },
     {
       "id": "brand_lumina",
@@ -248,9 +248,9 @@
       "status": "published",
       "managementTokenHash": "5b5275b1b10b5a0137010470cb542a2b4f27d70315d9eefc73b52bcbeeb473e3",
       "template": "editorial",
-      "clickCount": 45,
-      "createdAt": "2026-08-31T03:35:15.449Z",
-      "updatedAt": "2026-08-31T03:35:15.449Z"
+      "clickCount": 20,
+      "createdAt": "2026-09-06T05:08:55.090Z",
+      "updatedAt": "2026-09-06T05:08:55.090Z"
     },
     {
       "id": "brand_finstack",
@@ -266,9 +266,9 @@
       "status": "published",
       "managementTokenHash": "6a3891859a4fb1441e2b1debe6d253a5544a83940778cc693be82d6075b82f5c",
       "template": "typography",
-      "clickCount": 13,
-      "createdAt": "2026-08-31T04:35:15.449Z",
-      "updatedAt": "2026-08-31T04:35:15.449Z"
+      "clickCount": 47,
+      "createdAt": "2026-09-06T06:08:55.090Z",
+      "updatedAt": "2026-09-06T06:08:55.090Z"
     },
     {
       "id": "brand_nordic",
@@ -284,9 +284,9 @@
       "status": "published",
       "managementTokenHash": "970297892447170ba90ec18b4c6c05010e21788e8721257d39b1e721dcb3deb2",
       "template": "minimal",
-      "clickCount": 47,
-      "createdAt": "2026-08-31T05:35:15.449Z",
-      "updatedAt": "2026-08-31T05:35:15.449Z"
+      "clickCount": 14,
+      "createdAt": "2026-09-06T07:08:55.090Z",
+      "updatedAt": "2026-09-06T07:08:55.090Z"
     },
     {
       "id": "brand_pixelcraft",
@@ -302,9 +302,9 @@
       "status": "published",
       "managementTokenHash": "f37cc27238500de0b071c913e38c19080ff8ac2a43d116522e0394a6c5032ee9",
       "template": "logo_dominant",
-      "clickCount": 32,
-      "createdAt": "2026-09-01T06:35:15.449Z",
-      "updatedAt": "2026-09-01T06:35:15.449Z"
+      "clickCount": 43,
+      "createdAt": "2026-09-07T08:08:55.090Z",
+      "updatedAt": "2026-09-07T08:08:55.090Z"
     },
     {
       "id": "brand_cloudnest",
@@ -320,9 +320,9 @@
       "status": "published",
       "managementTokenHash": "ff56ff564ff4d000576ad62dda576f50b9ca39b508016f265f603742a9adfad0",
       "template": "typography",
-      "clickCount": 23,
-      "createdAt": "2026-09-01T07:35:15.449Z",
-      "updatedAt": "2026-09-01T07:35:15.449Z"
+      "clickCount": 42,
+      "createdAt": "2026-09-07T09:08:55.090Z",
+      "updatedAt": "2026-09-07T09:08:55.090Z"
     },
     {
       "id": "brand_nexuspay",
@@ -338,9 +338,9 @@
       "status": "published",
       "managementTokenHash": "f64deae1f2d22f42cd9fa202a9d4615c0e691213d10d4a8b38be47a8b709c283",
       "template": "editorial",
-      "clickCount": 32,
-      "createdAt": "2026-09-01T08:35:15.449Z",
-      "updatedAt": "2026-09-01T08:35:15.449Z"
+      "clickCount": 15,
+      "createdAt": "2026-09-07T10:08:55.090Z",
+      "updatedAt": "2026-09-07T10:08:55.090Z"
     },
     {
       "id": "brand_algotutor",
@@ -356,9 +356,9 @@
       "status": "published",
       "managementTokenHash": "ea998dc7f38786cc195e78a95a1c20c88b9dca1cd5811e1672cba5171ef50a36",
       "template": "minimal",
-      "clickCount": 21,
-      "createdAt": "2026-09-01T09:35:15.449Z",
-      "updatedAt": "2026-09-01T09:35:15.449Z"
+      "clickCount": 9,
+      "createdAt": "2026-09-07T11:08:55.090Z",
+      "updatedAt": "2026-09-07T11:08:55.090Z"
     },
     {
       "id": "brand_shopvibe",
@@ -374,9 +374,9 @@
       "status": "published",
       "managementTokenHash": "481a819a3b9f6c58e6acc189a03be0cac9ca067ef859434ee2b1040c047e28b1",
       "template": "typography",
-      "clickCount": 47,
-      "createdAt": "2026-09-01T10:35:15.449Z",
-      "updatedAt": "2026-09-01T10:35:15.449Z"
+      "clickCount": 41,
+      "createdAt": "2026-09-07T12:08:55.090Z",
+      "updatedAt": "2026-09-07T12:08:55.090Z"
     },
     {
       "id": "brand_datapulse",
@@ -392,9 +392,9 @@
       "status": "published",
       "managementTokenHash": "3abdf4619b63db62b015d1e873e02025cad79d25bfbd2639dd24da827721835c",
       "template": "logo_dominant",
-      "clickCount": 30,
-      "createdAt": "2026-09-02T11:35:15.449Z",
-      "updatedAt": "2026-09-02T11:35:15.449Z"
+      "clickCount": 21,
+      "createdAt": "2026-09-08T13:08:55.090Z",
+      "updatedAt": "2026-09-08T13:08:55.090Z"
     },
     {
       "id": "brand_vectorstudio",
@@ -410,9 +410,9 @@
       "status": "published",
       "managementTokenHash": "47ba7ba215b3ec4c58591e50582676dbbdea88e717330f9d8e9067e8cc44d1f0",
       "template": "editorial",
-      "clickCount": 9,
-      "createdAt": "2026-09-02T12:35:15.449Z",
-      "updatedAt": "2026-09-02T12:35:15.449Z"
+      "clickCount": 35,
+      "createdAt": "2026-09-08T14:08:55.090Z",
+      "updatedAt": "2026-09-08T14:08:55.090Z"
     },
     {
       "id": "brand_codesprint",
@@ -428,9 +428,9 @@
       "status": "published",
       "managementTokenHash": "35dc5a88ceabb21ba7d02242ed87eb66607d8256ddd4af6c8ee9e4c6076d1c60",
       "template": "minimal",
-      "clickCount": 41,
-      "createdAt": "2026-09-02T13:35:15.449Z",
-      "updatedAt": "2026-09-02T13:35:15.449Z"
+      "clickCount": 43,
+      "createdAt": "2026-09-08T15:08:55.090Z",
+      "updatedAt": "2026-09-08T15:08:55.090Z"
     },
     {
       "id": "brand_launchpad",
@@ -446,9 +446,9 @@
       "status": "published",
       "managementTokenHash": "b90d093fc4cb26d56af69312bddffda419891a20f980319d4c29a53fad267add",
       "template": "typography",
-      "clickCount": 24,
-      "createdAt": "2026-09-02T14:35:15.449Z",
-      "updatedAt": "2026-09-02T14:35:15.449Z"
+      "clickCount": 46,
+      "createdAt": "2026-09-08T16:08:55.090Z",
+      "updatedAt": "2026-09-08T16:08:55.090Z"
     },
     {
       "id": "brand_syncpoint",
@@ -464,9 +464,9 @@
       "status": "published",
       "managementTokenHash": "f0b4c8f24b54ab9fac66e55c0f734771e5b0448267ee219e734efeab39c98112",
       "template": "typography",
-      "clickCount": 36,
-      "createdAt": "2026-09-02T15:35:15.449Z",
-      "updatedAt": "2026-09-02T15:35:15.449Z"
+      "clickCount": 49,
+      "createdAt": "2026-09-08T17:08:55.090Z",
+      "updatedAt": "2026-09-08T17:08:55.090Z"
     }
   ],
   "payments": [
@@ -478,8 +478,8 @@
       "amount": 10000,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-18T14:35:15.449Z",
-      "verifiedAt": "2026-08-18T14:35:15.449Z"
+      "createdAt": "2026-08-24T16:08:55.090Z",
+      "verifiedAt": "2026-08-24T16:08:55.090Z"
     },
     {
       "id": "pay_seed_veloce",
@@ -489,8 +489,8 @@
       "amount": 7500,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-20T15:35:15.449Z",
-      "verifiedAt": "2026-08-20T15:35:15.449Z"
+      "createdAt": "2026-08-26T17:08:55.090Z",
+      "verifiedAt": "2026-08-26T17:08:55.090Z"
     },
     {
       "id": "pay_seed_hyperflow",
@@ -500,8 +500,8 @@
       "amount": 5800,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-22T16:35:15.449Z",
-      "verifiedAt": "2026-08-22T16:35:15.449Z"
+      "createdAt": "2026-08-28T18:08:55.090Z",
+      "verifiedAt": "2026-08-28T18:08:55.090Z"
     },
     {
       "id": "pay_seed_payzen",
@@ -511,8 +511,8 @@
       "amount": 4200,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-23T17:35:15.449Z",
-      "verifiedAt": "2026-08-23T17:35:15.449Z"
+      "createdAt": "2026-08-29T19:08:55.090Z",
+      "verifiedAt": "2026-08-29T19:08:55.090Z"
     },
     {
       "id": "pay_seed_kubecraft",
@@ -522,8 +522,8 @@
       "amount": 3500,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-24T18:35:15.449Z",
-      "verifiedAt": "2026-08-24T18:35:15.449Z"
+      "createdAt": "2026-08-30T20:08:55.090Z",
+      "verifiedAt": "2026-08-30T20:08:55.090Z"
     },
     {
       "id": "pay_seed_omnitrack",
@@ -533,8 +533,8 @@
       "amount": 2800,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-25T19:35:15.449Z",
-      "verifiedAt": "2026-08-25T19:35:15.449Z"
+      "createdAt": "2026-08-31T21:08:55.090Z",
+      "verifiedAt": "2026-08-31T21:08:55.090Z"
     },
     {
       "id": "pay_seed_draftwave",
@@ -544,8 +544,8 @@
       "amount": 2200,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-26T20:35:15.449Z",
-      "verifiedAt": "2026-08-26T20:35:15.449Z"
+      "createdAt": "2026-09-01T22:08:55.090Z",
+      "verifiedAt": "2026-09-01T22:08:55.090Z"
     },
     {
       "id": "pay_seed_zenithos",
@@ -555,8 +555,8 @@
       "amount": 1800,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-27T21:35:15.449Z",
-      "verifiedAt": "2026-08-27T21:35:15.449Z"
+      "createdAt": "2026-09-02T23:08:55.090Z",
+      "verifiedAt": "2026-09-02T23:08:55.090Z"
     },
     {
       "id": "pay_seed_pulsegraph",
@@ -566,8 +566,8 @@
       "amount": 1500,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-27T22:35:15.449Z",
-      "verifiedAt": "2026-08-27T22:35:15.449Z"
+      "createdAt": "2026-09-03T00:08:55.090Z",
+      "verifiedAt": "2026-09-03T00:08:55.090Z"
     },
     {
       "id": "pay_seed_cartlogic",
@@ -577,8 +577,8 @@
       "amount": 1200,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-28T23:35:15.449Z",
-      "verifiedAt": "2026-08-28T23:35:15.449Z"
+      "createdAt": "2026-09-04T01:08:55.090Z",
+      "verifiedAt": "2026-09-04T01:08:55.090Z"
     },
     {
       "id": "pay_seed_skillforge",
@@ -588,8 +588,8 @@
       "amount": 1000,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-29T00:35:15.449Z",
-      "verifiedAt": "2026-08-29T00:35:15.449Z"
+      "createdAt": "2026-09-04T02:08:55.090Z",
+      "verifiedAt": "2026-09-04T02:08:55.090Z"
     },
     {
       "id": "pay_seed_byteforge",
@@ -599,8 +599,8 @@
       "amount": 850,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-30T01:35:15.449Z",
-      "verifiedAt": "2026-08-30T01:35:15.449Z"
+      "createdAt": "2026-09-05T03:08:55.090Z",
+      "verifiedAt": "2026-09-05T03:08:55.090Z"
     },
     {
       "id": "pay_seed_aeromail",
@@ -610,8 +610,8 @@
       "amount": 750,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-30T02:35:15.449Z",
-      "verifiedAt": "2026-08-30T02:35:15.449Z"
+      "createdAt": "2026-09-05T04:08:55.090Z",
+      "verifiedAt": "2026-09-05T04:08:55.090Z"
     },
     {
       "id": "pay_seed_lumina",
@@ -621,8 +621,8 @@
       "amount": 650,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-31T03:35:15.449Z",
-      "verifiedAt": "2026-08-31T03:35:15.449Z"
+      "createdAt": "2026-09-06T05:08:55.090Z",
+      "verifiedAt": "2026-09-06T05:08:55.090Z"
     },
     {
       "id": "pay_seed_finstack",
@@ -632,8 +632,8 @@
       "amount": 550,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-31T04:35:15.449Z",
-      "verifiedAt": "2026-08-31T04:35:15.449Z"
+      "createdAt": "2026-09-06T06:08:55.090Z",
+      "verifiedAt": "2026-09-06T06:08:55.090Z"
     },
     {
       "id": "pay_seed_nordic",
@@ -643,8 +643,8 @@
       "amount": 480,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-08-31T05:35:15.449Z",
-      "verifiedAt": "2026-08-31T05:35:15.449Z"
+      "createdAt": "2026-09-06T07:08:55.090Z",
+      "verifiedAt": "2026-09-06T07:08:55.090Z"
     },
     {
       "id": "pay_seed_pixelcraft",
@@ -654,8 +654,8 @@
       "amount": 420,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-01T06:35:15.449Z",
-      "verifiedAt": "2026-09-01T06:35:15.449Z"
+      "createdAt": "2026-09-07T08:08:55.090Z",
+      "verifiedAt": "2026-09-07T08:08:55.090Z"
     },
     {
       "id": "pay_seed_cloudnest",
@@ -665,8 +665,8 @@
       "amount": 360,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-01T07:35:15.449Z",
-      "verifiedAt": "2026-09-01T07:35:15.449Z"
+      "createdAt": "2026-09-07T09:08:55.090Z",
+      "verifiedAt": "2026-09-07T09:08:55.090Z"
     },
     {
       "id": "pay_seed_nexuspay",
@@ -676,8 +676,8 @@
       "amount": 300,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-01T08:35:15.449Z",
-      "verifiedAt": "2026-09-01T08:35:15.449Z"
+      "createdAt": "2026-09-07T10:08:55.090Z",
+      "verifiedAt": "2026-09-07T10:08:55.090Z"
     },
     {
       "id": "pay_seed_algotutor",
@@ -687,8 +687,8 @@
       "amount": 250,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-01T09:35:15.449Z",
-      "verifiedAt": "2026-09-01T09:35:15.449Z"
+      "createdAt": "2026-09-07T11:08:55.090Z",
+      "verifiedAt": "2026-09-07T11:08:55.090Z"
     },
     {
       "id": "pay_seed_shopvibe",
@@ -698,8 +698,8 @@
       "amount": 200,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-01T10:35:15.449Z",
-      "verifiedAt": "2026-09-01T10:35:15.449Z"
+      "createdAt": "2026-09-07T12:08:55.090Z",
+      "verifiedAt": "2026-09-07T12:08:55.090Z"
     },
     {
       "id": "pay_seed_datapulse",
@@ -709,8 +709,8 @@
       "amount": 160,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-02T11:35:15.449Z",
-      "verifiedAt": "2026-09-02T11:35:15.449Z"
+      "createdAt": "2026-09-08T13:08:55.090Z",
+      "verifiedAt": "2026-09-08T13:08:55.090Z"
     },
     {
       "id": "pay_seed_vectorstudio",
@@ -720,8 +720,8 @@
       "amount": 120,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-02T12:35:15.449Z",
-      "verifiedAt": "2026-09-02T12:35:15.449Z"
+      "createdAt": "2026-09-08T14:08:55.090Z",
+      "verifiedAt": "2026-09-08T14:08:55.090Z"
     },
     {
       "id": "pay_seed_codesprint",
@@ -731,8 +731,8 @@
       "amount": 90,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-02T13:35:15.449Z",
-      "verifiedAt": "2026-09-02T13:35:15.449Z"
+      "createdAt": "2026-09-08T15:08:55.090Z",
+      "verifiedAt": "2026-09-08T15:08:55.090Z"
     },
     {
       "id": "pay_seed_launchpad",
@@ -742,8 +742,8 @@
       "amount": 60,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-02T14:35:15.449Z",
-      "verifiedAt": "2026-09-02T14:35:15.449Z"
+      "createdAt": "2026-09-08T16:08:55.090Z",
+      "verifiedAt": "2026-09-08T16:08:55.090Z"
     },
     {
       "id": "pay_seed_syncpoint",
@@ -753,8 +753,30 @@
       "amount": 30,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-02T15:35:15.449Z",
-      "verifiedAt": "2026-09-02T15:35:15.449Z"
+      "createdAt": "2026-09-08T17:08:55.090Z",
+      "verifiedAt": "2026-09-08T17:08:55.090Z"
+    },
+    {
+      "id": "pay_idem_test_1788797523420",
+      "brandId": "brand_synthetix",
+      "providerPaymentId": "pay_idem_test_1788797523420",
+      "providerOrderId": "order_idem_test",
+      "amount": 500,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-07T16:12:03.420Z",
+      "verifiedAt": "2026-09-07T16:12:03.421Z"
+    },
+    {
+      "id": "pay_dodo_idem_1788797523578",
+      "brandId": "brand_synthetix",
+      "providerPaymentId": "pay_dodo_idem_1788797523578",
+      "providerOrderId": "cks_idem_test",
+      "amount": 500,
+      "currency": "USD",
+      "status": "verified",
+      "createdAt": "2026-09-07T16:12:03.578Z",
+      "verifiedAt": "2026-09-07T16:12:03.579Z"
     }
   ],
   "bidHistory": [
@@ -767,7 +789,7 @@
       "newTotal": 10000,
       "previousRank": null,
       "newRank": 1,
-      "createdAt": "2026-08-18T14:35:15.449Z"
+      "createdAt": "2026-08-24T16:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_veloce",
@@ -778,7 +800,7 @@
       "newTotal": 7500,
       "previousRank": null,
       "newRank": 2,
-      "createdAt": "2026-08-20T15:35:15.449Z"
+      "createdAt": "2026-08-26T17:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_hyperflow",
@@ -789,7 +811,7 @@
       "newTotal": 5800,
       "previousRank": null,
       "newRank": 3,
-      "createdAt": "2026-08-22T16:35:15.449Z"
+      "createdAt": "2026-08-28T18:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_payzen",
@@ -800,7 +822,7 @@
       "newTotal": 4200,
       "previousRank": null,
       "newRank": 4,
-      "createdAt": "2026-08-23T17:35:15.449Z"
+      "createdAt": "2026-08-29T19:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_kubecraft",
@@ -811,7 +833,7 @@
       "newTotal": 3500,
       "previousRank": null,
       "newRank": 5,
-      "createdAt": "2026-08-24T18:35:15.449Z"
+      "createdAt": "2026-08-30T20:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_omnitrack",
@@ -822,7 +844,7 @@
       "newTotal": 2800,
       "previousRank": null,
       "newRank": 6,
-      "createdAt": "2026-08-25T19:35:15.449Z"
+      "createdAt": "2026-08-31T21:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_draftwave",
@@ -833,7 +855,7 @@
       "newTotal": 2200,
       "previousRank": null,
       "newRank": 7,
-      "createdAt": "2026-08-26T20:35:15.449Z"
+      "createdAt": "2026-09-01T22:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_zenithos",
@@ -844,7 +866,7 @@
       "newTotal": 1800,
       "previousRank": null,
       "newRank": 8,
-      "createdAt": "2026-08-27T21:35:15.449Z"
+      "createdAt": "2026-09-02T23:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_pulsegraph",
@@ -855,7 +877,7 @@
       "newTotal": 1500,
       "previousRank": null,
       "newRank": 9,
-      "createdAt": "2026-08-27T22:35:15.449Z"
+      "createdAt": "2026-09-03T00:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_cartlogic",
@@ -866,7 +888,7 @@
       "newTotal": 1200,
       "previousRank": null,
       "newRank": 10,
-      "createdAt": "2026-08-28T23:35:15.449Z"
+      "createdAt": "2026-09-04T01:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_skillforge",
@@ -877,7 +899,7 @@
       "newTotal": 1000,
       "previousRank": null,
       "newRank": 11,
-      "createdAt": "2026-08-29T00:35:15.449Z"
+      "createdAt": "2026-09-04T02:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_byteforge",
@@ -888,7 +910,7 @@
       "newTotal": 850,
       "previousRank": null,
       "newRank": 12,
-      "createdAt": "2026-08-30T01:35:15.449Z"
+      "createdAt": "2026-09-05T03:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_aeromail",
@@ -899,7 +921,7 @@
       "newTotal": 750,
       "previousRank": null,
       "newRank": 13,
-      "createdAt": "2026-08-30T02:35:15.449Z"
+      "createdAt": "2026-09-05T04:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_lumina",
@@ -910,7 +932,7 @@
       "newTotal": 650,
       "previousRank": null,
       "newRank": 14,
-      "createdAt": "2026-08-31T03:35:15.449Z"
+      "createdAt": "2026-09-06T05:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_finstack",
@@ -921,7 +943,7 @@
       "newTotal": 550,
       "previousRank": null,
       "newRank": 15,
-      "createdAt": "2026-08-31T04:35:15.449Z"
+      "createdAt": "2026-09-06T06:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_nordic",
@@ -932,7 +954,7 @@
       "newTotal": 480,
       "previousRank": null,
       "newRank": 16,
-      "createdAt": "2026-08-31T05:35:15.449Z"
+      "createdAt": "2026-09-06T07:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_pixelcraft",
@@ -943,7 +965,7 @@
       "newTotal": 420,
       "previousRank": null,
       "newRank": 17,
-      "createdAt": "2026-09-01T06:35:15.449Z"
+      "createdAt": "2026-09-07T08:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_cloudnest",
@@ -954,7 +976,7 @@
       "newTotal": 360,
       "previousRank": null,
       "newRank": 18,
-      "createdAt": "2026-09-01T07:35:15.449Z"
+      "createdAt": "2026-09-07T09:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_nexuspay",
@@ -965,7 +987,7 @@
       "newTotal": 300,
       "previousRank": null,
       "newRank": 19,
-      "createdAt": "2026-09-01T08:35:15.449Z"
+      "createdAt": "2026-09-07T10:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_algotutor",
@@ -976,7 +998,7 @@
       "newTotal": 250,
       "previousRank": null,
       "newRank": 20,
-      "createdAt": "2026-09-01T09:35:15.449Z"
+      "createdAt": "2026-09-07T11:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_shopvibe",
@@ -987,7 +1009,7 @@
       "newTotal": 200,
       "previousRank": null,
       "newRank": 21,
-      "createdAt": "2026-09-01T10:35:15.449Z"
+      "createdAt": "2026-09-07T12:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_datapulse",
@@ -998,7 +1020,7 @@
       "newTotal": 160,
       "previousRank": null,
       "newRank": 22,
-      "createdAt": "2026-09-02T11:35:15.449Z"
+      "createdAt": "2026-09-08T13:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_vectorstudio",
@@ -1009,7 +1031,7 @@
       "newTotal": 120,
       "previousRank": null,
       "newRank": 23,
-      "createdAt": "2026-09-02T12:35:15.449Z"
+      "createdAt": "2026-09-08T14:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_codesprint",
@@ -1020,7 +1042,7 @@
       "newTotal": 90,
       "previousRank": null,
       "newRank": 24,
-      "createdAt": "2026-09-02T13:35:15.449Z"
+      "createdAt": "2026-09-08T15:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_launchpad",
@@ -1031,7 +1053,7 @@
       "newTotal": 60,
       "previousRank": null,
       "newRank": 25,
-      "createdAt": "2026-09-02T14:35:15.449Z"
+      "createdAt": "2026-09-08T16:08:55.090Z"
     },
     {
       "id": "hist_pay_seed_syncpoint",
@@ -1042,7 +1064,7 @@
       "newTotal": 30,
       "previousRank": null,
       "newRank": 26,
-      "createdAt": "2026-09-02T15:35:15.449Z"
+      "createdAt": "2026-09-08T17:08:55.090Z"
     }
   ],
   "activity": [
@@ -1056,7 +1078,7 @@
         "newRank": 2,
         "slug": "veloce-dev"
       },
-      "createdAt": "2026-09-01T14:20:15.449Z"
+      "createdAt": "2026-09-07T15:53:55.090Z"
     },
     {
       "id": "act_bid_1",
@@ -1068,7 +1090,7 @@
         "newTotal": 10000,
         "slug": "synthetix-ai"
       },
-      "createdAt": "2026-09-01T13:50:15.449Z"
+      "createdAt": "2026-09-07T15:23:55.090Z"
     },
     {
       "id": "act_pay_seed_synthetix",
@@ -1080,7 +1102,7 @@
         "amount": 10000,
         "slug": "synthetix-ai"
       },
-      "createdAt": "2026-08-18T14:35:15.449Z"
+      "createdAt": "2026-08-24T16:08:55.090Z"
     },
     {
       "id": "act_pay_seed_veloce",
@@ -1092,7 +1114,7 @@
         "amount": 7500,
         "slug": "veloce-dev"
       },
-      "createdAt": "2026-08-20T15:35:15.449Z"
+      "createdAt": "2026-08-26T17:08:55.090Z"
     },
     {
       "id": "act_pay_seed_hyperflow",
@@ -1104,7 +1126,7 @@
         "amount": 5800,
         "slug": "hyperflow"
       },
-      "createdAt": "2026-08-22T16:35:15.449Z"
+      "createdAt": "2026-08-28T18:08:55.090Z"
     },
     {
       "id": "act_pay_seed_payzen",
@@ -1116,7 +1138,7 @@
         "amount": 4200,
         "slug": "payzen"
       },
-      "createdAt": "2026-08-23T17:35:15.449Z"
+      "createdAt": "2026-08-29T19:08:55.090Z"
     },
     {
       "id": "act_pay_seed_kubecraft",
@@ -1128,7 +1150,7 @@
         "amount": 3500,
         "slug": "kubecraft"
       },
-      "createdAt": "2026-08-24T18:35:15.449Z"
+      "createdAt": "2026-08-30T20:08:55.090Z"
     },
     {
       "id": "act_pay_seed_omnitrack",
@@ -1140,7 +1162,7 @@
         "amount": 2800,
         "slug": "omnitrack"
       },
-      "createdAt": "2026-08-25T19:35:15.449Z"
+      "createdAt": "2026-08-31T21:08:55.090Z"
     },
     {
       "id": "act_pay_seed_draftwave",
@@ -1152,7 +1174,7 @@
         "amount": 2200,
         "slug": "draftwave"
       },
-      "createdAt": "2026-08-26T20:35:15.449Z"
+      "createdAt": "2026-09-01T22:08:55.090Z"
     },
     {
       "id": "act_pay_seed_zenithos",
@@ -1164,7 +1186,7 @@
         "amount": 1800,
         "slug": "zenith-os"
       },
-      "createdAt": "2026-08-27T21:35:15.449Z"
+      "createdAt": "2026-09-02T23:08:55.090Z"
     },
     {
       "id": "act_pay_seed_pulsegraph",
@@ -1176,7 +1198,7 @@
         "amount": 1500,
         "slug": "pulsegraph"
       },
-      "createdAt": "2026-08-27T22:35:15.449Z"
+      "createdAt": "2026-09-03T00:08:55.090Z"
     },
     {
       "id": "act_pay_seed_cartlogic",
@@ -1188,7 +1210,7 @@
         "amount": 1200,
         "slug": "cartlogic"
       },
-      "createdAt": "2026-08-28T23:35:15.449Z"
+      "createdAt": "2026-09-04T01:08:55.090Z"
     },
     {
       "id": "act_pay_seed_skillforge",
@@ -1200,7 +1222,7 @@
         "amount": 1000,
         "slug": "skillforge"
       },
-      "createdAt": "2026-08-29T00:35:15.449Z"
+      "createdAt": "2026-09-04T02:08:55.090Z"
     },
     {
       "id": "act_pay_seed_byteforge",
@@ -1212,7 +1234,7 @@
         "amount": 850,
         "slug": "byteforge"
       },
-      "createdAt": "2026-08-30T01:35:15.449Z"
+      "createdAt": "2026-09-05T03:08:55.090Z"
     },
     {
       "id": "act_pay_seed_aeromail",
@@ -1224,7 +1246,7 @@
         "amount": 750,
         "slug": "aeromail"
       },
-      "createdAt": "2026-08-30T02:35:15.449Z"
+      "createdAt": "2026-09-05T04:08:55.090Z"
     },
     {
       "id": "act_pay_seed_lumina",
@@ -1236,7 +1258,7 @@
         "amount": 650,
         "slug": "lumina-ai"
       },
-      "createdAt": "2026-08-31T03:35:15.449Z"
+      "createdAt": "2026-09-06T05:08:55.090Z"
     },
     {
       "id": "act_pay_seed_finstack",
@@ -1248,7 +1270,7 @@
         "amount": 550,
         "slug": "finstack"
       },
-      "createdAt": "2026-08-31T04:35:15.449Z"
+      "createdAt": "2026-09-06T06:08:55.090Z"
     },
     {
       "id": "act_pay_seed_nordic",
@@ -1260,7 +1282,7 @@
         "amount": 480,
         "slug": "nordic-design"
       },
-      "createdAt": "2026-08-31T05:35:15.449Z"
+      "createdAt": "2026-09-06T07:08:55.090Z"
     },
     {
       "id": "act_pay_seed_pixelcraft",
@@ -1272,7 +1294,7 @@
         "amount": 420,
         "slug": "pixelcraft"
       },
-      "createdAt": "2026-09-01T06:35:15.449Z"
+      "createdAt": "2026-09-07T08:08:55.090Z"
     },
     {
       "id": "act_pay_seed_cloudnest",
@@ -1284,7 +1306,7 @@
         "amount": 360,
         "slug": "cloudnest"
       },
-      "createdAt": "2026-09-01T07:35:15.449Z"
+      "createdAt": "2026-09-07T09:08:55.090Z"
     },
     {
       "id": "act_pay_seed_nexuspay",
@@ -1296,7 +1318,7 @@
         "amount": 300,
         "slug": "nexuspay"
       },
-      "createdAt": "2026-09-01T08:35:15.449Z"
+      "createdAt": "2026-09-07T10:08:55.090Z"
     },
     {
       "id": "act_pay_seed_algotutor",
@@ -1308,7 +1330,7 @@
         "amount": 250,
         "slug": "algotutor"
       },
-      "createdAt": "2026-09-01T09:35:15.449Z"
+      "createdAt": "2026-09-07T11:08:55.090Z"
     },
     {
       "id": "act_pay_seed_shopvibe",
@@ -1320,7 +1342,7 @@
         "amount": 200,
         "slug": "shopvibe"
       },
-      "createdAt": "2026-09-01T10:35:15.449Z"
+      "createdAt": "2026-09-07T12:08:55.090Z"
     },
     {
       "id": "act_pay_seed_datapulse",
@@ -1332,7 +1354,7 @@
         "amount": 160,
         "slug": "datapulse"
       },
-      "createdAt": "2026-09-02T11:35:15.449Z"
+      "createdAt": "2026-09-08T13:08:55.090Z"
     },
     {
       "id": "act_pay_seed_vectorstudio",
@@ -1344,7 +1366,7 @@
         "amount": 120,
         "slug": "vectorstudio"
       },
-      "createdAt": "2026-09-02T12:35:15.449Z"
+      "createdAt": "2026-09-08T14:08:55.090Z"
     },
     {
       "id": "act_pay_seed_codesprint",
@@ -1356,7 +1378,7 @@
         "amount": 90,
         "slug": "codesprint"
       },
-      "createdAt": "2026-09-02T13:35:15.449Z"
+      "createdAt": "2026-09-08T15:08:55.090Z"
     },
     {
       "id": "act_pay_seed_launchpad",
@@ -1368,7 +1390,7 @@
         "amount": 60,
         "slug": "launchpad"
       },
-      "createdAt": "2026-09-02T14:35:15.449Z"
+      "createdAt": "2026-09-08T16:08:55.090Z"
     },
     {
       "id": "act_pay_seed_syncpoint",
@@ -1380,7 +1402,7 @@
         "amount": 30,
         "slug": "syncpoint"
       },
-      "createdAt": "2026-09-02T15:35:15.449Z"
+      "createdAt": "2026-09-08T17:08:55.090Z"
     }
   ]
 }

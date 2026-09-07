@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { increaseBidSchema } from "@/lib/validation/schemas";
-import { createRazorpayOrder } from "@/lib/payments/razorpay";
+import { createDodoCheckoutSession } from "@/lib/payments/dodo";
 import { estimateRankForBid } from "@/lib/ranking/ranking-engine";
 
 export async function POST(request: Request) {
@@ -33,30 +33,28 @@ export async function POST(request: Request) {
     const allBrands = db.getAllBrands();
     const projectedRank = estimateRankForBid(projectedTotal, allBrands, brand.id);
 
-    // Create payment order
-    const orderReceipt = `rebid_${brandId.slice(0, 8)}_${Date.now()}`;
-    const order = await createRazorpayOrder({
+    // Create Dodo payment checkout session
+    const dodoSession = await createDodoCheckoutSession({
       amount: additionalBid,
-      currency: "USD",
-      receipt: orderReceipt,
-      notes: {
-        brandId: brand.id,
-        isRebid: "true",
-        name: brand.name,
-      },
+      brandId: brand.id,
+      brandName: brand.name,
+      isRebid: true,
     });
 
     return NextResponse.json({
       success: true,
       data: {
-        orderId: order.id,
+        sessionId: dodoSession.sessionId,
+        checkoutUrl: dodoSession.checkoutUrl,
+        orderId: dodoSession.sessionId, // Backwards compatible
         amount: additionalBid,
-        currency: order.currency,
+        currency: dodoSession.currency,
         brandId: brand.id,
         brandName: brand.name,
         currentTotal: brand.totalBid,
         projectedTotal,
         projectedRank: projectedRank.estimatedRank,
+        isMock: dodoSession.isMock,
         keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_brandbid_local",
       },
     });

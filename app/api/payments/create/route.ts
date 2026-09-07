@@ -3,7 +3,7 @@ import { db, Brand } from "@/lib/db";
 import { claimSubmissionSchema } from "@/lib/validation/schemas";
 import { normalizeUrl, formatFullUrl, generateSlug } from "@/lib/url/normalize";
 import { generateManagementToken, hashToken } from "@/lib/security/tokens";
-import { createRazorpayOrder } from "@/lib/payments/razorpay";
+import { createDodoCheckoutSession } from "@/lib/payments/dodo";
 import crypto from "crypto";
 
 export async function POST(request: Request) {
@@ -72,28 +72,27 @@ export async function POST(request: Request) {
       db.insertBrand(newBrand);
     }
 
-    // Create payment order
-    const orderReceipt = `rcpt_${brandId.slice(0, 10)}_${Date.now()}`;
-    const order = await createRazorpayOrder({
+    // Create Dodo Payments Checkout Session
+    const dodoSession = await createDodoCheckoutSession({
       amount: data.bidAmount,
-      currency: "USD",
-      receipt: orderReceipt,
-      notes: {
-        brandId,
-        isRebid: String(isRebid),
-        name: data.name,
-      },
+      brandId,
+      brandName: data.name,
+      isRebid,
     });
 
     return NextResponse.json({
       success: true,
       data: {
-        orderId: order.id,
+        sessionId: dodoSession.sessionId,
+        checkoutUrl: dodoSession.checkoutUrl,
+        orderId: dodoSession.sessionId, // Backwards-compatible
         amount: data.bidAmount,
-        currency: order.currency,
+        currency: dodoSession.currency,
         brandId,
+        brandName: data.name,
         managementToken: isRebid ? null : managementToken,
         isRebid,
+        isMock: dodoSession.isMock,
         keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_brandbid_local",
       },
     });
