@@ -12,6 +12,7 @@
     "db:seed": "tsx lib/db/seed.ts"
   },
   "dependencies": {
+    "@dodopayments/nextjs": "^0.3.9",
     "clsx": "^2.1.1",
     "dodopayments": "^2.49.0",
     "lucide-react": "^0.475.0",

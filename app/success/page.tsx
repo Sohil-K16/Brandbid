@@ -8,7 +8,8 @@ import { Copy, Check, ExternalLink, ArrowRight, Key, Trophy } from "lucide-react
 
 function SuccessContent() {
   const searchParams = useSearchParams();
-  const name = searchParams.get("name") || "Your Brand";
+  const sessionId = searchParams.get("session_id") || searchParams.get("sessionId") || "";
+  const name = searchParams.get("name") || (sessionId ? "Brand Purchase" : "Your Brand");
   const slug = searchParams.get("slug") || "";
   const rank = searchParams.get("rank") || "1";
   const bid = searchParams.get("bid") || "0";
@@ -56,6 +57,11 @@ function SuccessContent() {
           <h1 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-foreground">
             YOU&apos;RE #{rank}.
           </h1>
+          {sessionId && (
+            <p className="text-[11px] font-mono-num text-muted pt-1 truncate max-w-sm mx-auto">
+              Session ID: {sessionId}
+            </p>
+          )}
         </div>
 
         <div className="py-4 border-y border-border grid grid-cols-2 gap-4 font-mono-num text-left text-xs">
