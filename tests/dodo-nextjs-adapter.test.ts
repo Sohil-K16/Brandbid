@@ -33,6 +33,8 @@ describe("Official @dodopayments/nextjs Adapter Integration", () => {
         metadata: {
           brandId: brand.id,
           brandName: brand.name,
+          amount: "500",
+          amountInCents: "50000",
         },
       },
     };

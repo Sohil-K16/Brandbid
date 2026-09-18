@@ -14,6 +14,7 @@
 # Environment variables
 .env*.local
 .env
+/data/brandbid.test-*.json
 
 # Debug & logs
 npm-debug.log*

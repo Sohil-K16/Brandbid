@@ -22,6 +22,18 @@ export interface DodoCheckoutSessionResult {
   paymentId?: string | null;
 }
 
+interface MockDodoSession {
+  sessionId: string;
+  paymentId: string;
+  checkoutUrl: string;
+  amount: number;
+  amountInCents: number;
+  currency: string;
+  metadata: Record<string, string>;
+  payment_status: "succeeded";
+  status: "completed";
+}
+
 export interface VerifyDodoWebhookParams {
   rawBody: string;
   headers: {
@@ -32,30 +44,94 @@ export interface VerifyDodoWebhookParams {
   };
 }
 
+const DODO_SUCCESS_PATH = "/checkout/success";
+const mockDodoSessions = new Map<string, MockDodoSession>();
+
+function isProduction(): boolean {
+  return process.env.NODE_ENV === "production";
+}
+
+function isPlaceholder(value: string | undefined): boolean {
+  if (!value) return true;
+  const normalized = value.trim().toLowerCase();
+  if (!normalized) return true;
+  return (
+    normalized.includes("placeholder") ||
+    normalized.includes("your_") ||
+    normalized.includes("example") ||
+    normalized.includes("changeme")
+  );
+}
+
+function getEnvStrict(name: string): string {
+  const value = process.env[name];
+  if (!value || isPlaceholder(value)) {
+    throw new Error(`Missing required Dodo configuration: ${name}`);
+  }
+  return value;
+}
+
+function getAppUrlStrict(): string {
+  const appUrl = getEnvStrict("NEXT_PUBLIC_APP_URL");
+  let parsed: URL;
+  try {
+    parsed = new URL(appUrl);
+  } catch {
+    throw new Error("NEXT_PUBLIC_APP_URL must be an absolute URL");
+  }
+
+  if (isProduction() && parsed.protocol !== "https:") {
+    throw new Error("NEXT_PUBLIC_APP_URL must use https in production");
+  }
+
+  return parsed.origin;
+}
+
+export function canUseMockDodoPayments(): boolean {
+  return !isProduction();
+}
+
 /**
  * Checks if live/valid Dodo Payments credentials are provided.
  */
 export function hasLiveDodoCredentials(): boolean {
-  const apiKey = process.env.DODO_PAYMENTS_API_KEY;
-  return Boolean(
-    apiKey &&
-    !apiKey.includes("placeholder") &&
-    !apiKey.includes("test_placeholder") &&
-    apiKey.length > 10
-  );
+  return !isPlaceholder(process.env.DODO_PAYMENTS_API_KEY);
+}
+
+export function assertDodoCheckoutConfig(): void {
+  if (!isProduction()) return;
+
+  const environment = getEnvStrict("DODO_PAYMENTS_ENVIRONMENT");
+  if (environment !== "live_mode") {
+    throw new Error("DODO_PAYMENTS_ENVIRONMENT must be live_mode in production");
+  }
+
+  getEnvStrict("DODO_PAYMENTS_API_KEY");
+  getEnvStrict("DODO_PAYMENTS_PRODUCT_ID");
+  getAppUrlStrict();
+}
+
+export function assertDodoWebhookConfig(): void {
+  if (!isProduction()) return;
+
+  getEnvStrict("DODO_PAYMENTS_API_KEY");
+  getEnvStrict("DODO_PAYMENTS_WEBHOOK_KEY");
+  const environment = getEnvStrict("DODO_PAYMENTS_ENVIRONMENT");
+  if (environment !== "live_mode") {
+    throw new Error("DODO_PAYMENTS_ENVIRONMENT must be live_mode in production");
+  }
 }
 
 /**
  * Instantiates the official DodoPayments client.
  */
 export function getDodoClient(): DodoPayments {
-  const environment =
-    process.env.DODO_PAYMENTS_ENVIRONMENT === "live_mode" ? "live_mode" : "test_mode";
+  const environment = process.env.DODO_PAYMENTS_ENVIRONMENT === "live_mode" ? "live_mode" : "test_mode";
 
   return new DodoPayments({
-    bearerToken: process.env.DODO_PAYMENTS_API_KEY || "dodo_placeholder_key",
+    bearerToken: process.env.DODO_PAYMENTS_API_KEY || "",
     environment,
-    webhookKey: process.env.DODO_PAYMENTS_WEBHOOK_KEY,
+    webhookKey: process.env.DODO_PAYMENTS_WEBHOOK_KEY || process.env.DODO_PAYMENTS_WEBHOOK_SECRET,
   });
 }
 
@@ -66,57 +142,81 @@ export function getDodoClient(): DodoPayments {
 export async function createDodoCheckoutSession(
   params: CreateDodoCheckoutParams
 ): Promise<DodoCheckoutSessionResult> {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const returnUrl = params.returnUrl || `${appUrl}/checkout/success`;
+  assertDodoCheckoutConfig();
+
+  const appOrigin = (() => {
+    if (params.returnUrl) {
+      return new URL(params.returnUrl).origin;
+    }
+    if (canUseMockDodoPayments()) {
+      return process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    }
+    return getAppUrlStrict();
+  })();
+  const returnUrl = params.returnUrl || `${appOrigin}${DODO_SUCCESS_PATH}`;
   const amountInCents = Math.round(params.amount * 100);
+  const metadata = {
+    brandId: params.brandId,
+    brandName: params.brandName,
+    isRebid: String(Boolean(params.isRebid)),
+    paymentType: params.isRebid ? "rebid" : "claim",
+    amount: String(params.amount),
+    amountInCents: String(amountInCents),
+    ...(params.metadata || {}),
+  };
 
   if (hasLiveDodoCredentials()) {
-    try {
-      const client = getDodoClient();
+    const client = getDodoClient();
 
-      const session = await client.checkoutSessions.create({
-        product_cart: [
-          {
-            product_id: process.env.DODO_PAYMENTS_PRODUCT_ID || "pdt_brandbid_spot",
-            quantity: 1,
-            amount: amountInCents,
-          },
-        ],
-        customer: {
-          email: params.customerEmail || "bidder@brandbid.me",
-          name: params.customerName || params.brandName,
+    const session = await client.checkoutSessions.create({
+      product_cart: [
+        {
+          product_id: isProduction() ? getEnvStrict("DODO_PAYMENTS_PRODUCT_ID") : process.env.DODO_PAYMENTS_PRODUCT_ID || "pdt_brandbid_spot",
+          quantity: 1,
+          amount: amountInCents,
         },
-        metadata: {
-          brandId: params.brandId,
-          brandName: params.brandName,
-          isRebid: String(Boolean(params.isRebid)),
-          amount: String(params.amount),
-          ...(params.metadata || {}),
-        },
-        return_url: returnUrl,
-      });
+      ],
+      customer: {
+        email: params.customerEmail || "bidder@brandbid.me",
+        name: params.customerName || params.brandName,
+      },
+      metadata,
+      return_url: returnUrl,
+    });
 
-      if (session && session.session_id) {
-        return {
-          sessionId: session.session_id,
-          checkoutUrl: session.checkout_url || `${returnUrl}?session_id=${session.session_id}&status=success`,
-          amount: params.amount,
-          currency: "USD",
-          clientSecret: session.client_secret || null,
-          paymentId: session.payment_id || null,
-          isMock: false,
-        };
-      }
-    } catch (err) {
-      console.warn("[Dodo Payments] Live API checkout session creation note/fallback:", err);
+    if (!session?.session_id) {
+      throw new Error("Dodo checkout session was not created");
     }
+
+    return {
+      sessionId: session.session_id,
+      checkoutUrl: session.checkout_url || `${returnUrl}?session_id=${session.session_id}&status=success`,
+      amount: params.amount,
+      currency: "USD",
+      clientSecret: session.client_secret || null,
+      paymentId: session.payment_id || null,
+      isMock: false,
+    };
   }
 
-  // Local / Test Mode Simulation Session
+  if (!canUseMockDodoPayments()) {
+    throw new Error("Dodo live credentials are required in production");
+  }
+
   const mockSessionId = "cks_mock_" + crypto.randomBytes(8).toString("hex");
-  const mockCheckoutUrl = `${returnUrl}?session_id=${mockSessionId}&status=success&brand_id=${encodeURIComponent(
-    params.brandId
-  )}&amount=${params.amount}`;
+  const mockPaymentId = "pay_mock_" + crypto.randomBytes(8).toString("hex");
+  const mockCheckoutUrl = `${returnUrl}?session_id=${mockSessionId}&status=success`;
+  mockDodoSessions.set(mockSessionId, {
+    sessionId: mockSessionId,
+    paymentId: mockPaymentId,
+    checkoutUrl: mockCheckoutUrl,
+    amount: params.amount,
+    amountInCents,
+    currency: "USD",
+    metadata,
+    payment_status: "succeeded",
+    status: "completed",
+  });
 
   return {
     sessionId: mockSessionId,
@@ -134,10 +234,19 @@ export async function retrieveDodoCheckoutSession(sessionId: string) {
   if (!sessionId) return null;
 
   if (sessionId.startsWith("cks_mock_")) {
+    const mockSession = mockDodoSessions.get(sessionId);
+    if (!mockSession) return null;
     return {
-      id: sessionId,
-      payment_status: "succeeded",
-      status: "completed",
+      id: mockSession.sessionId,
+      session_id: mockSession.sessionId,
+      payment_id: mockSession.paymentId,
+      checkout_url: mockSession.checkoutUrl,
+      payment_status: mockSession.payment_status,
+      status: mockSession.status,
+      metadata: mockSession.metadata,
+      total_amount: mockSession.amountInCents,
+      amount: mockSession.amountInCents,
+      currency: mockSession.currency,
       isMock: true,
     };
   }
@@ -167,8 +276,19 @@ export function verifyDodoWebhook(params: VerifyDodoWebhookParams): {
   const webhookSignature = (headers["webhook-signature"] || headers["Webhook-Signature"]) as string;
   const webhookTimestamp = (headers["webhook-timestamp"] || headers["Webhook-Timestamp"]) as string;
 
+  const webhookKey = process.env.DODO_PAYMENTS_WEBHOOK_KEY || process.env.DODO_PAYMENTS_WEBHOOK_SECRET;
+
+  if (isProduction()) {
+    try {
+      assertDodoWebhookConfig();
+    } catch {
+      return { isValid: false, event: null };
+    }
+  }
+
   // 1. Support simulated test signatures in development / testing
   if (
+    canUseMockDodoPayments() &&
     webhookSignature &&
     (webhookSignature.startsWith("mock_hook_") ||
       webhookSignature.startsWith("mock_sig_") ||
@@ -182,8 +302,7 @@ export function verifyDodoWebhook(params: VerifyDodoWebhookParams): {
     }
   }
 
-  const webhookKey = process.env.DODO_PAYMENTS_WEBHOOK_KEY;
-  if (!webhookKey || webhookKey.includes("placeholder")) {
+  if (canUseMockDodoPayments() && (!webhookKey || isPlaceholder(webhookKey))) {
     // If webhook secret is not configured in local development, parse safely
     try {
       const parsed = JSON.parse(rawBody);
@@ -195,6 +314,9 @@ export function verifyDodoWebhook(params: VerifyDodoWebhookParams): {
 
   // 2. Official DodoPayments SDK unwrap verification
   try {
+    if (!webhookKey) {
+      return { isValid: false, event: null };
+    }
     const client = getDodoClient();
     const event = client.webhooks.unwrap(rawBody, {
       headers: {
@@ -206,10 +328,14 @@ export function verifyDodoWebhook(params: VerifyDodoWebhookParams): {
     });
 
     return { isValid: true, event };
-  } catch (sdkError) {
+  } catch {
+    if (!canUseMockDodoPayments()) {
+      return { isValid: false, event: null };
+    }
+
     // 3. Fallback standard HMAC-SHA256 verification (webhook-id.webhook-timestamp.rawBody)
     try {
-      if (webhookId && webhookTimestamp && webhookSignature) {
+      if (webhookId && webhookTimestamp && webhookSignature && webhookKey) {
         const secret = webhookKey.startsWith("whsec_")
           ? Buffer.from(webhookKey.replace("whsec_", ""), "base64")
           : Buffer.from(webhookKey, "utf8");
@@ -229,11 +355,10 @@ export function verifyDodoWebhook(params: VerifyDodoWebhookParams): {
           return { isValid: true, event: parsed };
         }
       }
-    } catch (manualError) {
-      console.error("[Dodo Webhook] Manual signature verification error:", manualError);
+    } catch {
+      return { isValid: false, event: null };
     }
 
-    console.warn("[Dodo Webhook] Verification failed:", sdkError);
     return { isValid: false, event: null };
   }
 }

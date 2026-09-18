@@ -1,9 +1,12 @@
 import { Checkout } from "@dodopayments/nextjs";
 import { dodoEnvironment } from "@/lib/dodo-env";
+import { assertDodoCheckoutConfig } from "@/lib/payments/dodo";
+
+assertDodoCheckoutConfig();
 
 export const POST = Checkout({
   bearerToken: process.env.DODO_PAYMENTS_API_KEY,
-  returnUrl: process.env.DODO_PAYMENTS_RETURN_URL || "http://localhost:3000/success",
+  returnUrl: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/checkout/success`,
   environment: dodoEnvironment,
   type: "session",
 });

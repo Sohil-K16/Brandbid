@@ -3,7 +3,8 @@ import path from "path";
 import { Brand, Payment, BidHistoryItem, ActivityItem, DatabaseState } from "./schema";
 
 const DB_DIR = path.join(process.cwd(), "data");
-const DB_FILE = path.join(DB_DIR, "brandbid.json");
+const TEST_DB_SUFFIX = process.env.VITEST_POOL_ID ? `.test-${process.env.VITEST_POOL_ID}` : "";
+const DB_FILE = path.join(DB_DIR, `brandbid${TEST_DB_SUFFIX}.json`);
 
 function ensureDbFile(): DatabaseState {
   if (!fs.existsSync(DB_DIR)) {
@@ -37,7 +38,7 @@ function writeDbFile(state: DatabaseState): void {
     fs.mkdirSync(DB_DIR, { recursive: true });
   }
   // Write to temp file then rename for atomic replace
-  const tempFile = `${DB_FILE}.${Date.now()}.tmp`;
+  const tempFile = `${DB_FILE}.${process.pid}.${Date.now()}.${Math.random().toString(16).slice(2)}.tmp`;
   fs.writeFileSync(tempFile, JSON.stringify(state, null, 2), "utf8");
   fs.renameSync(tempFile, DB_FILE);
 }

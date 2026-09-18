@@ -27,7 +27,7 @@ BrandBid.me is an internet-native public leaderboard where brands and startups c
 - **Framework**: Next.js 15 App Router + React 19 + TypeScript
 - **Styling**: Tailwind CSS + Custom CSS (`#F7F6F2` warm off-white, near-black, metallic accents)
 - **Database**: Universal typed storage engine with atomic writes and PostgreSQL / SQLite schema
-- **Payments**: Razorpay SDK + Server-side HMAC SHA-256 signature verification + Webhook idempotency
+- **Payments**: Dodo Payments checkout sessions + signed webhook verification + idempotent server-side fulfillment
 - **Testing**: Vitest suite covering ranking, tie-breaks, payment idempotency, and URL canonicalization
 
 ---
@@ -44,6 +44,13 @@ Copy `.env.example` to `.env.local`:
 ```bash
 cp .env.example .env.local
 ```
+
+For production (Vercel), set:
+- `DODO_PAYMENTS_ENVIRONMENT=live_mode`
+- `DODO_PAYMENTS_API_KEY` (live API key)
+- `DODO_PAYMENTS_PRODUCT_ID` (live product ID)
+- `DODO_PAYMENTS_WEBHOOK_KEY` (live webhook signing key)
+- `NEXT_PUBLIC_APP_URL` (absolute `https://...` app URL)
 
 ### 3. Seed Development Data
 Populates 26 realistic brands across all categories and tiers with verified payments and activity:
@@ -71,9 +78,10 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `/api/leaderboard` | `GET` | Ranked brands and platform statistics |
 | `/api/brands/[slug]` | `GET`, `POST` | Brand details, climb gap, and click tracking |
 | `/api/metadata` | `POST` | Best-effort website title, logo, and OG tag extractor |
-| `/api/payments/create` | `POST` | Creates Razorpay order for claim or rebid |
-| `/api/payments/verify` | `POST` | Server-side signature verification, atomic balance update |
-| `/api/payments/webhook` | `POST` | Idempotent webhook listener |
+| `/api/payments/create` | `POST` | Creates Dodo checkout session for claim or rebid |
+| `/api/payments/verify` | `POST` | Verifies Dodo checkout session state and fulfills payment idempotently |
+| `/api/webhook/dodo-payments` | `POST` | Canonical signed Dodo webhook endpoint (production) |
+| `/api/payments/webhook` | `POST` | Legacy endpoint (does not process Dodo events) |
 | `/api/bids/increase` | `POST` | Initiates rebid for existing brand |
 | `/api/manage/[token]` | `GET`, `PUT` | Tokenized brand retrieval and detail editing |
 | `/api/activity` | `GET` | Live platform activity ticker items |
@@ -88,3 +96,12 @@ Access the admin panel at `/admin` using the `ADMIN_SECRET` configured in `.env.
 ```
 Default secret: brandbid_admin_super_secret_key_2026
 ```
+
+## Dodo Dashboard Webhook Setup
+
+Configure your Dodo webhook to:
+- URL: `https://<your-domain>/api/webhook/dodo-payments`
+- Signing key: copy into `DODO_PAYMENTS_WEBHOOK_KEY`
+- Events: include successful payment completion events (for example `payment.succeeded` / `checkout.session.completed`)
+
+Brand publication and leaderboard updates are applied only after verified Dodo server-side status/webhook fulfillment.

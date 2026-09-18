@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { increaseBidSchema } from "@/lib/validation/schemas";
-import { createDodoCheckoutSession } from "@/lib/payments/dodo";
+import { createDodoCheckoutSession, assertDodoCheckoutConfig } from "@/lib/payments/dodo";
 import { estimateRankForBid } from "@/lib/ranking/ranking-engine";
 
 export async function POST(request: Request) {
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
     }
 
     const { brandId, additionalBid } = parseResult.data;
+    assertDodoCheckoutConfig();
     const brand = db.getBrandById(brandId);
 
     if (!brand) {
@@ -55,13 +56,12 @@ export async function POST(request: Request) {
         projectedTotal,
         projectedRank: projectedRank.estimatedRank,
         isMock: dodoSession.isMock,
-        keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_brandbid_local",
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("[API] Increase bid error:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to create rebid order" },
+      { success: false, error: error?.message || "Failed to create rebid order" },
       { status: 500 }
     );
   }

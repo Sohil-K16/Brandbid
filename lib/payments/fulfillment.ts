@@ -34,35 +34,51 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
     };
   }
 
-  const providerPaymentId: string =
-    dodoData?.payment_id ||
-    dodoData?.id ||
-    `pay_dodo_${Date.now()}`;
+  const providerPaymentId: string | null = dodoData?.payment_id || dodoData?.id || null;
+  if (!providerPaymentId) {
+    return { success: false, message: "Missing provider payment ID" };
+  }
 
   const providerOrderId: string =
     dodoData?.session_id ||
     dodoData?.order_id ||
     providerPaymentId;
 
-  // Amount conversion: Dodo total_amount is in cents (lowest currency denomination)
-  let amount = 0;
-  if (typeof dodoData?.total_amount === "number") {
-    amount = dodoData.total_amount / 100;
-  } else if (typeof dodoData?.amount === "number") {
-    amount = dodoData.amount > 1000 ? dodoData.amount / 100 : dodoData.amount;
-  } else {
-    amount = Number(dodoData?.metadata?.amount) || 100;
+  const metadata = dodoData?.metadata || {};
+  const brandId = metadata.brandId || metadata.brand_id;
+  if (!brandId || typeof brandId !== "string") {
+    return { success: false, message: "Missing or invalid metadata.brandId" };
   }
 
-  const brandId: string =
-    dodoData?.metadata?.brandId ||
-    dodoData?.metadata?.brand_id ||
-    dodoData?.metadata?.brandId;
+  const metadataAmount = Number(metadata.amount);
+  const metadataAmountInCents = Number(metadata.amountInCents);
+  const providerTotalAmountInCents =
+    typeof dodoData?.total_amount === "number"
+      ? dodoData.total_amount
+      : typeof dodoData?.amount === "number"
+        ? dodoData.amount
+        : null;
 
-  if (!brandId) {
-    console.warn("[Dodo Fulfillment] No brandId present in webhook metadata", dodoData?.metadata);
-    return { success: true, message: "No brandId provided in metadata" };
+  let amountFromProvider: number | null = null;
+  if (providerTotalAmountInCents !== null && Number.isFinite(providerTotalAmountInCents) && providerTotalAmountInCents > 0) {
+    amountFromProvider = providerTotalAmountInCents / 100;
   }
+
+  if (!Number.isFinite(metadataAmount) || metadataAmount <= 0) {
+    return { success: false, message: "Missing or invalid metadata.amount" };
+  }
+
+  if (Number.isFinite(metadataAmountInCents) && metadataAmountInCents > 0) {
+    const normalized = metadataAmountInCents / 100;
+    if (Math.abs(normalized - metadataAmount) > 0.01) {
+      return { success: false, message: "Metadata amount mismatch" };
+    }
+  }
+
+  if (amountFromProvider !== null && Math.abs(amountFromProvider - metadataAmount) > 0.01) {
+    return { success: false, message: "Provider amount does not match metadata amount" };
+  }
+  const amount = amountFromProvider ?? metadataAmount;
 
   // Idempotency: verify if this payment was already credited
   const existingPayment = db.getPaymentByProviderId(providerPaymentId);

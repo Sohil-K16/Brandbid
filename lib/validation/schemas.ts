@@ -34,7 +34,7 @@ export const claimSubmissionSchema = z.object({
 });
 
 export const verifyPaymentSchema = z.object({
-  brandId: z.string().min(1, "Brand ID is required"),
+  brandId: z.string().min(1, "Brand ID is required").optional(),
   // Dodo Payments / Universal fields
   sessionId: z.string().optional(),
   paymentId: z.string().optional(),
@@ -43,7 +43,7 @@ export const verifyPaymentSchema = z.object({
   razorpayOrderId: z.string().optional(),
   razorpayPaymentId: z.string().optional(),
   razorpaySignature: z.string().optional(),
-  amount: z.number().min(10),
+  amount: z.number().min(10).optional(),
   managementToken: z.string().optional(), // Provided when increasing bid
 });
 

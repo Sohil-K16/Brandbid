@@ -3,7 +3,7 @@ import { db, Brand } from "@/lib/db";
 import { claimSubmissionSchema } from "@/lib/validation/schemas";
 import { normalizeUrl, formatFullUrl, generateSlug } from "@/lib/url/normalize";
 import { generateManagementToken, hashToken } from "@/lib/security/tokens";
-import { createDodoCheckoutSession } from "@/lib/payments/dodo";
+import { createDodoCheckoutSession, assertDodoCheckoutConfig } from "@/lib/payments/dodo";
 import crypto from "crypto";
 
 export async function POST(request: Request) {
@@ -22,6 +22,7 @@ export async function POST(request: Request) {
     }
 
     const data = parseResult.data;
+    assertDodoCheckoutConfig();
     const canonical = normalizeUrl(data.websiteUrl);
     const formattedUrl = formatFullUrl(data.websiteUrl);
 
@@ -93,13 +94,12 @@ export async function POST(request: Request) {
         managementToken: isRebid ? null : managementToken,
         isRebid,
         isMock: dodoSession.isMock,
-        keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_brandbid_local",
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("[API] Create payment order error:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to create payment order" },
+      { success: false, error: error?.message || "Failed to create payment order" },
       { status: 500 }
     );
   }

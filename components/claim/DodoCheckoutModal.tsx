@@ -80,11 +80,13 @@ export default function DodoCheckoutModal({
   };
 
   const handleProceedToDodo = () => {
-    if (checkoutData.checkoutUrl && !checkoutData.checkoutUrl.includes("cks_mock_")) {
+    if (checkoutData.checkoutUrl && !checkoutData.isMock) {
       window.location.href = checkoutData.checkoutUrl;
-    } else {
+    } else if (checkoutData.isMock) {
       // Direct instant simulated verification in test mode
       handleVerify();
+    } else {
+      setError("Checkout URL is missing. Please try again.");
     }
   };
 

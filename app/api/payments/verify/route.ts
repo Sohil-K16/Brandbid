@@ -1,10 +1,26 @@
 import { NextResponse } from "next/server";
-import { db, Payment, BidHistoryItem, ActivityItem } from "@/lib/db";
+import { db } from "@/lib/db";
 import { verifyPaymentSchema } from "@/lib/validation/schemas";
+import { retrieveDodoCheckoutSession } from "@/lib/payments/dodo";
 import { verifyRazorpaySignature } from "@/lib/payments/razorpay";
-import { retrieveDodoCheckoutSession, hasLiveDodoCredentials } from "@/lib/payments/dodo";
 import { calculateRankings } from "@/lib/ranking/ranking-engine";
+import { fulfillDodoPayment } from "@/lib/payments/fulfillment";
 import crypto from "crypto";
+
+function buildRankResponse(brandId: string) {
+  const brand = db.getBrandById(brandId);
+  if (!brand) return null;
+
+  const rankings = calculateRankings(db.getAllBrands());
+  const rank = rankings.find((b) => b.id === brand.id)?.rank || 1;
+
+  return {
+    brand,
+    rank,
+    totalBid: brand.totalBid,
+    isNumberOne: rank === 1,
+  };
+}
 
 export async function POST(request: Request) {
   try {
@@ -24,78 +40,72 @@ export async function POST(request: Request) {
     const {
       brandId,
       sessionId,
-      paymentId,
-      signature,
       razorpayOrderId,
       razorpayPaymentId,
       razorpaySignature,
       amount,
     } = parseResult.data;
 
-    const providerOrderId = sessionId || razorpayOrderId || `sess_${Date.now()}`;
-    const providerPaymentId =
-      paymentId ||
-      razorpayPaymentId ||
-      (sessionId ? `pay_${sessionId.replace(/^(cks_|order_)/, "")}` : `pay_${Date.now()}`);
-    const sig = signature || razorpaySignature || "";
-
-    // 1. Verify Payment & Signature
-    let isValidPayment = false;
-
-    // Check Mock / Test mode signatures
-    if (
-      providerOrderId.startsWith("cks_mock_") ||
-      providerOrderId.startsWith("order_mock_") ||
-      sig.startsWith("mock_") ||
-      sig === "valid_test_signature" ||
-      providerPaymentId.startsWith("pay_mock_") ||
-      providerPaymentId.startsWith("pay_e2e_test_")
-    ) {
-      isValidPayment = true;
-    } else if (sessionId && hasLiveDodoCredentials()) {
+    if (sessionId) {
       const dodoSession = await retrieveDodoCheckoutSession(sessionId);
-      if (
-        dodoSession &&
-        ((dodoSession as any).payment_status === "succeeded" ||
-          (dodoSession as any).status === "completed" ||
-          (dodoSession as any).status === "active")
-      ) {
-        isValidPayment = true;
+      if (!dodoSession) {
+        return NextResponse.json(
+          { success: false, error: "Checkout session not found" },
+          { status: 404 }
+        );
       }
-    } else if (razorpayOrderId && razorpayPaymentId && razorpaySignature) {
-      isValidPayment = verifyRazorpaySignature({
-        razorpayOrderId,
-        razorpayPaymentId,
-        razorpaySignature,
+
+      const isSettled =
+        (dodoSession as any).payment_status === "succeeded" ||
+        (dodoSession as any).status === "completed";
+      if (!isSettled) {
+        return NextResponse.json(
+          { success: false, error: "Payment is not settled yet" },
+          { status: 202 }
+        );
+      }
+
+      const fulfillment = await fulfillDodoPayment({
+        type: "payment.succeeded",
+        data: dodoSession,
       });
-    } else if (!hasLiveDodoCredentials()) {
-      // Local development without live keys allows standard verification
-      isValidPayment = true;
+
+      if (!fulfillment.success || !fulfillment.brandId) {
+        return NextResponse.json(
+          { success: false, error: fulfillment.message || "Fulfillment failed" },
+          { status: 400 }
+        );
+      }
+
+      const responseData = buildRankResponse(fulfillment.brandId);
+      if (!responseData) {
+        return NextResponse.json(
+          { success: false, error: "Associated brand not found" },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json({ success: true, data: responseData });
     }
 
-    if (!isValidPayment) {
+    // Legacy Razorpay verification path (non-Dodo flow)
+    if (!(brandId && razorpayOrderId && razorpayPaymentId && razorpaySignature && amount)) {
       return NextResponse.json(
-        { success: false, error: "Payment verification failed or signature mismatch" },
+        { success: false, error: "sessionId is required for Dodo verification" },
         { status: 400 }
       );
     }
 
-    // 2. Check Idempotency
-    const existingPayment = db.getPaymentByProviderId(providerPaymentId);
-    if (existingPayment && existingPayment.status === "verified") {
-      // Payment was already processed
-      const brand = db.getBrandById(brandId);
-      const ranked = calculateRankings(db.getAllBrands());
-      const currentRank = ranked.find((b) => b.id === brandId)?.rank || 1;
-
-      return NextResponse.json({
-        success: true,
-        data: {
-          brand,
-          rank: currentRank,
-          alreadyProcessed: true,
-        },
-      });
+    const isValid = verifyRazorpaySignature({
+      razorpayOrderId,
+      razorpayPaymentId,
+      razorpaySignature,
+    });
+    if (!isValid) {
+      return NextResponse.json(
+        { success: false, error: "Payment verification failed or signature mismatch" },
+        { status: 400 }
+      );
     }
 
     const brand = db.getBrandById(brandId);
@@ -106,89 +116,33 @@ export async function POST(request: Request) {
       );
     }
 
-    // 3. Determine previous rank before applying new bid
-    const beforeRankings = calculateRankings(db.getAllBrands());
-    const previousRank = beforeRankings.find((b) => b.id === brandId)?.rank || null;
-    const previousTotal = brand.totalBid;
-    const newTotal = previousTotal + amount;
-    const now = new Date().toISOString();
-
-    // 4. Record Payment
-    const paymentRecord: Payment = {
-      id: "pay_" + crypto.randomBytes(8).toString("hex"),
-      brandId: brand.id,
-      providerPaymentId,
-      providerOrderId,
-      amount,
-      currency: "USD",
-      status: "verified",
-      createdAt: now,
-      verifiedAt: now,
-    };
-    db.insertPayment(paymentRecord);
-
-    // 5. Update Brand
-    db.updateBrand(brand.id, {
-      totalBid: newTotal,
-      status: "published",
-      updatedAt: now,
-    });
-
-    // 6. Calculate new ranking after applying new bid
-    const afterRankings = calculateRankings(db.getAllBrands());
-    const newRank = afterRankings.find((b) => b.id === brand.id)?.rank || 1;
-
-    // 7. Record Bid History
-    const historyItem: BidHistoryItem = {
-      id: "hist_" + crypto.randomBytes(8).toString("hex"),
-      brandId: brand.id,
-      paymentId: paymentRecord.id,
-      amountAdded: amount,
-      previousTotal,
-      newTotal,
-      previousRank,
-      newRank,
-      createdAt: now,
-    };
-    db.insertBidHistory(historyItem);
-
-    // 8. Record Activity
-    let eventType: ActivityItem["eventType"] = "brand_entered";
-    if (newRank === 1) {
-      eventType = "became_number_one";
-    } else if (previousRank && newRank < previousRank) {
-      eventType = "rank_climbed";
-    } else if (previousTotal > 0) {
-      eventType = "bid_increased";
+    const existingPayment = db.getPaymentByProviderId(razorpayPaymentId);
+    if (!existingPayment) {
+      const now = new Date().toISOString();
+      db.insertPayment({
+        id: "pay_" + crypto.randomBytes(8).toString("hex"),
+        brandId: brand.id,
+        providerPaymentId: razorpayPaymentId,
+        providerOrderId: razorpayOrderId,
+        amount,
+        currency: "USD",
+        status: "verified",
+        createdAt: now,
+        verifiedAt: now,
+      });
+      db.updateBrand(brand.id, {
+        totalBid: brand.totalBid + amount,
+        status: "published",
+        updatedAt: now,
+      });
     }
 
-    const activityItem: ActivityItem = {
-      id: "act_" + crypto.randomBytes(8).toString("hex"),
-      brandId: brand.id,
-      eventType,
-      metadata: {
-        brandName: brand.name,
-        rank: newRank,
-        previousRank,
-        amountAdded: amount,
-        totalBid: newTotal,
-        slug: brand.slug,
-      },
-      createdAt: now,
-    };
-    db.insertActivity(activityItem);
-
-    const updatedBrand = db.getBrandById(brand.id);
-
+    const responseData = buildRankResponse(brand.id);
     return NextResponse.json({
       success: true,
       data: {
-        brand: updatedBrand,
-        rank: newRank,
-        previousRank,
-        totalBid: newTotal,
-        amountAdded: amount,
-        isNumberOne: newRank === 1,
+        ...responseData,
+        alreadyProcessed: Boolean(existingPayment),
       },
     });
   } catch (error) {
