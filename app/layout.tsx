@@ -3,7 +3,6 @@ import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -62,12 +61,6 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
-      <head>
-        <Script
-          src="https://checkout.razorpay.com/v1/checkout.js"
-          strategy="lazyOnload"
-        />
-      </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground selection:bg-black selection:text-white">
         <Header />
         <main className="flex-1 w-full">{children}</main>

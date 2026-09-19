@@ -1,15 +1,33 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { db, Payment } from "@/lib/db";
 import { calculateRankings } from "@/lib/ranking/ranking-engine";
 
+import crypto from "crypto";
+
 function checkAdminAuth(request: Request): boolean {
-  const secret = process.env.ADMIN_SECRET || "brandbid_admin_super_secret_key_2026";
+  const secret =
+    process.env.ADMIN_SECRET ||
+    (process.env.NODE_ENV === "test" ? "brandbid_admin_super_secret_key_2026" : "");
+  if (!secret || secret.trim() === "") {
+    return false;
+  }
+
   const authHeader = request.headers.get("authorization") || "";
   const token = authHeader.replace(/^Bearer\s+/i, "").trim();
   const url = new URL(request.url);
   const querySecret = url.searchParams.get("secret") || "";
 
-  return token === secret || querySecret === secret;
+  const candidate = token || querySecret;
+  if (!candidate) return false;
+
+  try {
+    const candidateBuf = Buffer.from(candidate, "utf8");
+    const secretBuf = Buffer.from(secret, "utf8");
+    if (candidateBuf.length !== secretBuf.length) return false;
+    return crypto.timingSafeEqual(candidateBuf, secretBuf);
+  } catch {
+    return false;
+  }
 }
 
 export async function GET(request: Request) {
@@ -23,11 +41,11 @@ export async function GET(request: Request) {
   try {
     const allBrands = db.getAllBrands();
     const ranked = calculateRankings(allBrands);
-    const payments = db.getAllPayments();
+    const payments: Payment[] = db.getAllPayments();
     const activity = db.getActivity(50);
 
-    const verifiedPayments = payments.filter((p) => p.status === "verified");
-    const totalVolume = verifiedPayments.reduce((sum, p) => sum + p.amount, 0);
+    const verifiedPayments = payments.filter((p: Payment) => p.status === "verified");
+    const totalVolume = verifiedPayments.reduce((sum: number, p: Payment) => sum + p.amount, 0);
 
     return NextResponse.json({
       success: true,

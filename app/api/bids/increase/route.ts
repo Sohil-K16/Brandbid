@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { increaseBidSchema } from "@/lib/validation/schemas";
 import { createDodoCheckoutSession } from "@/lib/payments/dodo";
 import { estimateRankForBid } from "@/lib/ranking/ranking-engine";
+import { verifyToken } from "@/lib/security/tokens";
 
 export async function POST(request: Request) {
   try {
@@ -19,13 +20,20 @@ export async function POST(request: Request) {
       );
     }
 
-    const { brandId, additionalBid } = parseResult.data;
+    const { brandId, additionalBid, managementToken } = parseResult.data;
     const brand = db.getBrandById(brandId);
 
     if (!brand) {
       return NextResponse.json(
         { success: false, error: "Brand not found" },
         { status: 404 }
+      );
+    }
+
+    if (managementToken && !verifyToken(managementToken, brand.managementTokenHash)) {
+      return NextResponse.json(
+        { success: false, error: "Invalid management token" },
+        { status: 401 }
       );
     }
 
@@ -46,7 +54,6 @@ export async function POST(request: Request) {
       data: {
         sessionId: dodoSession.sessionId,
         checkoutUrl: dodoSession.checkoutUrl,
-        orderId: dodoSession.sessionId, // Backwards compatible
         amount: additionalBid,
         currency: dodoSession.currency,
         brandId: brand.id,
@@ -54,8 +61,7 @@ export async function POST(request: Request) {
         currentTotal: brand.totalBid,
         projectedTotal,
         projectedRank: projectedRank.estimatedRank,
-        isMock: dodoSession.isMock,
-        keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_brandbid_local",
+        paymentAttemptId: dodoSession.paymentAttemptId,
       },
     });
   } catch (error) {

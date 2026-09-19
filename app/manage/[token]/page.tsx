@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect, useCallback, use } from "react";
 import Link from "next/link";
 import { Brand, BidHistoryItem } from "@/lib/db";
 import { NextRankInfo } from "@/lib/ranking/ranking-engine";
@@ -17,14 +17,15 @@ export default function ManageBrandPage({
 }: {
   params: Promise<{ token: string }>;
 }) {
-  const { token } = use(params);
+  const resolvedParams = use(params);
+  const token = resolvedParams.token;
 
   const [brand, setBrand] = useState<Brand | null>(null);
   const [rank, setRank] = useState<number | null>(null);
   const [climbInfo, setClimbInfo] = useState<NextRankInfo | null>(null);
   const [bidHistory, setBidHistory] = useState<BidHistoryItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   // Edit form state
   const [name, setName] = useState("");
@@ -38,7 +39,7 @@ export default function ManageBrandPage({
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [isRebidOpen, setIsRebidOpen] = useState(false);
 
-  const fetchBrandData = async () => {
+  const fetchBrandData = useCallback(async () => {
     setIsLoading(true);
     try {
       const res = await fetch(`/api/manage/${token}`);
@@ -64,11 +65,11 @@ export default function ManageBrandPage({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     fetchBrandData();
-  }, [token]);
+  }, [fetchBrandData]);
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();

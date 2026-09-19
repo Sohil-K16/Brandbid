@@ -13,7 +13,7 @@ This plan outlines the complete production implementation based on `PRD.md`, `DE
 > 
 > **Database & Local Compatibility**: We will configure Drizzle ORM with support for PostgreSQL (Supabase) via `DATABASE_URL`, along with local SQLite/LibSQL fallback so the application runs completely out-of-the-box in local development while remaining 100% production-ready for Supabase PostgreSQL migrations.
 > 
-> **Razorpay Integration & Simulation Mode**: We will implement full Razorpay order creation, SDK checkout, and server-side signature/webhook verification. For local testing without active Razorpay live credentials, we will include a test checkout simulation mode that triggers the exact same server-side verification and idempotent transaction flow.
+> **Dodo Payments Integration**: We will implement Dodo Payments Checkout Session creation and server-side signature/webhook verification using official Dodo Payments mechanisms and idempotent transaction flows.
 
 ---
 
@@ -25,7 +25,7 @@ graph TD
     A -->|Clicks Claim CTA| C[Claim Flow /claim]
     C -->|Enter URL| D[Metadata Extractor]
     C -->|Select Category & Bid| E[Live Rank Estimator]
-    C -->|Submit| F[Razorpay Checkout]
+    C -->|Submit| F[Dodo Payments Checkout]
     F -->|Payment Verification / Webhook| G[Payment Engine]
     G -->|Atomic DB Transaction| H[(PostgreSQL Database)]
     H -->|Calculate Ranks & Record Bid| I[Canonical Ranking Engine]
@@ -44,7 +44,7 @@ graph TD
 ### 1. Core Foundation & Database (`lib/db/`, `drizzle/`)
 
 #### [NEW] `package.json`
-- Next.js 15/16 App Router, React 19, TypeScript, Tailwind CSS, Lucide React / Tabler icons, Drizzle ORM, Razorpay SDK, Zod, Vitest.
+- Next.js 15/16 App Router, React 19, TypeScript, Tailwind CSS, Lucide React / Tabler icons, Drizzle ORM, Dodo Payments SDK, Zod, Vitest.
 
 #### [NEW] [schema.ts](file:///c:/Users/Workf/Downloads/sohil/brand/lib/db/schema.ts)
 - `brands`: `id`, `website_url`, `canonical_url`, `slug`, `name`, `category`, `logo_url`, `description`, `total_bid`, `status` (`published`, `pending`, `suspended`), `management_token_hash`, `created_at`, `updated_at`.
@@ -71,8 +71,8 @@ graph TD
 - `getNextRank(currentBid)`: Calculates the minimum bid needed to overtake the next spot ("Only ₹X to climb to #Y").
 - `estimateRankForBid(bidAmount)`: Calculates prospective rank for a new submission in real-time.
 
-#### [NEW] [razorpay.ts](file:///c:/Users/Workf/Downloads/sohil/brand/lib/payments/razorpay.ts)
-- Razorpay order creation, HMAC SHA-256 signature verification, idempotent payment recording inside an atomic database transaction.
+#### [NEW] [dodo.ts](file:///c:/Users/Workf/Downloads/sohil/brand/lib/payments/dodo.ts)
+- Dodo Payments checkout session creation, webhook cryptographic signature verification, idempotent payment fulfillment inside an atomic database transaction.
 
 #### [NEW] [extractor.ts](file:///c:/Users/Workf/Downloads/sohil/brand/lib/metadata/extractor.ts)
 - Best-effort website title, description, favicon, and Open Graph image fetcher with strict timeout, SSR error handling, and graceful fallback.
@@ -120,7 +120,7 @@ graph TD
   - Step 1: Website URL input with automatic metadata preview.
   - Step 2: Category selection.
   - Step 3: Bid amount with **Live Rank Estimator** ("This bid puts you at #4!").
-  - Step 4: Razorpay Checkout modal with instant confirmation.
+  - Step 4: Dodo Payments Checkout redirect with instant confirmation.
 
 #### [NEW] `app/brand/[slug]/page.tsx` (Public Brand Detail Page)
 - Dedicated screenshot-friendly poster presentation.
@@ -142,7 +142,7 @@ graph TD
 #### [NEW] `app/admin/page.tsx` (Admin Panel)
 - Platform summary metrics (Total bid volume, total brands, conversion rates, verified payments).
 - Brand moderation table (Publish, Suspend, Delete, Edit).
-- Payment inspection log with Razorpay transaction IDs.
+- Payment inspection log with Dodo Payments transaction IDs.
 - Activity log monitor.
 
 ---
@@ -152,9 +152,9 @@ graph TD
 - `GET /api/leaderboard`: Returns ranked brands, category filters, and platform totals.
 - `GET /api/brands/[slug]`: Returns individual brand, rank, and climbing gap.
 - `POST /api/metadata`: Extracts website metadata with timeout and fallback.
-- `POST /api/payments/create`: Validates submission and creates Razorpay order.
-- `POST /api/payments/verify`: Verifies Razorpay payment signature, executes atomic DB transaction to update `brands`, `payments`, `bid_history`, `activity`, and recalculates ranks.
-- `POST /api/payments/webhook`: Idempotent Razorpay webhook listener.
+- `POST /api/payments/create`: Validates submission and creates Dodo Payments checkout session.
+- `GET /api/payments/status`: Returns current payment verification status.
+- `POST /api/payments/webhook`: Cryptographically verified Dodo Payments webhook listener.
 - `POST /api/bids/increase`: Handles rebids for existing brands.
 - `GET|PUT /api/manage/[token]`: Fetches / updates brand via token hash.
 - `GET /api/activity`: Returns recent platform activity items.

@@ -5,11 +5,11 @@ import { getDodoWebhookKey } from "@/lib/dodo-env";
 export const POST = Webhooks({
   webhookKey: getDodoWebhookKey(),
   onPayload: async (payload) => {
-    console.log("Dodo webhook received:", payload);
-    try {
-      await fulfillDodoPayment(payload);
-    } catch (err) {
-      console.error("[Dodo Webhook Route] Fulfillment error:", err);
+    const paymentId = (payload?.data as any)?.payment_id || "N/A";
+    console.log(`[Dodo Webhook Route] Received event: ${payload?.type}, paymentId: ${paymentId}`);
+    const result = await fulfillDodoPayment(payload);
+    if (!result.success && !result.message?.includes("Ignored")) {
+      throw new Error(`[Dodo Webhook Route] Fulfillment failed: ${result.message}`);
     }
   },
 });

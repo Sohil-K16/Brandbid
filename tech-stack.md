@@ -48,8 +48,8 @@ ORM
 Drizzle ORM
 Type-safe database access
 Payments
-Razorpay
-Initial payment processing
+Dodo Payments
+Global payment processing and merchant of record
 Authentication
 None for public users
 Frictionless participation
@@ -302,20 +302,20 @@ view bid history
 No password is required.
 
 15. Payment Provider
-Razorpay
-For the initial India-focused launch, use Razorpay.
+Dodo Payments
+BrandBid uses Dodo Payments as its sole Merchant of Record and global payment provider.
 The important architecture is:
 User
  ↓
 BrandBid
  ↓
-Create payment order
+Create checkout session
  ↓
-Razorpay Checkout
+Dodo Payments Checkout
  ↓
 Payment
  ↓
-Razorpay Webhook
+Dodo Payments Webhook
  ↓
 Verify webhook
  ↓
@@ -334,7 +334,7 @@ Frontend
  ↓
 Update database
 Instead:
-Razorpay
+Dodo Payments
  ↓
 Webhook
  ↓
@@ -472,8 +472,8 @@ Initial infrastructure:
                     │
           ┌─────────┴─────────┐
           ↓                   ↓
-     Supabase             Razorpay
-     PostgreSQL             Payments
+     Supabase            Dodo Payments
+     PostgreSQL            Checkout & Webhook
           │
           ↓
      Brand data
@@ -699,20 +699,18 @@ brandbid/
 
 36. Environment Variables
 Production secrets should live in the deployment platform's secret/environment-variable system.
-Examples:
+Variables required by BrandBid:
+DODO_PAYMENTS_API_KEY
+DODO_PAYMENTS_WEBHOOK_KEY
+DODO_PAYMENTS_PRODUCT_ID
+DODO_PAYMENTS_ENVIRONMENT
+DODO_PAYMENTS_RETURN_URL
+NEXT_PUBLIC_APP_URL
 DATABASE_URL
+ADMIN_SECRET
 
-RAZORPAY_KEY_ID
-RAZORPAY_KEY_SECRET
-RAZORPAY_WEBHOOK_SECRET
-
-SUPABASE_URL
-SUPABASE_SERVICE_ROLE_KEY
-
-SENTRY_DSN
-
-POSTHOG_KEY
-Never commit these to Git.
+Never expose server API keys or webhook signing secrets to client-side code.
+Never commit secret values to Git.
 
 37. Development Workflow
 Recommended:
@@ -746,7 +744,7 @@ We should scale only when necessary.
 Stage 1 — MVP
 Next.js
 Postgres
-Razorpay
+Dodo Payments
 Vercel
 Stage 2 — Growing traffic
 Add:
@@ -820,10 +818,10 @@ Ship the product, not the infrastructure.
                                 │
                     ┌───────────┴───────────┐
                     ↓                       ↓
-              PostgreSQL                 Razorpay
-              (Supabase)                  Payments
+              PostgreSQL              Dodo Payments
+              (Supabase)                 Checkout
                     │                       │
-                    │                  Webhook
+                    │                    Webhook
                     │                       │
                     └───────────┬───────────┘
                                 ↓
@@ -845,7 +843,7 @@ PostgreSQL via Supabase
 ORM
 Drizzle
 Payments
-Razorpay
+Dodo Payments
 Authentication
 None for public users
 Brand management
@@ -867,4 +865,4 @@ Architecture principle
 The most important technical decision isn't actually which framework we use.
 It's this:
 Keep BrandBid a single, boring, reliable application until the product proves it needs more.
-For this particular product, Next.js + PostgreSQL + Razorpay + Vercel is more than enough to build a polished, production-ready MVP without drowning ourselves in infrastructure.
+For this particular product, Next.js + PostgreSQL + Dodo Payments + Vercel is more than enough to build a polished, production-ready MVP without drowning ourselves in infrastructure.

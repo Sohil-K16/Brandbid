@@ -7,7 +7,6 @@ import { Input } from "../ui/Input";
 import { Select } from "../ui/Select";
 import { CATEGORIES, TEMPLATES, TemplateType } from "@/lib/validation/schemas";
 import LiveRankEstimator from "./LiveRankEstimator";
-import DodoCheckoutModal, { DodoCheckoutData } from "./DodoCheckoutModal";
 import { RankedBrand } from "@/lib/ranking/ranking-engine";
 import { Globe, ArrowRight, Loader2, Sparkles, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
@@ -32,9 +31,6 @@ export default function ClaimForm({ existingBrands }: ClaimFormProps) {
   const [metaFetched, setMetaFetched] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
-  const [checkoutData, setCheckoutData] = useState<DodoCheckoutData | null>(null);
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   // Auto-fetch website metadata when user stops typing URL
   const handleUrlBlur = async () => {
@@ -122,50 +118,27 @@ export default function ClaimForm({ existingBrands }: ClaimFormProps) {
       });
 
       const json = await res.json();
-      if (json.success) {
-        setCheckoutData({
-          sessionId: json.data.sessionId || json.data.orderId,
-          checkoutUrl: json.data.checkoutUrl,
-          amount: json.data.amount,
-          currency: json.data.currency,
-          brandId: json.data.brandId,
-          brandName: name,
-          managementToken: json.data.managementToken,
-          isMock: json.data.isMock,
-        });
-        setIsCheckoutOpen(true);
+      if (json.success && json.data?.checkoutUrl) {
+        if (json.data.managementToken && typeof window !== "undefined") {
+          try {
+            localStorage.setItem(
+              `brandbid_token_${json.data.brandId}`,
+              json.data.managementToken
+            );
+          } catch {
+            // Ignore localStorage error
+          }
+        }
+        // Redirect directly to Dodo hosted checkout URL
+        window.location.href = json.data.checkoutUrl;
       } else {
-        setErrorMessage(json.error || "Failed to initiate claim order");
+        setErrorMessage(json.error || "Failed to initiate Dodo checkout session");
+        setIsSubmitting(false);
       }
     } catch (err: any) {
       setErrorMessage(err?.message || "Failed to connect to server");
-    } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handlePaymentSuccess = (result: any) => {
-    setIsCheckoutOpen(false);
-    // Store management token in localStorage for convenience
-    if (result.managementToken && typeof window !== "undefined") {
-      try {
-        localStorage.setItem(`brandbid_token_${result.brand.id}`, result.managementToken);
-      } catch {
-        // Ignore localStorage errors
-      }
-    }
-
-    // Redirect to success confirmation page with query params
-    const query = new URLSearchParams({
-      brandId: result.brand.id,
-      slug: result.brand.slug,
-      name: result.brand.name,
-      rank: String(result.rank),
-      bid: String(result.totalBid),
-      token: result.managementToken || "",
-    });
-
-    router.push(`/success?${query.toString()}`);
   };
 
   return (
@@ -373,14 +346,6 @@ export default function ClaimForm({ existingBrands }: ClaimFormProps) {
           </p>
         </div>
       </form>
-
-      {/* Dodo Payments Checkout Modal */}
-      <DodoCheckoutModal
-        isOpen={isCheckoutOpen}
-        onClose={() => setIsCheckoutOpen(false)}
-        checkoutData={checkoutData}
-        onSuccess={handlePaymentSuccess}
-      />
     </div>
   );
 }

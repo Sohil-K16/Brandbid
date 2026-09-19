@@ -385,7 +385,9 @@ export async function seedDatabase() {
     const payment: Payment = {
       id: paymentId,
       brandId: item.id,
+      provider: "dodo",
       providerPaymentId: paymentId,
+      providerSessionId: orderId,
       providerOrderId: orderId,
       amount: item.totalBid,
       currency: "USD",
@@ -399,6 +401,8 @@ export async function seedDatabase() {
       id: `hist_${paymentId}`,
       brandId: item.id,
       paymentId: paymentId,
+      amount: item.totalBid,
+      totalAfter: item.totalBid,
       amountAdded: item.totalBid,
       previousTotal: 0,
       newTotal: item.totalBid,

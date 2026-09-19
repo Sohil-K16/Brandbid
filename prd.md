@@ -472,20 +472,19 @@ This gives the buyer management capabilities without introducing accounts.
 23. Payment
 Payment is the critical backend operation.
 Initial payment provider
-Razorpay for India-first launch.
-International payment support can be added later.
+Dodo Payments (Global Merchant of Record)
 Payment flow
 Website submission
        ↓
 Bid amount
        ↓
-Create payment order
+Create Dodo checkout session
        ↓
-Payment provider
+Dodo Payments Checkout
        ↓
 Payment
        ↓
-Webhook
+Dodo Webhook
        ↓
 Verify payment
        ↓
@@ -554,7 +553,7 @@ Supabase
 ORM
 Drizzle
 Payments
-Razorpay
+Dodo Payments
 Storage
 Supabase Storage, if we need to store processed logos/assets.
 Deployment
@@ -580,9 +579,9 @@ Sentry
                               │
                     ┌─────────┴─────────┐
                     ↓                   ↓
-               PostgreSQL           Razorpay
+               PostgreSQL          Dodo Payments
                     │                   │
-                    │              Webhook
+                    │                Webhook
                     │                   │
                     └─────────┬─────────┘
                               ↓

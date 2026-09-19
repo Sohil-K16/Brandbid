@@ -9,7 +9,10 @@ export async function POST(request: Request) {
 
     if (!result.success) {
       return NextResponse.json(
-        { success: false, error: "Invalid URL provided" },
+        {
+          success: false,
+          error: result.error.errors[0]?.message || "Invalid or prohibited URL provided",
+        },
         { status: 400 }
       );
     }
@@ -20,11 +23,19 @@ export async function POST(request: Request) {
       success: true,
       data: metadata,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("[API] Metadata extraction error:", error);
+    const errorMessage = error?.message || "Failed to extract metadata";
+    const isSecurityError =
+      errorMessage.includes("prohibited") ||
+      errorMessage.includes("private") ||
+      errorMessage.includes("restricted") ||
+      errorMessage.includes("Dangerous") ||
+      errorMessage.includes("Malformed");
+
     return NextResponse.json(
-      { success: false, error: "Failed to extract metadata" },
-      { status: 500 }
+      { success: false, error: isSecurityError ? errorMessage : "Failed to extract metadata" },
+      { status: isSecurityError ? 400 : 500 }
     );
   }
 }

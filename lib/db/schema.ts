@@ -20,11 +20,14 @@ export interface Brand {
 export interface Payment {
   id: string;
   brandId: string;
-  providerPaymentId: string;
+  provider?: string; // e.g. "dodo" (defaults to "dodo")
+  providerPaymentId: string; // UNIQUE constraint
+  providerSessionId?: string; // Dodo checkout session ID (cks_...)
   providerOrderId: string;
+  paymentAttemptId?: string;
   amount: number;
   currency: string;
-  status: "pending" | "verified" | "failed" | "refunded";
+  status: "pending" | "verified" | "failed" | "refunded" | "cancelled";
   createdAt: string;
   verifiedAt: string | null;
 }
@@ -33,7 +36,9 @@ export interface BidHistoryItem {
   id: string;
   brandId: string;
   paymentId: string | null;
-  amountAdded: number;
+  amount: number; // bid amount added
+  totalAfter: number; // total bid after addition
+  amountAdded: number; // alias for backward compatibility
   previousTotal: number;
   newTotal: number;
   previousRank: number | null;

@@ -25,27 +25,27 @@ export async function POST(request: Request) {
     const canonical = normalizeUrl(data.websiteUrl);
     const formattedUrl = formatFullUrl(data.websiteUrl);
 
-    // Check if canonical URL already exists in published brands
+    // Check if canonical URL already exists in brands
     const existing = db.getBrandByCanonicalUrl(canonical);
     let brandId: string;
     let managementToken: string;
     let isRebid = false;
 
-    if (existing) {
-      // Existing brand rebidding
+    if (existing && existing.status === "published") {
+      // Existing published brand rebidding
       brandId = existing.id;
       isRebid = true;
       managementToken = ""; // Existing token remains active
     } else {
-      // New brand creation
-      brandId = "brand_" + crypto.randomBytes(8).toString("hex");
+      // New brand creation or re-attempt on unpaid pending claim
+      brandId = existing ? existing.id : "brand_" + crypto.randomBytes(8).toString("hex");
       managementToken = generateManagementToken();
       const tokenHash = hashToken(managementToken);
 
       // Generate unique slug
-      let slug = generateSlug(data.name || canonical);
+      let slug = existing ? existing.slug : generateSlug(data.name || canonical);
       let count = 1;
-      while (db.getBrandBySlug(slug)) {
+      while (!existing && db.getBrandBySlug(slug)) {
         slug = `${generateSlug(data.name)}-${count++}`;
       }
 
@@ -64,20 +64,26 @@ export async function POST(request: Request) {
         status: "pending",
         managementTokenHash: tokenHash,
         template: data.template || "typography",
-        clickCount: 0,
-        createdAt: now,
+        clickCount: existing ? existing.clickCount : 0,
+        createdAt: existing ? existing.createdAt : now,
         updatedAt: now,
       };
 
       db.insertBrand(newBrand);
     }
 
-    // Create Dodo Payments Checkout Session
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const returnUrl = `${appUrl}/checkout/success?brand_id=${brandId}${
+      managementToken ? `&token=${managementToken}` : ""
+    }`;
+
+    // Create real Dodo Payments Checkout Session
     const dodoSession = await createDodoCheckoutSession({
       amount: data.bidAmount,
       brandId,
       brandName: data.name,
       isRebid,
+      returnUrl,
     });
 
     return NextResponse.json({
@@ -85,21 +91,20 @@ export async function POST(request: Request) {
       data: {
         sessionId: dodoSession.sessionId,
         checkoutUrl: dodoSession.checkoutUrl,
-        orderId: dodoSession.sessionId, // Backwards-compatible
-        amount: data.bidAmount,
-        currency: dodoSession.currency,
         brandId,
         brandName: data.name,
         managementToken: isRebid ? null : managementToken,
         isRebid,
-        isMock: dodoSession.isMock,
-        keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_brandbid_local",
+        paymentAttemptId: dodoSession.paymentAttemptId,
       },
     });
-  } catch (error) {
-    console.error("[API] Create payment order error:", error);
+  } catch (error: any) {
+    console.error("[API] Create Dodo checkout error:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to create payment order" },
+      {
+        success: false,
+        error: error?.message || "Failed to create Dodo checkout session",
+      },
       { status: 500 }
     );
   }

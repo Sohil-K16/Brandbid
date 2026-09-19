@@ -3,7 +3,9 @@ import { dodoEnvironment } from "@/lib/dodo-env";
 
 export const GET = Checkout({
   bearerToken: process.env.DODO_PAYMENTS_API_KEY,
-  returnUrl: process.env.DODO_PAYMENTS_RETURN_URL || "http://localhost:3000/success",
+  returnUrl:
+    process.env.DODO_PAYMENTS_RETURN_URL ||
+    `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/checkout/success`,
   environment: dodoEnvironment,
   type: "static",
 });

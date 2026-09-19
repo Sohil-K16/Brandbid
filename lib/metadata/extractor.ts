@@ -1,4 +1,5 @@
 import { normalizeUrl } from "../url/normalize";
+import { validateUrlSecurity, safeFetch } from "../security/url-security";
 
 export interface ExtractedMetadata {
   title: string;
@@ -11,23 +12,33 @@ export interface ExtractedMetadata {
 }
 
 /**
- * Best-effort metadata extractor from a website URL.
- * Designed to never fail catastrophically: if a site is unreachable,
- * it returns graceful defaults derived from the domain.
+ * Validates whether an extracted asset URL (e.g. logo or OG image) is safe to return.
+ * Rejects javascript:, data:, file:, and internal IP URLs.
+ */
+function isSafeAssetUrl(rawUrl: string | null): string | null {
+  if (!rawUrl || typeof rawUrl !== "string") return null;
+  const trimmed = rawUrl.trim();
+  const check = validateUrlSecurity(trimmed);
+  if (!check.valid || !check.url) return null;
+  return check.url.toString();
+}
+
+/**
+ * Best-effort metadata extractor from a website URL protected by SSRF and scheme validation.
+ * Features:
+ * - Scheme validation (strictly HTTP/HTTPS)
+ * - SSRF protection (rejects private, loopback, and cloud metadata targets)
+ * - Redirect protection (validates each redirect hop)
+ * - Request timeout and response size limits
  */
 export async function extractWebsiteMetadata(rawUrl: string): Promise<ExtractedMetadata> {
-  let targetUrl = rawUrl.trim();
-  if (!/^https?:\/\//i.test(targetUrl)) {
-    targetUrl = "https://" + targetUrl;
+  const urlCheck = validateUrlSecurity(rawUrl);
+  if (!urlCheck.valid || !urlCheck.url) {
+    throw new Error(urlCheck.error || "Invalid or prohibited URL");
   }
 
-  let domain = "";
-  try {
-    const parsed = new URL(targetUrl);
-    domain = parsed.hostname.replace(/^www\./, "");
-  } catch {
-    domain = normalizeUrl(rawUrl);
-  }
+  const targetUrl = urlCheck.url.toString();
+  const domain = urlCheck.url.hostname.replace(/^www\./, "");
 
   // Derive sensible default name from domain (e.g. "linear.app" -> "Linear", "stripe.com" -> "Stripe")
   const domainParts = domain.split(".");
@@ -45,18 +56,12 @@ export async function extractWebsiteMetadata(rawUrl: string): Promise<ExtractedM
   };
 
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3500); // 3.5s timeout
-
-    const response = await fetch(targetUrl, {
-      signal: controller.signal,
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 BrandBidBot/1.0",
-        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      },
+    const response = await safeFetch(targetUrl, {
+      timeoutMs: 4000,
+      maxBytes: 2 * 1024 * 1024, // 2MB HTML limit
+      maxRedirects: 3,
+      allowedContentTypes: ["text/html", "application/xhtml+xml", "text/xml", "application/xml"],
     });
-
-    clearTimeout(timeoutId);
 
     if (!response.ok) {
       return fallbackData;
@@ -66,8 +71,9 @@ export async function extractWebsiteMetadata(rawUrl: string): Promise<ExtractedM
 
     // 1. Extract Title
     let title = "";
-    const ogTitleMatch = html.match(/<meta\s+(?:property|name)=["']og:title["']\s+content=["'](.*?)["']/i) ||
-                         html.match(/<meta\s+content=["'](.*?)["']\s+(?:property|name)=["']og:title["']/i);
+    const ogTitleMatch =
+      html.match(/<meta\s+(?:property|name)=["']og:title["']\s+content=["'](.*?)["']/i) ||
+      html.match(/<meta\s+content=["'](.*?)["']\s+(?:property|name)=["']og:title["']/i);
     if (ogTitleMatch && ogTitleMatch[1]) {
       title = ogTitleMatch[1].trim();
     } else {
@@ -79,49 +85,47 @@ export async function extractWebsiteMetadata(rawUrl: string): Promise<ExtractedM
 
     // 2. Extract Description / Tagline
     let description = "";
-    const ogDescMatch = html.match(/<meta\s+(?:property|name)=["']og:description["']\s+content=["'](.*?)["']/i) ||
-                        html.match(/<meta\s+content=["'](.*?)["']\s+(?:property|name)=["']og:description["']/i);
+    const ogDescMatch =
+      html.match(/<meta\s+(?:property|name)=["']og:description["']\s+content=["'](.*?)["']/i) ||
+      html.match(/<meta\s+content=["'](.*?)["']\s+(?:property|name)=["']og:description["']/i);
     if (ogDescMatch && ogDescMatch[1]) {
       description = ogDescMatch[1].trim();
     } else {
-      const metaDescMatch = html.match(/<meta\s+name=["']description["']\s+content=["'](.*?)["']/i) ||
-                            html.match(/<meta\s+content=["'](.*?)["']\s+name=["']description["']/i);
+      const metaDescMatch =
+        html.match(/<meta\s+name=["']description["']\s+content=["'](.*?)["']/i) ||
+        html.match(/<meta\s+content=["'](.*?)["']\s+name=["']description["']/i);
       if (metaDescMatch && metaDescMatch[1]) {
         description = metaDescMatch[1].trim();
       }
     }
 
-    // 3. Extract Open Graph Image
+    // 3. Extract Open Graph Image (safely resolved and scheme-validated)
     let ogImage: string | null = null;
-    const ogImgMatch = html.match(/<meta\s+(?:property|name)=["']og:image["']\s+content=["'](.*?)["']/i) ||
-                       html.match(/<meta\s+content=["'](.*?)["']\s+(?:property|name)=["']og:image["']/i);
+    const ogImgMatch =
+      html.match(/<meta\s+(?:property|name)=["']og:image["']\s+content=["'](.*?)["']/i) ||
+      html.match(/<meta\s+content=["'](.*?)["']\s+(?:property|name)=["']og:image["']/i);
     if (ogImgMatch && ogImgMatch[1]) {
       const rawImg = ogImgMatch[1].trim();
-      if (/^https?:\/\//i.test(rawImg)) {
-        ogImage = rawImg;
-      } else {
-        try {
-          ogImage = new URL(rawImg, targetUrl).toString();
-        } catch {
-          ogImage = null;
-        }
+      try {
+        const resolvedImg = new URL(rawImg, targetUrl).toString();
+        ogImage = isSafeAssetUrl(resolvedImg);
+      } catch {
+        ogImage = null;
       }
     }
 
-    // 4. Extract Favicon
+    // 4. Extract Favicon (safely resolved and scheme-validated)
     let logoUrl: string | null = null;
-    const iconMatch = html.match(/<link\s+[^>]*rel=["'](?:icon|shortcut icon|apple-touch-icon)["'][^>]*href=["'](.*?)["']/i) ||
-                      html.match(/<link\s+[^>]*href=["'](.*?)["'][^>]*rel=["'](?:icon|shortcut icon|apple-touch-icon)["']/i);
+    const iconMatch =
+      html.match(/<link\s+[^>]*rel=["'](?:icon|shortcut icon|apple-touch-icon)["'][^>]*href=["'](.*?)["']/i) ||
+      html.match(/<link\s+[^>]*href=["'](.*?)["'][^>]*rel=["'](?:icon|shortcut icon|apple-touch-icon)["']/i);
     if (iconMatch && iconMatch[1]) {
       const rawIcon = iconMatch[1].trim();
-      if (/^https?:\/\//i.test(rawIcon)) {
-        logoUrl = rawIcon;
-      } else {
-        try {
-          logoUrl = new URL(rawIcon, targetUrl).toString();
-        } catch {
-          logoUrl = fallbackData.logoUrl;
-        }
+      try {
+        const resolvedIcon = new URL(rawIcon, targetUrl).toString();
+        logoUrl = isSafeAssetUrl(resolvedIcon);
+      } catch {
+        logoUrl = fallbackData.logoUrl;
       }
     } else {
       logoUrl = fallbackData.logoUrl;
@@ -130,7 +134,6 @@ export async function extractWebsiteMetadata(rawUrl: string): Promise<ExtractedM
     // Clean up brand name
     let cleanName = defaultName;
     if (title) {
-      // Split on common delimiters like " | ", " - ", " : ", " • "
       const parts = title.split(/\s*[-–—|:•]\s*/);
       if (parts.length > 0 && parts[0].length >= 2 && parts[0].length <= 35) {
         cleanName = parts[0].trim();
@@ -143,12 +146,19 @@ export async function extractWebsiteMetadata(rawUrl: string): Promise<ExtractedM
       title: title || defaultName,
       name: cleanName || defaultName,
       description: description || fallbackData.description,
-      tagline: description ? description.slice(0, 80) : fallbackData.tagline,
+      tagline: description ? description.slice(0, 100) : fallbackData.tagline,
       logoUrl: logoUrl || fallbackData.logoUrl,
       ogImage,
       domain,
     };
-  } catch {
+  } catch (error: any) {
+    // If blocked specifically by SSRF defense, propagate error
+    if (error.message && error.message.includes("SSRF Block")) {
+      throw error;
+    }
+
+    // Otherwise return graceful fallback for standard public site connection timeouts
+    console.warn(`[Metadata Extractor] Could not reach ${targetUrl} (${error.message}), using domain fallbacks.`);
     return fallbackData;
   }
 }

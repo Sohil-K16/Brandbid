@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "dodo-knowledge": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote@latest", "https://knowledge.dodopayments.com/mcp"]
+    },
+    "codebase-memory": {
+      "command": "npx",
+      "args": ["-y", "codebase-memory-mcp@latest"]
+    }
+  }
+}

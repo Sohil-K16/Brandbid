@@ -9,6 +9,22 @@ export function normalizeUrl(rawUrl: string): string {
   if (!rawUrl || typeof rawUrl !== "string") return "";
 
   let urlStr = rawUrl.trim();
+  const lower = urlStr.toLowerCase();
+
+  // Reject dangerous schemes
+  const dangerousSchemes = [
+    "javascript:",
+    "data:",
+    "file:",
+    "ftp:",
+    "blob:",
+    "vbscript:",
+    "gopher:",
+    "ldap:",
+  ];
+  if (dangerousSchemes.some((s) => lower.startsWith(s))) {
+    throw new Error(`Dangerous or prohibited URL scheme: ${rawUrl}`);
+  }
 
   // Add protocol if missing for URL parser
   if (!/^https?:\/\//i.test(urlStr)) {
@@ -48,6 +64,21 @@ export function normalizeUrl(rawUrl: string): string {
  */
 export function formatFullUrl(rawUrl: string): string {
   let trimmed = rawUrl.trim();
+  const lower = trimmed.toLowerCase();
+  const dangerousSchemes = [
+    "javascript:",
+    "data:",
+    "file:",
+    "ftp:",
+    "blob:",
+    "vbscript:",
+    "gopher:",
+    "ldap:",
+  ];
+  if (dangerousSchemes.some((s) => lower.startsWith(s))) {
+    throw new Error(`Dangerous or prohibited URL scheme: ${rawUrl}`);
+  }
+
   if (!/^https?:\/\//i.test(trimmed)) {
     trimmed = "https://" + trimmed;
   }

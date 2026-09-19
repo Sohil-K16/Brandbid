@@ -1,14 +1,45 @@
-import { describe, it, expect } from "vitest";
-import {
-  createDodoCheckoutSession,
-  verifyDodoWebhook,
-  retrieveDodoCheckoutSession,
-} from "../lib/payments/dodo";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import * as dodoModule from "../lib/payments/dodo";
+import { getDodoWebhookKey } from "../lib/dodo-env";
 import { db } from "../lib/db/index";
+import crypto from "crypto";
+
+const { mockClient } = vi.hoisted(() => {
+  return {
+    mockClient: {
+      checkoutSessions: {
+        create: vi.fn(),
+        retrieve: vi.fn(),
+      },
+      webhooks: {
+        unwrap: vi.fn(),
+      },
+    },
+  };
+});
+
+vi.mock("dodopayments", () => {
+  return {
+    default: vi.fn().mockImplementation(() => mockClient),
+    DodoPayments: vi.fn().mockImplementation(() => mockClient),
+  };
+});
+
+import { seedDatabase } from "../lib/db/seed";
 
 describe("Dodo Payments Architecture & Idempotency", () => {
+  beforeEach(async () => {
+    await seedDatabase();
+    vi.clearAllMocks();
+  });
+
   it("creates a compliant Dodo Checkout Session", async () => {
-    const session = await createDodoCheckoutSession({
+    mockClient.checkoutSessions.create.mockResolvedValueOnce({
+      session_id: "cks_real_test_12345",
+      checkout_url: "https://test.dodopayments.com/buy/cks_real_test_12345",
+    });
+
+    const session = await dodoModule.createDodoCheckoutSession({
       amount: 500,
       brandId: "brand_test_dodo",
       brandName: "Acme Corp",
@@ -16,19 +47,53 @@ describe("Dodo Payments Architecture & Idempotency", () => {
     });
 
     expect(session).toBeDefined();
-    expect(session.sessionId).toMatch(/^cks_/);
+    expect(session.sessionId).toBe("cks_real_test_12345");
+    expect(session.checkoutUrl).toBe("https://test.dodopayments.com/buy/cks_real_test_12345");
     expect(session.amount).toBe(500);
     expect(session.currency).toBe("USD");
-    expect(session.checkoutUrl).toBeDefined();
+    expect(session.paymentAttemptId).toMatch(/^att_/);
+
+    // Verify Dodo SDK was called with the exact right arguments
+    expect(mockClient.checkoutSessions.create).toHaveBeenCalledWith({
+      product_cart: [
+        {
+          product_id: "pdt_brandbid_spot",
+          quantity: 1,
+          amount: 50000, // $500 in cents
+        },
+      ],
+      customer: {
+        email: "founder@acme.com",
+        name: "Acme Corp",
+      },
+      metadata: {
+        brandId: "brand_test_dodo",
+        brandName: "Acme Corp",
+        paymentAttemptId: expect.stringMatching(/^att_/),
+        isRebid: "false",
+        amount: "500",
+      },
+      return_url: expect.stringContaining("/success"),
+    });
   });
 
   it("retrieves session status properly", async () => {
-    const status = await retrieveDodoCheckoutSession("cks_mock_12345");
+    mockClient.checkoutSessions.retrieve.mockResolvedValueOnce({
+      session_id: "cks_real_test_12345",
+      payment_status: "succeeded",
+      status: "completed",
+      total_amount: 50000,
+      currency: "USD",
+      metadata: { brandId: "brand_test_dodo" },
+    });
+
+    const status = await dodoModule.retrieveDodoCheckoutSession("cks_real_test_12345");
     expect(status).toBeDefined();
     expect(status?.payment_status).toBe("succeeded");
+    expect(mockClient.checkoutSessions.retrieve).toHaveBeenCalledWith("cks_real_test_12345");
   });
 
-  it("verifies webhook signatures properly in test mode", () => {
+  it("verifies webhook signatures properly using unwrap", () => {
     const validBody = JSON.stringify({
       type: "payment.succeeded",
       data: {
@@ -38,17 +103,27 @@ describe("Dodo Payments Architecture & Idempotency", () => {
       },
     });
 
-    const verification = verifyDodoWebhook({
+    mockClient.webhooks.unwrap.mockReturnValueOnce(JSON.parse(validBody));
+
+    const event = dodoModule.verifyDodoWebhook({
       rawBody: validBody,
       headers: {
         "webhook-id": "evt_test_123",
-        "webhook-signature": "mock_sig_valid",
+        "webhook-signature": "v1,mock_signature",
         "webhook-timestamp": String(Math.floor(Date.now() / 1000)),
       },
     });
 
-    expect(verification.isValid).toBe(true);
-    expect(verification.event?.type).toBe("payment.succeeded");
+    expect(event).toBeDefined();
+    expect(event.type).toBe("payment.succeeded");
+    expect(mockClient.webhooks.unwrap).toHaveBeenCalledWith(validBody, {
+      headers: {
+        "webhook-id": "evt_test_123",
+        "webhook-signature": "v1,mock_signature",
+        "webhook-timestamp": expect.any(String),
+      },
+      key: expect.any(String),
+    });
   });
 
   it("enforces database payment idempotency for Dodo Payments", () => {
