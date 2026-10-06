@@ -72,7 +72,7 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
         : "failed";
 
       if (brandId) {
-        db.insertPayment({
+        await db.insertPayment({
           id: "pay_" + crypto.randomBytes(8).toString("hex"),
           brandId,
           provider: "dodo",
@@ -179,7 +179,7 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
   // 5. Atomic Execution & Strict Idempotency Check (Local & Test Fallback)
   return await db.transaction(async () => {
     // Idempotency: verify if this payment was already credited
-    const existingPayment = db.getPaymentByProviderId(providerPaymentId);
+    const existingPayment = await db.getPaymentByProviderId(providerPaymentId);
     if (existingPayment && existingPayment.status === "verified") {
       return {
         success: true,
@@ -190,7 +190,7 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
       };
     }
 
-    let brand = db.getBrandById(brandId);
+    let brand = await db.getBrandById(brandId);
     if (!brand) {
       console.warn(`[Dodo Fulfillment] Brand not found locally for ${brandId}, restoring from verified payment metadata`);
       const brandName = (dodoData?.metadata?.brandName || dodoData?.customer?.name || "Claimed Brand").trim();
@@ -214,10 +214,10 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
         createdAt: now,
         updatedAt: now,
       };
-      db.insertBrand(brand);
+      await db.insertBrand(brand);
     }
 
-    const beforeRankings = calculateRankings(db.getAllBrands());
+    const beforeRankings = calculateRankings(await db.getAllBrands());
     const previousRank = beforeRankings.find((b) => b.id === brandId)?.rank || null;
     const previousTotal = brand.totalBid;
     const newTotal = Math.round((previousTotal + amount) * 100) / 100;
@@ -238,7 +238,7 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
       createdAt: existingPayment?.createdAt || now,
       verifiedAt: now,
     };
-    db.insertPayment(paymentRecord);
+    await db.insertPayment(paymentRecord);
 
     // B. Safety & Moderation Evaluation:
     // If brand was already published, maintain published status.
@@ -247,7 +247,7 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
     const shouldPublish = brand.status === "published" || safetyCheck.safe;
     const finalStatus: Brand["status"] = shouldPublish ? "published" : "pending";
 
-    db.updateBrand(brand.id, {
+    await db.updateBrand(brand.id, {
       totalBid: newTotal,
       status: finalStatus,
       updatedAt: now,
@@ -265,7 +265,7 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
     }
 
     // C. Recalculate ranking for published brands
-    const afterRankings = calculateRankings(db.getAllBrands());
+    const afterRankings = calculateRankings(await db.getAllBrands());
     const newRank = afterRankings.find((b) => b.id === brand.id)?.rank || 1;
 
     // D. Record bid history
@@ -282,7 +282,7 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
       newRank,
       createdAt: now,
     };
-    db.insertBidHistory(historyItem);
+    await db.insertBidHistory(historyItem);
 
     // E. Record activity feed
     let activityType: ActivityItem["eventType"] = "brand_entered";
@@ -308,7 +308,7 @@ export async function fulfillDodoPayment(payload: any): Promise<FulfillPaymentRe
       },
       createdAt: now,
     };
-    db.insertActivity(activityItem);
+    await db.insertActivity(activityItem);
 
     return {
       success: true,

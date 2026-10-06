@@ -457,7 +457,7 @@ export async function seedDatabase() {
     }
   );
 
-  db.resetState({
+  await db.resetState({
     brands,
     payments,
     bidHistory,

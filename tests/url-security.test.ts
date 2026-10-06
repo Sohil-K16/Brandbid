@@ -178,8 +178,8 @@ describe("URL Security & SSRF Protection", () => {
   });
 
   describe("Brand Moderation and Safety Assessment Workflow", () => {
-    beforeEach(() => {
-      db.clearAll();
+    beforeEach(async () => {
+      await db.clearAll();
     });
 
     it("assesses safe public brand as safe for immediate publication", () => {
@@ -219,7 +219,7 @@ describe("URL Security & SSRF Protection", () => {
 
     it("fulfills verified payment and auto-publishes safe brands", async () => {
       const brandId = "brand_safe_1";
-      db.insertBrand({
+      await db.insertBrand({
         id: brandId,
         name: "Acme SaaS",
         websiteUrl: "https://acme-saas.com",
@@ -251,14 +251,14 @@ describe("URL Security & SSRF Protection", () => {
       });
 
       expect(result.success).toBe(true);
-      const updatedBrand = db.getBrandById(brandId);
+      const updatedBrand = await db.getBrandById(brandId);
       expect(updatedBrand?.status).toBe("published");
       expect(updatedBrand?.totalBid).toBe(150);
     });
 
     it("fulfills verified payment but holds suspicious brands in pending status", async () => {
       const brandId = "brand_suspicious_1";
-      db.insertBrand({
+      await db.insertBrand({
         id: brandId,
         name: "Free Crypto Giveaway Doubler Drainer",
         websiteUrl: "https://free-crypto-doubler-drainer.xyz",
@@ -292,7 +292,7 @@ describe("URL Security & SSRF Protection", () => {
       expect(result.success).toBe(true);
       expect(result.message).toContain("held in pending status for moderation review");
       
-      const heldBrand = db.getBrandById(brandId);
+      const heldBrand = await db.getBrandById(brandId);
       // Bid is registered, but status is kept pending so it is NOT visible on public leaderboard
       expect(heldBrand?.totalBid).toBe(500);
       expect(heldBrand?.status).toBe("pending");

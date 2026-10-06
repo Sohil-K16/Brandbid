@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 
 export async function GET() {
   try {
-    const items = db.getActivity(25);
+    const items = await db.getActivity(25);
     return NextResponse.json({
       success: true,
       data: items,

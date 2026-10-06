@@ -16,9 +16,9 @@ export default async function Image({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const brand = db.getBrandBySlug(slug);
+  const brand = await db.getBrandBySlug(slug);
 
-  const allBrands = db.getAllBrands();
+  const allBrands = await db.getAllBrands();
   const ranked = calculateRankings(allBrands);
   const rankedBrand = ranked.find((b) => b.slug === slug);
 

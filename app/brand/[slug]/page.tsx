@@ -13,7 +13,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const brand = db.getBrandBySlug(slug);
+  const brand = await db.getBrandBySlug(slug);
 
   if (!brand || brand.status !== "published") {
     return {
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const allBrands = db.getAllBrands();
+  const allBrands = await db.getAllBrands();
   const ranked = calculateRankings(allBrands);
   const rankedBrand = ranked.find((b) => b.id === brand.id);
   const rankNumber = rankedBrand?.rank || "?";
@@ -52,13 +52,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BrandPage({ params }: Props) {
   const { slug } = await params;
-  const brand = db.getBrandBySlug(slug);
+  const brand = await db.getBrandBySlug(slug);
 
   if (!brand || brand.status !== "published") {
     notFound();
   }
 
-  const allBrands = db.getAllBrands();
+  const allBrands = await db.getAllBrands();
   const ranked = calculateRankings(allBrands);
   const rankedBrand = ranked.find((b) => b.id === brand.id);
 
@@ -67,7 +67,7 @@ export default async function BrandPage({ params }: Props) {
   }
 
   const climbInfo = getNextRank(brand.id, allBrands);
-  const bidHistory = db.getBidHistoryByBrandId(brand.id);
+  const bidHistory = await db.getBidHistoryByBrandId(brand.id);
 
   return (
     <div className="w-full min-h-screen py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-background">

@@ -38,7 +38,7 @@ describe("BrandBid End-to-End Core User Journey", () => {
   });
 
   it("1. Loads active leaderboard with correct #1, total bids and rankings", async () => {
-    const brands = db.getPublishedBrands();
+    const brands = await db.getPublishedBrands();
     expect(brands.length).toBeGreaterThanOrEqual(20);
 
     // Verify #1 is Synthetix AI

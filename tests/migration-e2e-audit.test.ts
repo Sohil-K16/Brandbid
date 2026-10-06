@@ -75,7 +75,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     const { brandId, sessionId } = createJson.data;
 
     // Verify brand was initially created in pending state with $0 verified bid
-    const pendingBrand = db.getBrandById(brandId);
+    const pendingBrand = await db.getBrandById(brandId);
     expect(pendingBrand).toBeDefined();
     expect(pendingBrand?.status).toBe("pending");
     expect(pendingBrand?.totalBid).toBe(0);
@@ -119,11 +119,11 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     expect(webhookJson.amount).toBe(12000);
 
     // 5. Verify database updates: payment recorded, brand total increased, status published
-    const verifiedBrand = db.getBrandById(brandId);
+    const verifiedBrand = await db.getBrandById(brandId);
     expect(verifiedBrand?.totalBid).toBe(12000);
     expect(["published", "active"]).toContain(verifiedBrand?.status);
 
-    const paymentRecord = db.getPaymentByProviderId(paymentId);
+    const paymentRecord = await db.getPaymentByProviderId(paymentId);
     expect(paymentRecord).toBeDefined();
     expect(paymentRecord?.amount).toBe(12000);
     expect(paymentRecord?.status).toBe("verified");
@@ -143,7 +143,8 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
   // CASE 2 — Duplicate webhook
   // ===========================================================================
   it("CASE 2 — Duplicate webhook: ensures payment is recorded once and bid is only credited once", async () => {
-    const brand = db.getAllBrands()[0];
+    const all = await db.getAllBrands();
+    const brand = all[0];
     const initialBid = brand.totalBid;
     const paymentId = `pay_duplicate_test_${Date.now()}`;
 
@@ -176,7 +177,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     const res1 = await handleWebhook(req1 as any);
     expect(res1.status).toBe(200);
 
-    const brandAfterFirst = db.getBrandById(brand.id);
+    const brandAfterFirst = await db.getBrandById(brand.id);
     expect(brandAfterFirst?.totalBid).toBe(initialBid + 300);
 
     // Duplicate webhook delivery
@@ -196,14 +197,14 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     expect(json2.message).toContain("idempotent skip");
 
     // Brand balance must NOT have been incremented a second time
-    const brandAfterDuplicate = db.getBrandById(brand.id);
+    const brandAfterDuplicate = await db.getBrandById(brand.id);
     expect(brandAfterDuplicate?.totalBid).toBe(initialBid + 300);
 
     // Bid history should have exactly 1 record for this payment
-    const paymentRecord = db.getPaymentByProviderId(paymentId);
+    const paymentRecord = await db.getPaymentByProviderId(paymentId);
     expect(paymentRecord).toBeDefined();
 
-    const history = db.getBidHistoryByBrandId(brand.id);
+    const history = await db.getBidHistoryByBrandId(brand.id);
     const matches = history.filter((h) => h.paymentId === paymentRecord?.id);
     expect(matches.length).toBe(1);
   });
@@ -212,7 +213,8 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
   // CASE 3 — Invalid webhook signature
   // ===========================================================================
   it("CASE 3 — Invalid webhook: rejects invalid signature and leaves database untouched", async () => {
-    const brand = db.getAllBrands()[0];
+    const all = await db.getAllBrands();
+    const brand = all[0];
     const initialBid = brand.totalBid;
 
     mockClient.webhooks.unwrap.mockImplementationOnce(() => {
@@ -236,7 +238,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     expect(json.error).toBe("Invalid webhook signature");
 
     // Database state must be unchanged
-    const unchangedBrand = db.getBrandById(brand.id);
+    const unchangedBrand = await db.getBrandById(brand.id);
     expect(unchangedBrand?.totalBid).toBe(initialBid);
   });
 
@@ -244,7 +246,8 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
   // CASE 4 — Failed payment
   // ===========================================================================
   it("CASE 4 — Failed payment: does not increase leaderboard bid", async () => {
-    const brand = db.getAllBrands()[0];
+    const all = await db.getAllBrands();
+    const brand = all[0];
     const initialBid = brand.totalBid;
     const failedPaymentId = `pay_failed_${Date.now()}`;
 
@@ -279,11 +282,11 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     expect(res.status).toBe(200);
 
     // Total bid must remain unchanged
-    const brandAfterFail = db.getBrandById(brand.id);
+    const brandAfterFail = await db.getBrandById(brand.id);
     expect(brandAfterFail?.totalBid).toBe(initialBid);
 
     // Payment record should exist as 'failed' with amount 0
-    const payment = db.getPaymentByProviderId(failedPaymentId);
+    const payment = await db.getPaymentByProviderId(failedPaymentId);
     expect(payment).toBeDefined();
     expect(payment?.status).toBe("failed");
     expect(payment?.amount).toBe(0);
@@ -295,7 +298,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
   it("CASE 5 — Rebid: adds $50 rebid to existing $100 brand for exact $150 total", async () => {
     // 1. Create a brand with exactly $100
     const brandId = `brand_rebid_${Date.now()}`;
-    db.insertBrand({
+    await db.insertBrand({
       id: brandId,
       name: "Rebid Test Brand",
       websiteUrl: "https://rebid-test.org",
@@ -314,7 +317,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
       updatedAt: new Date().toISOString(),
     });
 
-    const brandBefore = db.getBrandById(brandId);
+    const brandBefore = await db.getBrandById(brandId);
     expect(brandBefore?.totalBid).toBe(100);
 
     // 2. Request rebid checkout session for $50
@@ -370,7 +373,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     expect(webhookRes.status).toBe(200);
 
     // 4. Verify exact total of $150
-    const brandAfter = db.getBrandById(brandId);
+    const brandAfter = await db.getBrandById(brandId);
     expect(brandAfter?.totalBid).toBe(150);
   });
 
@@ -378,7 +381,8 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
   // CASE 6 — Client manipulation
   // ===========================================================================
   it("CASE 6 — Client manipulation: frontend cannot dictate paid amount; only Dodo verified data is credited", async () => {
-    const brand = db.getAllBrands()[0];
+    const all = await db.getAllBrands();
+    const brand = all[0];
     const initialBid = brand.totalBid;
 
     // Attacker tries to query status with an arbitrary amount $99,999
@@ -393,7 +397,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     expect(statusJson.data.isVerified).toBe(false);
 
     // Verify brand total was NOT manipulated
-    const unchangedBrand = db.getBrandById(brand.id);
+    const unchangedBrand = await db.getBrandById(brand.id);
     expect(unchangedBrand?.totalBid).toBe(initialBid);
 
     // Now send a real webhook from Dodo that verified $25.00
@@ -426,7 +430,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     await handleWebhook(webhookReq as any);
 
     // Exactly $25 was credited, NOT $99,999
-    const finalBrand = db.getBrandById(brand.id);
+    const finalBrand = await db.getBrandById(brand.id);
     expect(finalBrand?.totalBid).toBe(initialBid + 25);
   });
 
@@ -435,7 +439,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
   // ===========================================================================
   it("CASE 7 — Concurrent payments: two simultaneous payments for the same brand sum accurately without lost updates", async () => {
     const brandId = `brand_concurrent_${Date.now()}`;
-    db.insertBrand({
+    await db.insertBrand({
       id: brandId,
       name: "Concurrent Test Brand",
       websiteUrl: "https://concurrent-test.com",
@@ -486,7 +490,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     expect(resultB.success).toBe(true);
 
     // Expected: $100 + $40 + $60 = $200
-    const finalBrand = db.getBrandById(brandId);
+    const finalBrand = await db.getBrandById(brandId);
     expect(finalBrand?.totalBid).toBe(200);
   });
 
@@ -550,7 +554,7 @@ describe("Complete End-to-End Audit: BrandBid Dodo Payments Migration", () => {
     expect(json.error).toMatch(/Dodo Payments service timeout|Unable to initialize payment/i);
 
     // Ensure no published active brand exists for this attempt
-    const brands = db.getPublishedBrands();
+    const brands = await db.getPublishedBrands();
     const found = brands.find((b) => b.name === "Safe Startup");
     expect(found).toBeUndefined();
   });

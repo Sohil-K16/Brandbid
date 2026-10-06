@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default function ClaimPage() {
-  const allBrands = db.getAllBrands();
+export default async function ClaimPage() {
+  const allBrands = await db.getAllBrands();
   const rankedBrands = calculateRankings(allBrands);
 
   return (

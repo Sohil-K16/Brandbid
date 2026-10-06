@@ -4,12 +4,12 @@ import { fulfillDodoPayment } from "../lib/payments/fulfillment";
 import { calculateRankings } from "../lib/ranking/ranking-engine";
 
 describe("Persistence Layer & Production Payment Safety", () => {
-  beforeEach(() => {
-    db.clearAll();
+  beforeEach(async () => {
+    await db.clearAll();
   });
 
   describe("Schema Integrity & Field Structure", () => {
-    it("persists Brand with all required fields (id, websiteUrl, name, category, totalBid, status, createdAt, updatedAt)", () => {
+    it("persists Brand with all required fields (id, websiteUrl, name, category, totalBid, status, createdAt, updatedAt)", async () => {
       const now = new Date().toISOString();
       const brand: Brand = {
         id: "brand_audit_1",
@@ -30,7 +30,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
         updatedAt: now,
       };
 
-      const inserted = db.insertBrand(brand);
+      const inserted = await db.insertBrand(brand);
       expect(inserted.id).toBe("brand_audit_1");
       expect(inserted.websiteUrl).toBe("https://audit-brand.io");
       expect(inserted.name).toBe("Audit Brand");
@@ -40,12 +40,12 @@ describe("Persistence Layer & Production Payment Safety", () => {
       expect(inserted.createdAt).toBe(now);
       expect(inserted.updatedAt).toBe(now);
 
-      const retrieved = db.getBrandById("brand_audit_1");
+      const retrieved = await db.getBrandById("brand_audit_1");
       expect(retrieved).not.toBeNull();
       expect(retrieved?.totalBid).toBe(250);
     });
 
-    it("persists Payment with provider, providerPaymentId, providerSessionId, amount, currency, status, verifiedAt", () => {
+    it("persists Payment with provider, providerPaymentId, providerSessionId, amount, currency, status, verifiedAt", async () => {
       const now = new Date().toISOString();
       const payment: Payment = {
         id: "pay_test_audit_1",
@@ -62,7 +62,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
         verifiedAt: now,
       };
 
-      const inserted = db.insertPayment(payment);
+      const inserted = await db.insertPayment(payment);
       expect(inserted.provider).toBe("dodo");
       expect(inserted.providerPaymentId).toBe("dodo_pay_unique_123");
       expect(inserted.providerSessionId).toBe("cks_dodo_session_456");
@@ -71,11 +71,11 @@ describe("Persistence Layer & Production Payment Safety", () => {
       expect(inserted.status).toBe("verified");
       expect(inserted.verifiedAt).toBe(now);
 
-      const retrieved = db.getPaymentByProviderId("dodo_pay_unique_123");
+      const retrieved = await db.getPaymentByProviderId("dodo_pay_unique_123");
       expect(retrieved?.id).toBe("pay_test_audit_1");
     });
 
-    it("persists BidHistory with id, brandId, paymentId, amount, totalAfter, createdAt", () => {
+    it("persists BidHistory with id, brandId, paymentId, amount, totalAfter, createdAt", async () => {
       const now = new Date().toISOString();
       const historyItem: BidHistoryItem = {
         id: "hist_audit_1",
@@ -91,14 +91,14 @@ describe("Persistence Layer & Production Payment Safety", () => {
         createdAt: now,
       };
 
-      const inserted = db.insertBidHistory(historyItem);
+      const inserted = await db.insertBidHistory(historyItem);
       expect(inserted.id).toBe("hist_audit_1");
       expect(inserted.brandId).toBe("brand_audit_1");
       expect(inserted.paymentId).toBe("pay_test_audit_1");
       expect(inserted.amount).toBe(150);
       expect(inserted.totalAfter).toBe(400);
 
-      const history = db.getBidHistoryByBrandId("brand_audit_1");
+      const history = await db.getBidHistoryByBrandId("brand_audit_1");
       expect(history.length).toBe(1);
       expect(history[0].amount).toBe(150);
       expect(history[0].totalAfter).toBe(400);
@@ -106,7 +106,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
   });
 
   describe("Unique Constraints & Idempotency", () => {
-    it("enforces uniqueness of providerPaymentId and rejects double insertions", () => {
+    it("enforces uniqueness of providerPaymentId and rejects double insertions", async () => {
       const now = new Date().toISOString();
       const payment: Payment = {
         id: "pay_uniq_1",
@@ -122,7 +122,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
         verifiedAt: now,
       };
 
-      db.insertPayment(payment);
+      await db.insertPayment(payment);
 
       // Attempt second insertion with same providerPaymentId
       const duplicate: Payment = {
@@ -139,9 +139,10 @@ describe("Persistence Layer & Production Payment Safety", () => {
         verifiedAt: now,
       };
 
-      db.insertPayment(duplicate);
+      await db.insertPayment(duplicate);
 
-      const matching = db.getAllPayments().filter(
+      const all = await db.getAllPayments();
+      const matching = all.filter(
         (p) => p.providerPaymentId === "dodo_pay_unique_constraint_test"
       );
       // Must be exactly 1 record
@@ -150,7 +151,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
 
     it("duplicate Dodo webhooks are idempotent and DO NOT increase the brand total a second time", async () => {
       const brandId = "brand_idempotency_audit";
-      db.insertBrand({
+      await db.insertBrand({
         id: brandId,
         websiteUrl: "https://idempotent-brand.com",
         canonicalUrl: "idempotent-brand.com",
@@ -184,7 +185,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
       const res1 = await fulfillDodoPayment(webhookPayload);
       expect(res1.success).toBe(true);
 
-      const brandAfter1 = db.getBrandById(brandId);
+      const brandAfter1 = await db.getBrandById(brandId);
       expect(brandAfter1?.totalBid).toBe(300);
       expect(brandAfter1?.status).toBe("published");
 
@@ -193,12 +194,12 @@ describe("Persistence Layer & Production Payment Safety", () => {
       expect(res2.success).toBe(true);
       expect(res2.message).toContain("idempotent skip");
 
-      const brandAfter2 = db.getBrandById(brandId);
+      const brandAfter2 = await db.getBrandById(brandId);
       // Bid must remain exactly $300, NEVER $600
       expect(brandAfter2?.totalBid).toBe(300);
 
       // Bid history must only have 1 entry
-      const history = db.getBidHistoryByBrandId(brandId);
+      const history = await db.getBidHistoryByBrandId(brandId);
       expect(history.length).toBe(1);
       expect(history[0].totalAfter).toBe(300);
     });
@@ -207,7 +208,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
   describe("Simultaneous Payments & Concurrent Rebids", () => {
     it("safely handles multiple concurrent payments on the same brand without race conditions", async () => {
       const brandId = "brand_concurrent_audit";
-      db.insertBrand({
+      await db.insertBrand({
         id: brandId,
         websiteUrl: "https://concurrent-brand.com",
         canonicalUrl: "concurrent-brand.com",
@@ -246,10 +247,10 @@ describe("Persistence Layer & Production Payment Safety", () => {
       }
 
       // Expected sum: 100 (initial) + 50 + 100 + 150 + 200 + 250 = 850
-      const finalBrand = db.getBrandById(brandId);
+      const finalBrand = await db.getBrandById(brandId);
       expect(finalBrand?.totalBid).toBe(850);
 
-      const history = db.getBidHistoryByBrandId(brandId);
+      const history = await db.getBidHistoryByBrandId(brandId);
       expect(history.length).toBe(5);
     });
 
@@ -257,7 +258,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
       const brandA = "brand_comp_a";
       const brandB = "brand_comp_b";
 
-      db.insertBrand({
+      await db.insertBrand({
         id: brandA,
         websiteUrl: "https://brand-a.com",
         canonicalUrl: "brand-a.com",
@@ -276,7 +277,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
         updatedAt: "2026-01-01T00:00:00.000Z",
       });
 
-      db.insertBrand({
+      await db.insertBrand({
         id: brandB,
         websiteUrl: "https://brand-b.com",
         canonicalUrl: "brand-b.com",
@@ -296,7 +297,8 @@ describe("Persistence Layer & Production Payment Safety", () => {
       });
 
       // Initially Brand A is #1 ($200) and Brand B is #2 ($150)
-      let rankings = calculateRankings(db.getAllBrands());
+      const allBrandsInitial = await db.getAllBrands();
+      let rankings = calculateRankings(allBrandsInitial);
       expect(rankings[0].id).toBe(brandA);
       expect(rankings[1].id).toBe(brandB);
 
@@ -313,7 +315,8 @@ describe("Persistence Layer & Production Payment Safety", () => {
       });
 
       // Brand B should now overtake Brand A and become #1
-      rankings = calculateRankings(db.getAllBrands());
+      const allBrandsAfter = await db.getAllBrands();
+      rankings = calculateRankings(allBrandsAfter);
       expect(rankings[0].id).toBe(brandB);
       expect(rankings[0].totalBid).toBe(250);
       expect(rankings[1].id).toBe(brandA);
@@ -324,7 +327,7 @@ describe("Persistence Layer & Production Payment Safety", () => {
   describe("Payment Status Updates & Lifecycle", () => {
     it("updates payment status accurately without mutating brand bids on failure/cancellation", async () => {
       const brandId = "brand_status_audit";
-      db.insertBrand({
+      await db.insertBrand({
         id: brandId,
         websiteUrl: "https://status-brand.com",
         canonicalUrl: "status-brand.com",
@@ -359,12 +362,12 @@ describe("Persistence Layer & Production Payment Safety", () => {
       expect(failedRes.message).toContain("failed recorded. Bid was not increased");
 
       // Verify payment recorded as failed
-      const payment = db.getPaymentByProviderId("pay_failed_attempt_1");
+      const payment = await db.getPaymentByProviderId("pay_failed_attempt_1");
       expect(payment?.status).toBe("failed");
       expect(payment?.amount).toBe(0);
 
       // Brand bid must remain unchanged at 50
-      const brand = db.getBrandById(brandId);
+      const brand = await db.getBrandById(brandId);
       expect(brand?.totalBid).toBe(50);
     });
   });

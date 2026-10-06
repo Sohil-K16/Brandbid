@@ -85,7 +85,8 @@ describe("Dodo Payments Complete Integration", () => {
   });
 
   it("3. Enforces webhook idempotency across repeated deliveries", async () => {
-    const brand = db.getAllBrands()[0];
+    const all = await db.getAllBrands();
+    const brand = all[0];
     const initialBid = brand.totalBid;
     const testPaymentId = `pay_dodo_idem_${Date.now()}`;
     const testSessionId = `cks_dodo_idem_${Date.now()}`;
@@ -111,7 +112,7 @@ describe("Dodo Payments Complete Integration", () => {
     expect(res1.success).toBe(true);
     expect(res1.amount).toBe(300);
 
-    const afterFirst = db.getBrandById(brand.id);
+    const afterFirst = await db.getBrandById(brand.id);
     expect(afterFirst?.totalBid).toBe(initialBid + 300);
 
     // Delivery 2 (Duplicate Webhook)
@@ -120,13 +121,12 @@ describe("Dodo Payments Complete Integration", () => {
     expect(res2.message).toContain("idempotent skip");
 
     // Brand bid must not change
-    const afterSecond = db.getBrandById(brand.id);
+    const afterSecond = await db.getBrandById(brand.id);
     expect(afterSecond?.totalBid).toBe(initialBid + 300);
 
     // Only one payment record should exist in DB
-    const allMatching = db
-      .getAllPayments()
-      .filter((p) => p.providerPaymentId === testPaymentId);
+    const allPayments = await db.getAllPayments();
+    const allMatching = allPayments.filter((p) => p.providerPaymentId === testPaymentId);
     expect(allMatching).toHaveLength(1);
   });
 

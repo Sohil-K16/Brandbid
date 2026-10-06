@@ -14,9 +14,9 @@
       "status": "published",
       "managementTokenHash": "fcb8ec8212a07b22f7a0b494cab82121b2c9df10971a2d652c00aee5e91bdf2d",
       "template": "typography",
-      "clickCount": 29,
-      "createdAt": "2026-09-05T11:24:29.690Z",
-      "updatedAt": "2026-09-05T11:24:29.690Z"
+      "clickCount": 23,
+      "createdAt": "2026-09-22T18:07:44.054Z",
+      "updatedAt": "2026-09-22T18:07:44.054Z"
     },
     {
       "id": "brand_veloce",
@@ -32,9 +32,9 @@
       "status": "published",
       "managementTokenHash": "3d48fe400e3b5d4fc3a22bc7770c832b46690ad797d29434a82132f39bcbd565",
       "template": "logo_dominant",
-      "clickCount": 43,
-      "createdAt": "2026-09-07T12:24:29.690Z",
-      "updatedAt": "2026-09-07T12:24:29.690Z"
+      "clickCount": 41,
+      "createdAt": "2026-09-24T19:07:44.054Z",
+      "updatedAt": "2026-09-24T19:07:44.054Z"
     },
     {
       "id": "brand_hyperflow",
@@ -50,9 +50,9 @@
       "status": "published",
       "managementTokenHash": "7761172795d9363c4664f40506c55c02ec7a2c713358731fd32cf7493f01d01c",
       "template": "editorial",
-      "clickCount": 20,
-      "createdAt": "2026-09-09T13:24:29.690Z",
-      "updatedAt": "2026-09-09T13:24:29.690Z"
+      "clickCount": 23,
+      "createdAt": "2026-09-26T20:07:44.054Z",
+      "updatedAt": "2026-09-26T20:07:44.054Z"
     },
     {
       "id": "brand_payzen",
@@ -68,9 +68,9 @@
       "status": "published",
       "managementTokenHash": "872d251d3cc8dc2780bb031d5804ead2deaf925f39776a2cb16b0842a0f02694",
       "template": "minimal",
-      "clickCount": 48,
-      "createdAt": "2026-09-10T14:24:29.690Z",
-      "updatedAt": "2026-09-10T14:24:29.690Z"
+      "clickCount": 44,
+      "createdAt": "2026-09-27T21:07:44.054Z",
+      "updatedAt": "2026-09-27T21:07:44.054Z"
     },
     {
       "id": "brand_kubecraft",
@@ -86,9 +86,9 @@
       "status": "published",
       "managementTokenHash": "4c4299a1c2aab1d3857cf9c9ca1471d8c6ecfaee0881a71753c4637998ddf033",
       "template": "typography",
-      "clickCount": 41,
-      "createdAt": "2026-09-11T15:24:29.690Z",
-      "updatedAt": "2026-09-11T15:24:29.690Z"
+      "clickCount": 9,
+      "createdAt": "2026-09-28T22:07:44.054Z",
+      "updatedAt": "2026-09-28T22:07:44.054Z"
     },
     {
       "id": "brand_omnitrack",
@@ -104,9 +104,9 @@
       "status": "published",
       "managementTokenHash": "0fcfe3b75a15c7a4994a8beead0501d4ceb3fbaf458bac975088829b7e80a85b",
       "template": "editorial",
-      "clickCount": 41,
-      "createdAt": "2026-09-12T16:24:29.690Z",
-      "updatedAt": "2026-09-12T16:24:29.690Z"
+      "clickCount": 25,
+      "createdAt": "2026-09-29T23:07:44.054Z",
+      "updatedAt": "2026-09-29T23:07:44.054Z"
     },
     {
       "id": "brand_draftwave",
@@ -122,9 +122,9 @@
       "status": "published",
       "managementTokenHash": "37b33bc6f075b650eb97822d0b7a5588f6acbaeb3dc605f9207bbf6c5e746209",
       "template": "logo_dominant",
-      "clickCount": 37,
-      "createdAt": "2026-09-13T17:24:29.690Z",
-      "updatedAt": "2026-09-13T17:24:29.690Z"
+      "clickCount": 7,
+      "createdAt": "2026-10-01T00:07:44.054Z",
+      "updatedAt": "2026-10-01T00:07:44.054Z"
     },
     {
       "id": "brand_zenithos",
@@ -140,9 +140,9 @@
       "status": "published",
       "managementTokenHash": "f9df88540d3492bfda07bb8a9c75c3060e4e05581a90b5b1447461dd7924759f",
       "template": "minimal",
-      "clickCount": 22,
-      "createdAt": "2026-09-14T18:24:29.690Z",
-      "updatedAt": "2026-09-14T18:24:29.690Z"
+      "clickCount": 10,
+      "createdAt": "2026-10-02T01:07:44.054Z",
+      "updatedAt": "2026-10-02T01:07:44.054Z"
     },
     {
       "id": "brand_pulsegraph",
@@ -158,9 +158,9 @@
       "status": "published",
       "managementTokenHash": "8570c3192abf05cdd4b98ffde0afb9b3e91768406ec1945d814a87e2db6a7421",
       "template": "typography",
-      "clickCount": 23,
-      "createdAt": "2026-09-14T19:24:29.690Z",
-      "updatedAt": "2026-09-14T19:24:29.690Z"
+      "clickCount": 28,
+      "createdAt": "2026-10-02T02:07:44.054Z",
+      "updatedAt": "2026-10-02T02:07:44.054Z"
     },
     {
       "id": "brand_cartlogic",
@@ -176,9 +176,9 @@
       "status": "published",
       "managementTokenHash": "da5c3d5598c09dec859cddfa9c7defed71d2e44b2e42f7058672264588835c33",
       "template": "editorial",
-      "clickCount": 21,
-      "createdAt": "2026-09-15T20:24:29.690Z",
-      "updatedAt": "2026-09-15T20:24:29.690Z"
+      "clickCount": 7,
+      "createdAt": "2026-10-03T03:07:44.054Z",
+      "updatedAt": "2026-10-03T03:07:44.054Z"
     },
     {
       "id": "brand_skillforge",
@@ -194,9 +194,9 @@
       "status": "published",
       "managementTokenHash": "2393938e3b3ebc79f22609149190e7bd5d451ef886f99e8aed6e244caa2702f0",
       "template": "typography",
-      "clickCount": 14,
-      "createdAt": "2026-09-15T21:24:29.690Z",
-      "updatedAt": "2026-09-15T21:24:29.690Z"
+      "clickCount": 36,
+      "createdAt": "2026-10-03T04:07:44.054Z",
+      "updatedAt": "2026-10-03T04:07:44.054Z"
     },
     {
       "id": "brand_byteforge",
@@ -212,9 +212,9 @@
       "status": "published",
       "managementTokenHash": "9dc994e65697642ed55735951587c8e63e159de66cfe0802015541d1cd61261d",
       "template": "minimal",
-      "clickCount": 21,
-      "createdAt": "2026-09-16T22:24:29.690Z",
-      "updatedAt": "2026-09-16T22:24:29.690Z"
+      "clickCount": 44,
+      "createdAt": "2026-10-04T05:07:44.054Z",
+      "updatedAt": "2026-10-04T05:07:44.054Z"
     },
     {
       "id": "brand_aeromail",
@@ -230,9 +230,9 @@
       "status": "published",
       "managementTokenHash": "8c023dcc192ad991a36e18f2546bf8f85834df108504da5d303be38b27d3c1a7",
       "template": "logo_dominant",
-      "clickCount": 17,
-      "createdAt": "2026-09-16T23:24:29.690Z",
-      "updatedAt": "2026-09-16T23:24:29.690Z"
+      "clickCount": 14,
+      "createdAt": "2026-10-04T06:07:44.054Z",
+      "updatedAt": "2026-10-04T06:07:44.054Z"
     },
     {
       "id": "brand_lumina",
@@ -248,9 +248,9 @@
       "status": "published",
       "managementTokenHash": "5b5275b1b10b5a0137010470cb542a2b4f27d70315d9eefc73b52bcbeeb473e3",
       "template": "editorial",
-      "clickCount": 49,
-      "createdAt": "2026-09-18T00:24:29.690Z",
-      "updatedAt": "2026-09-18T00:24:29.690Z"
+      "clickCount": 25,
+      "createdAt": "2026-10-05T07:07:44.054Z",
+      "updatedAt": "2026-10-05T07:07:44.054Z"
     },
     {
       "id": "brand_finstack",
@@ -266,9 +266,9 @@
       "status": "published",
       "managementTokenHash": "6a3891859a4fb1441e2b1debe6d253a5544a83940778cc693be82d6075b82f5c",
       "template": "typography",
-      "clickCount": 9,
-      "createdAt": "2026-09-18T01:24:29.690Z",
-      "updatedAt": "2026-09-18T01:24:29.690Z"
+      "clickCount": 39,
+      "createdAt": "2026-10-05T08:07:44.054Z",
+      "updatedAt": "2026-10-05T08:07:44.054Z"
     },
     {
       "id": "brand_nordic",
@@ -284,9 +284,9 @@
       "status": "published",
       "managementTokenHash": "970297892447170ba90ec18b4c6c05010e21788e8721257d39b1e721dcb3deb2",
       "template": "minimal",
-      "clickCount": 21,
-      "createdAt": "2026-09-18T02:24:29.690Z",
-      "updatedAt": "2026-09-18T02:24:29.690Z"
+      "clickCount": 20,
+      "createdAt": "2026-10-05T09:07:44.054Z",
+      "updatedAt": "2026-10-05T09:07:44.054Z"
     },
     {
       "id": "brand_pixelcraft",
@@ -302,9 +302,9 @@
       "status": "published",
       "managementTokenHash": "f37cc27238500de0b071c913e38c19080ff8ac2a43d116522e0394a6c5032ee9",
       "template": "logo_dominant",
-      "clickCount": 10,
-      "createdAt": "2026-09-19T03:24:29.690Z",
-      "updatedAt": "2026-09-19T03:24:29.690Z"
+      "clickCount": 32,
+      "createdAt": "2026-10-06T10:07:44.054Z",
+      "updatedAt": "2026-10-06T10:07:44.054Z"
     },
     {
       "id": "brand_cloudnest",
@@ -320,9 +320,9 @@
       "status": "published",
       "managementTokenHash": "ff56ff564ff4d000576ad62dda576f50b9ca39b508016f265f603742a9adfad0",
       "template": "typography",
-      "clickCount": 41,
-      "createdAt": "2026-09-19T04:24:29.690Z",
-      "updatedAt": "2026-09-19T04:24:29.690Z"
+      "clickCount": 22,
+      "createdAt": "2026-10-06T11:07:44.054Z",
+      "updatedAt": "2026-10-06T11:07:44.054Z"
     },
     {
       "id": "brand_nexuspay",
@@ -338,9 +338,9 @@
       "status": "published",
       "managementTokenHash": "f64deae1f2d22f42cd9fa202a9d4615c0e691213d10d4a8b38be47a8b709c283",
       "template": "editorial",
-      "clickCount": 38,
-      "createdAt": "2026-09-19T05:24:29.690Z",
-      "updatedAt": "2026-09-19T05:24:29.690Z"
+      "clickCount": 33,
+      "createdAt": "2026-10-06T12:07:44.054Z",
+      "updatedAt": "2026-10-06T12:07:44.054Z"
     },
     {
       "id": "brand_algotutor",
@@ -356,9 +356,9 @@
       "status": "published",
       "managementTokenHash": "ea998dc7f38786cc195e78a95a1c20c88b9dca1cd5811e1672cba5171ef50a36",
       "template": "minimal",
-      "clickCount": 28,
-      "createdAt": "2026-09-19T06:24:29.690Z",
-      "updatedAt": "2026-09-19T06:24:29.690Z"
+      "clickCount": 13,
+      "createdAt": "2026-10-06T13:07:44.054Z",
+      "updatedAt": "2026-10-06T13:07:44.054Z"
     },
     {
       "id": "brand_shopvibe",
@@ -374,9 +374,9 @@
       "status": "published",
       "managementTokenHash": "481a819a3b9f6c58e6acc189a03be0cac9ca067ef859434ee2b1040c047e28b1",
       "template": "typography",
-      "clickCount": 14,
-      "createdAt": "2026-09-19T07:24:29.690Z",
-      "updatedAt": "2026-09-19T07:24:29.690Z"
+      "clickCount": 20,
+      "createdAt": "2026-10-06T14:07:44.054Z",
+      "updatedAt": "2026-10-06T14:07:44.054Z"
     },
     {
       "id": "brand_datapulse",
@@ -392,9 +392,9 @@
       "status": "published",
       "managementTokenHash": "3abdf4619b63db62b015d1e873e02025cad79d25bfbd2639dd24da827721835c",
       "template": "logo_dominant",
-      "clickCount": 21,
-      "createdAt": "2026-09-20T08:24:29.690Z",
-      "updatedAt": "2026-09-20T08:24:29.690Z"
+      "clickCount": 36,
+      "createdAt": "2026-10-07T15:07:44.054Z",
+      "updatedAt": "2026-10-07T15:07:44.054Z"
     },
     {
       "id": "brand_vectorstudio",
@@ -410,9 +410,9 @@
       "status": "published",
       "managementTokenHash": "47ba7ba215b3ec4c58591e50582676dbbdea88e717330f9d8e9067e8cc44d1f0",
       "template": "editorial",
-      "clickCount": 25,
-      "createdAt": "2026-09-20T09:24:29.690Z",
-      "updatedAt": "2026-09-20T09:24:29.690Z"
+      "clickCount": 28,
+      "createdAt": "2026-10-07T16:07:44.054Z",
+      "updatedAt": "2026-10-07T16:07:44.054Z"
     },
     {
       "id": "brand_codesprint",
@@ -428,9 +428,9 @@
       "status": "published",
       "managementTokenHash": "35dc5a88ceabb21ba7d02242ed87eb66607d8256ddd4af6c8ee9e4c6076d1c60",
       "template": "minimal",
-      "clickCount": 48,
-      "createdAt": "2026-09-20T10:24:29.690Z",
-      "updatedAt": "2026-09-20T10:24:29.690Z"
+      "clickCount": 11,
+      "createdAt": "2026-10-07T17:07:44.054Z",
+      "updatedAt": "2026-10-07T17:07:44.054Z"
     },
     {
       "id": "brand_launchpad",
@@ -446,9 +446,9 @@
       "status": "published",
       "managementTokenHash": "b90d093fc4cb26d56af69312bddffda419891a20f980319d4c29a53fad267add",
       "template": "typography",
-      "clickCount": 11,
-      "createdAt": "2026-09-20T11:24:29.690Z",
-      "updatedAt": "2026-09-20T11:24:29.690Z"
+      "clickCount": 31,
+      "createdAt": "2026-10-07T18:07:44.054Z",
+      "updatedAt": "2026-10-07T18:07:44.054Z"
     },
     {
       "id": "brand_syncpoint",
@@ -464,81 +464,9 @@
       "status": "published",
       "managementTokenHash": "f0b4c8f24b54ab9fac66e55c0f734771e5b0448267ee219e734efeab39c98112",
       "template": "typography",
-      "clickCount": 18,
-      "createdAt": "2026-09-20T12:24:29.690Z",
-      "updatedAt": "2026-09-20T12:24:29.690Z"
-    },
-    {
-      "id": "brand_0dbc36a1fde82a99",
-      "websiteUrl": "https://linear.app",
-      "canonicalUrl": "linear.app",
-      "slug": "linear-app",
-      "name": "Linear App",
-      "category": "Developer Tools",
-      "logoUrl": null,
-      "description": "The issue tracking tool you'll actually enjoy using.",
-      "tagline": "Issue Tracking for High-Performance Teams",
-      "totalBid": 15000,
-      "status": "published",
-      "managementTokenHash": "b7a2117516831c9e9ea90899b7cd44fc2b7fe3dd4634f22874ffb1b961105c6b",
-      "template": "typography",
-      "clickCount": 0,
-      "createdAt": "2026-09-19T11:24:30.221Z",
-      "updatedAt": "2026-09-19T11:24:30.228Z"
-    },
-    {
-      "id": "brand_8acff8955af55aaa",
-      "websiteUrl": "https://xitswhatshappening.com",
-      "canonicalUrl": "xitswhatshappening",
-      "slug": "brand-8acff8955af55aaa",
-      "name": "X. It’s what’s happening",
-      "category": "General",
-      "logoUrl": null,
-      "description": "Verified brand placement for X. It’s what’s happening",
-      "tagline": null,
-      "totalBid": 50,
-      "status": "published",
-      "managementTokenHash": "",
-      "template": "typography",
-      "clickCount": 0,
-      "createdAt": "2026-09-19T13:34:44.322Z",
-      "updatedAt": "2026-09-19T13:34:44.335Z"
-    },
-    {
-      "id": "brand_e5aadbac0c849197",
-      "websiteUrl": "https://brandbid.in",
-      "canonicalUrl": "brandbid.in",
-      "slug": "brandbid",
-      "name": "Brandbid",
-      "category": "AI",
-      "logoUrl": "https://www.google.com/s2/favicons?domain=brandbid.in&sz=128",
-      "description": "Official website for Brandbid.",
-      "tagline": "Discover Brandbid",
-      "totalBid": 0,
-      "status": "pending",
-      "managementTokenHash": "f167b6242a74b224bb47ae1718916119e9e0eba9bef5f6338c48d08ae8447956",
-      "template": "typography",
-      "clickCount": 0,
-      "createdAt": "2026-09-19T13:40:17.366Z",
-      "updatedAt": "2026-09-19T13:40:17.366Z"
-    },
-    {
-      "id": "brand_47facf92ebca3a29",
-      "websiteUrl": "https://youtube.com",
-      "canonicalUrl": "youtube.com",
-      "slug": "youtube",
-      "name": "YouTube",
-      "category": "AI",
-      "logoUrl": "https://www.youtube.com/s/desktop/b0f1b2cc/img/favicon.ico",
-      "description": "Enjoy the videos and music that you love, upload original content and share it all with friends, family and the world on YouTube.",
-      "tagline": "Enjoy the videos and music that you love, upload original content and share it all with friends, fam",
-      "totalBid": 100,
-      "status": "published",
-      "managementTokenHash": "ff518f28561d3f144cf4135c22b12bb0fd50d17122bba13979b829a2d2714304",
-      "template": "typography",
-      "clickCount": 0,
-      "createdAt": "2026-09-19T13:41:50.333Z",
-      "updatedAt": "2026-09-19T13:43:00.091Z"
+      "clickCount": 48,
+      "createdAt": "2026-10-07T19:07:44.054Z",
+      "updatedAt": "2026-10-07T19:07:44.054Z"
     }
   ],
   "payments": [
@@ -552,8 +480,8 @@
       "amount": 10000,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-05T11:24:29.690Z",
-      "verifiedAt": "2026-09-05T11:24:29.690Z"
+      "createdAt": "2026-09-22T18:07:44.054Z",
+      "verifiedAt": "2026-09-22T18:07:44.054Z"
     },
     {
       "id": "pay_seed_veloce",
@@ -565,8 +493,8 @@
       "amount": 7500,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-07T12:24:29.690Z",
-      "verifiedAt": "2026-09-07T12:24:29.690Z"
+      "createdAt": "2026-09-24T19:07:44.054Z",
+      "verifiedAt": "2026-09-24T19:07:44.054Z"
     },
     {
       "id": "pay_seed_hyperflow",
@@ -578,8 +506,8 @@
       "amount": 5800,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-09T13:24:29.690Z",
-      "verifiedAt": "2026-09-09T13:24:29.690Z"
+      "createdAt": "2026-09-26T20:07:44.054Z",
+      "verifiedAt": "2026-09-26T20:07:44.054Z"
     },
     {
       "id": "pay_seed_payzen",
@@ -591,8 +519,8 @@
       "amount": 4200,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-10T14:24:29.690Z",
-      "verifiedAt": "2026-09-10T14:24:29.690Z"
+      "createdAt": "2026-09-27T21:07:44.054Z",
+      "verifiedAt": "2026-09-27T21:07:44.054Z"
     },
     {
       "id": "pay_seed_kubecraft",
@@ -604,8 +532,8 @@
       "amount": 3500,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-11T15:24:29.690Z",
-      "verifiedAt": "2026-09-11T15:24:29.690Z"
+      "createdAt": "2026-09-28T22:07:44.054Z",
+      "verifiedAt": "2026-09-28T22:07:44.054Z"
     },
     {
       "id": "pay_seed_omnitrack",
@@ -617,8 +545,8 @@
       "amount": 2800,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-12T16:24:29.690Z",
-      "verifiedAt": "2026-09-12T16:24:29.690Z"
+      "createdAt": "2026-09-29T23:07:44.054Z",
+      "verifiedAt": "2026-09-29T23:07:44.054Z"
     },
     {
       "id": "pay_seed_draftwave",
@@ -630,8 +558,8 @@
       "amount": 2200,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-13T17:24:29.690Z",
-      "verifiedAt": "2026-09-13T17:24:29.690Z"
+      "createdAt": "2026-10-01T00:07:44.054Z",
+      "verifiedAt": "2026-10-01T00:07:44.054Z"
     },
     {
       "id": "pay_seed_zenithos",
@@ -643,8 +571,8 @@
       "amount": 1800,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-14T18:24:29.690Z",
-      "verifiedAt": "2026-09-14T18:24:29.690Z"
+      "createdAt": "2026-10-02T01:07:44.054Z",
+      "verifiedAt": "2026-10-02T01:07:44.054Z"
     },
     {
       "id": "pay_seed_pulsegraph",
@@ -656,8 +584,8 @@
       "amount": 1500,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-14T19:24:29.690Z",
-      "verifiedAt": "2026-09-14T19:24:29.690Z"
+      "createdAt": "2026-10-02T02:07:44.054Z",
+      "verifiedAt": "2026-10-02T02:07:44.054Z"
     },
     {
       "id": "pay_seed_cartlogic",
@@ -669,8 +597,8 @@
       "amount": 1200,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-15T20:24:29.690Z",
-      "verifiedAt": "2026-09-15T20:24:29.690Z"
+      "createdAt": "2026-10-03T03:07:44.054Z",
+      "verifiedAt": "2026-10-03T03:07:44.054Z"
     },
     {
       "id": "pay_seed_skillforge",
@@ -682,8 +610,8 @@
       "amount": 1000,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-15T21:24:29.690Z",
-      "verifiedAt": "2026-09-15T21:24:29.690Z"
+      "createdAt": "2026-10-03T04:07:44.054Z",
+      "verifiedAt": "2026-10-03T04:07:44.054Z"
     },
     {
       "id": "pay_seed_byteforge",
@@ -695,8 +623,8 @@
       "amount": 850,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-16T22:24:29.690Z",
-      "verifiedAt": "2026-09-16T22:24:29.690Z"
+      "createdAt": "2026-10-04T05:07:44.054Z",
+      "verifiedAt": "2026-10-04T05:07:44.054Z"
     },
     {
       "id": "pay_seed_aeromail",
@@ -708,8 +636,8 @@
       "amount": 750,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-16T23:24:29.690Z",
-      "verifiedAt": "2026-09-16T23:24:29.690Z"
+      "createdAt": "2026-10-04T06:07:44.054Z",
+      "verifiedAt": "2026-10-04T06:07:44.054Z"
     },
     {
       "id": "pay_seed_lumina",
@@ -721,8 +649,8 @@
       "amount": 650,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-18T00:24:29.690Z",
-      "verifiedAt": "2026-09-18T00:24:29.690Z"
+      "createdAt": "2026-10-05T07:07:44.054Z",
+      "verifiedAt": "2026-10-05T07:07:44.054Z"
     },
     {
       "id": "pay_seed_finstack",
@@ -734,8 +662,8 @@
       "amount": 550,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-18T01:24:29.690Z",
-      "verifiedAt": "2026-09-18T01:24:29.690Z"
+      "createdAt": "2026-10-05T08:07:44.054Z",
+      "verifiedAt": "2026-10-05T08:07:44.054Z"
     },
     {
       "id": "pay_seed_nordic",
@@ -747,8 +675,8 @@
       "amount": 480,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-18T02:24:29.690Z",
-      "verifiedAt": "2026-09-18T02:24:29.690Z"
+      "createdAt": "2026-10-05T09:07:44.054Z",
+      "verifiedAt": "2026-10-05T09:07:44.054Z"
     },
     {
       "id": "pay_seed_pixelcraft",
@@ -760,8 +688,8 @@
       "amount": 420,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-19T03:24:29.690Z",
-      "verifiedAt": "2026-09-19T03:24:29.690Z"
+      "createdAt": "2026-10-06T10:07:44.054Z",
+      "verifiedAt": "2026-10-06T10:07:44.054Z"
     },
     {
       "id": "pay_seed_cloudnest",
@@ -773,8 +701,8 @@
       "amount": 360,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-19T04:24:29.690Z",
-      "verifiedAt": "2026-09-19T04:24:29.690Z"
+      "createdAt": "2026-10-06T11:07:44.054Z",
+      "verifiedAt": "2026-10-06T11:07:44.054Z"
     },
     {
       "id": "pay_seed_nexuspay",
@@ -786,8 +714,8 @@
       "amount": 300,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-19T05:24:29.690Z",
-      "verifiedAt": "2026-09-19T05:24:29.690Z"
+      "createdAt": "2026-10-06T12:07:44.054Z",
+      "verifiedAt": "2026-10-06T12:07:44.054Z"
     },
     {
       "id": "pay_seed_algotutor",
@@ -799,8 +727,8 @@
       "amount": 250,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-19T06:24:29.690Z",
-      "verifiedAt": "2026-09-19T06:24:29.690Z"
+      "createdAt": "2026-10-06T13:07:44.054Z",
+      "verifiedAt": "2026-10-06T13:07:44.054Z"
     },
     {
       "id": "pay_seed_shopvibe",
@@ -812,8 +740,8 @@
       "amount": 200,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-19T07:24:29.690Z",
-      "verifiedAt": "2026-09-19T07:24:29.690Z"
+      "createdAt": "2026-10-06T14:07:44.054Z",
+      "verifiedAt": "2026-10-06T14:07:44.054Z"
     },
     {
       "id": "pay_seed_datapulse",
@@ -825,8 +753,8 @@
       "amount": 160,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-20T08:24:29.690Z",
-      "verifiedAt": "2026-09-20T08:24:29.690Z"
+      "createdAt": "2026-10-07T15:07:44.054Z",
+      "verifiedAt": "2026-10-07T15:07:44.054Z"
     },
     {
       "id": "pay_seed_vectorstudio",
@@ -838,8 +766,8 @@
       "amount": 120,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-20T09:24:29.690Z",
-      "verifiedAt": "2026-09-20T09:24:29.690Z"
+      "createdAt": "2026-10-07T16:07:44.054Z",
+      "verifiedAt": "2026-10-07T16:07:44.054Z"
     },
     {
       "id": "pay_seed_codesprint",
@@ -851,8 +779,8 @@
       "amount": 90,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-20T10:24:29.690Z",
-      "verifiedAt": "2026-09-20T10:24:29.690Z"
+      "createdAt": "2026-10-07T17:07:44.054Z",
+      "verifiedAt": "2026-10-07T17:07:44.054Z"
     },
     {
       "id": "pay_seed_launchpad",
@@ -864,8 +792,8 @@
       "amount": 60,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-20T11:24:29.690Z",
-      "verifiedAt": "2026-09-20T11:24:29.690Z"
+      "createdAt": "2026-10-07T18:07:44.054Z",
+      "verifiedAt": "2026-10-07T18:07:44.054Z"
     },
     {
       "id": "pay_seed_syncpoint",
@@ -877,50 +805,21 @@
       "amount": 30,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-20T12:24:29.690Z",
-      "verifiedAt": "2026-09-20T12:24:29.690Z"
+      "createdAt": "2026-10-07T19:07:44.054Z",
+      "verifiedAt": "2026-10-07T19:07:44.054Z"
     },
     {
-      "id": "pay_e929a7e75ccbc6e1",
-      "brandId": "brand_0dbc36a1fde82a99",
-      "provider": "dodo",
-      "providerPaymentId": "pay_e2e_linear_payment",
-      "providerSessionId": "cks_e2e_linear_session",
-      "providerOrderId": "cks_e2e_linear_session",
-      "paymentAttemptId": "att_b2f1d96f4eea7ddc46e1459f",
-      "amount": 15000,
+      "id": "pay_dodo_idem_1791310064056",
+      "brandId": "brand_synthetix",
+      "providerPaymentId": "pay_dodo_idem_1791310064056",
+      "providerOrderId": "cks_idem_test",
+      "amount": 500,
       "currency": "USD",
       "status": "verified",
-      "createdAt": "2026-09-19T11:24:30.225Z",
-      "verifiedAt": "2026-09-19T11:24:30.225Z"
-    },
-    {
-      "id": "pay_f891771dcc9f4289",
-      "brandId": "brand_8acff8955af55aaa",
+      "createdAt": "2026-10-06T18:07:44.056Z",
+      "verifiedAt": "2026-10-06T18:07:44.056Z",
       "provider": "dodo",
-      "providerPaymentId": "pay_0Nnw6IRjUjvQFR34Hb6TS",
-      "providerSessionId": "",
-      "providerOrderId": "",
-      "paymentAttemptId": "att_30365c58c22107db83c496e6",
-      "amount": 50,
-      "currency": "INR",
-      "status": "verified",
-      "createdAt": "2026-09-19T13:34:44.330Z",
-      "verifiedAt": "2026-09-19T13:34:44.330Z"
-    },
-    {
-      "id": "pay_7e90fbb5e3d6e82a",
-      "brandId": "brand_47facf92ebca3a29",
-      "provider": "dodo",
-      "providerPaymentId": "pay_0NnwX3FGbzxrMfyM6RcCU",
-      "providerSessionId": "",
-      "providerOrderId": "",
-      "paymentAttemptId": "att_28ed5fa8de5ca764c88e4b2d",
-      "amount": 100,
-      "currency": "INR",
-      "status": "verified",
-      "createdAt": "2026-09-19T13:43:00.088Z",
-      "verifiedAt": "2026-09-19T13:43:00.088Z"
+      "providerSessionId": "cks_idem_test"
     }
   ],
   "bidHistory": [
@@ -935,7 +834,7 @@
       "newTotal": 10000,
       "previousRank": null,
       "newRank": 1,
-      "createdAt": "2026-09-05T11:24:29.690Z"
+      "createdAt": "2026-09-22T18:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_veloce",
@@ -948,7 +847,7 @@
       "newTotal": 7500,
       "previousRank": null,
       "newRank": 2,
-      "createdAt": "2026-09-07T12:24:29.690Z"
+      "createdAt": "2026-09-24T19:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_hyperflow",
@@ -961,7 +860,7 @@
       "newTotal": 5800,
       "previousRank": null,
       "newRank": 3,
-      "createdAt": "2026-09-09T13:24:29.690Z"
+      "createdAt": "2026-09-26T20:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_payzen",
@@ -974,7 +873,7 @@
       "newTotal": 4200,
       "previousRank": null,
       "newRank": 4,
-      "createdAt": "2026-09-10T14:24:29.690Z"
+      "createdAt": "2026-09-27T21:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_kubecraft",
@@ -987,7 +886,7 @@
       "newTotal": 3500,
       "previousRank": null,
       "newRank": 5,
-      "createdAt": "2026-09-11T15:24:29.690Z"
+      "createdAt": "2026-09-28T22:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_omnitrack",
@@ -1000,7 +899,7 @@
       "newTotal": 2800,
       "previousRank": null,
       "newRank": 6,
-      "createdAt": "2026-09-12T16:24:29.690Z"
+      "createdAt": "2026-09-29T23:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_draftwave",
@@ -1013,7 +912,7 @@
       "newTotal": 2200,
       "previousRank": null,
       "newRank": 7,
-      "createdAt": "2026-09-13T17:24:29.690Z"
+      "createdAt": "2026-10-01T00:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_zenithos",
@@ -1026,7 +925,7 @@
       "newTotal": 1800,
       "previousRank": null,
       "newRank": 8,
-      "createdAt": "2026-09-14T18:24:29.690Z"
+      "createdAt": "2026-10-02T01:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_pulsegraph",
@@ -1039,7 +938,7 @@
       "newTotal": 1500,
       "previousRank": null,
       "newRank": 9,
-      "createdAt": "2026-09-14T19:24:29.690Z"
+      "createdAt": "2026-10-02T02:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_cartlogic",
@@ -1052,7 +951,7 @@
       "newTotal": 1200,
       "previousRank": null,
       "newRank": 10,
-      "createdAt": "2026-09-15T20:24:29.690Z"
+      "createdAt": "2026-10-03T03:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_skillforge",
@@ -1065,7 +964,7 @@
       "newTotal": 1000,
       "previousRank": null,
       "newRank": 11,
-      "createdAt": "2026-09-15T21:24:29.690Z"
+      "createdAt": "2026-10-03T04:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_byteforge",
@@ -1078,7 +977,7 @@
       "newTotal": 850,
       "previousRank": null,
       "newRank": 12,
-      "createdAt": "2026-09-16T22:24:29.690Z"
+      "createdAt": "2026-10-04T05:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_aeromail",
@@ -1091,7 +990,7 @@
       "newTotal": 750,
       "previousRank": null,
       "newRank": 13,
-      "createdAt": "2026-09-16T23:24:29.690Z"
+      "createdAt": "2026-10-04T06:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_lumina",
@@ -1104,7 +1003,7 @@
       "newTotal": 650,
       "previousRank": null,
       "newRank": 14,
-      "createdAt": "2026-09-18T00:24:29.690Z"
+      "createdAt": "2026-10-05T07:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_finstack",
@@ -1117,7 +1016,7 @@
       "newTotal": 550,
       "previousRank": null,
       "newRank": 15,
-      "createdAt": "2026-09-18T01:24:29.690Z"
+      "createdAt": "2026-10-05T08:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_nordic",
@@ -1130,7 +1029,7 @@
       "newTotal": 480,
       "previousRank": null,
       "newRank": 16,
-      "createdAt": "2026-09-18T02:24:29.690Z"
+      "createdAt": "2026-10-05T09:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_pixelcraft",
@@ -1143,7 +1042,7 @@
       "newTotal": 420,
       "previousRank": null,
       "newRank": 17,
-      "createdAt": "2026-09-19T03:24:29.690Z"
+      "createdAt": "2026-10-06T10:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_cloudnest",
@@ -1156,7 +1055,7 @@
       "newTotal": 360,
       "previousRank": null,
       "newRank": 18,
-      "createdAt": "2026-09-19T04:24:29.690Z"
+      "createdAt": "2026-10-06T11:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_nexuspay",
@@ -1169,7 +1068,7 @@
       "newTotal": 300,
       "previousRank": null,
       "newRank": 19,
-      "createdAt": "2026-09-19T05:24:29.690Z"
+      "createdAt": "2026-10-06T12:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_algotutor",
@@ -1182,7 +1081,7 @@
       "newTotal": 250,
       "previousRank": null,
       "newRank": 20,
-      "createdAt": "2026-09-19T06:24:29.690Z"
+      "createdAt": "2026-10-06T13:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_shopvibe",
@@ -1195,7 +1094,7 @@
       "newTotal": 200,
       "previousRank": null,
       "newRank": 21,
-      "createdAt": "2026-09-19T07:24:29.690Z"
+      "createdAt": "2026-10-06T14:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_datapulse",
@@ -1208,7 +1107,7 @@
       "newTotal": 160,
       "previousRank": null,
       "newRank": 22,
-      "createdAt": "2026-09-20T08:24:29.690Z"
+      "createdAt": "2026-10-07T15:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_vectorstudio",
@@ -1221,7 +1120,7 @@
       "newTotal": 120,
       "previousRank": null,
       "newRank": 23,
-      "createdAt": "2026-09-20T09:24:29.690Z"
+      "createdAt": "2026-10-07T16:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_codesprint",
@@ -1234,7 +1133,7 @@
       "newTotal": 90,
       "previousRank": null,
       "newRank": 24,
-      "createdAt": "2026-09-20T10:24:29.690Z"
+      "createdAt": "2026-10-07T17:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_launchpad",
@@ -1247,7 +1146,7 @@
       "newTotal": 60,
       "previousRank": null,
       "newRank": 25,
-      "createdAt": "2026-09-20T11:24:29.690Z"
+      "createdAt": "2026-10-07T18:07:44.054Z"
     },
     {
       "id": "hist_pay_seed_syncpoint",
@@ -1260,91 +1159,10 @@
       "newTotal": 30,
       "previousRank": null,
       "newRank": 26,
-      "createdAt": "2026-09-20T12:24:29.690Z"
-    },
-    {
-      "id": "hist_e9b15c73ab75d975",
-      "brandId": "brand_0dbc36a1fde82a99",
-      "paymentId": "pay_e929a7e75ccbc6e1",
-      "amount": 15000,
-      "totalAfter": 15000,
-      "amountAdded": 15000,
-      "previousTotal": 0,
-      "newTotal": 15000,
-      "previousRank": null,
-      "newRank": 1,
-      "createdAt": "2026-09-19T11:24:30.225Z"
-    },
-    {
-      "id": "hist_df01d3927e80cf1b",
-      "brandId": "brand_8acff8955af55aaa",
-      "paymentId": "pay_f891771dcc9f4289",
-      "amount": 50,
-      "totalAfter": 50,
-      "amountAdded": 50,
-      "previousTotal": 0,
-      "newTotal": 50,
-      "previousRank": null,
-      "newRank": 27,
-      "createdAt": "2026-09-19T13:34:44.330Z"
-    },
-    {
-      "id": "hist_dec0f45c703e1b0d",
-      "brandId": "brand_47facf92ebca3a29",
-      "paymentId": "pay_7e90fbb5e3d6e82a",
-      "amount": 100,
-      "totalAfter": 100,
-      "amountAdded": 100,
-      "previousTotal": 0,
-      "newTotal": 100,
-      "previousRank": null,
-      "newRank": 25,
-      "createdAt": "2026-09-19T13:43:00.088Z"
+      "createdAt": "2026-10-07T19:07:44.054Z"
     }
   ],
   "activity": [
-    {
-      "id": "act_ce39269390739f52",
-      "brandId": "brand_47facf92ebca3a29",
-      "eventType": "brand_entered",
-      "metadata": {
-        "brandName": "YouTube",
-        "rank": 25,
-        "previousRank": null,
-        "amountAdded": 100,
-        "totalBid": 100,
-        "slug": "youtube"
-      },
-      "createdAt": "2026-09-19T13:43:00.088Z"
-    },
-    {
-      "id": "act_593c193537850e95",
-      "brandId": "brand_8acff8955af55aaa",
-      "eventType": "brand_entered",
-      "metadata": {
-        "brandName": "X. It’s what’s happening",
-        "rank": 27,
-        "previousRank": null,
-        "amountAdded": 50,
-        "totalBid": 50,
-        "slug": "brand-8acff8955af55aaa"
-      },
-      "createdAt": "2026-09-19T13:34:44.330Z"
-    },
-    {
-      "id": "act_eaae7894077ef031",
-      "brandId": "brand_0dbc36a1fde82a99",
-      "eventType": "became_number_one",
-      "metadata": {
-        "brandName": "Linear App",
-        "rank": 1,
-        "previousRank": null,
-        "amountAdded": 15000,
-        "totalBid": 15000,
-        "slug": "linear-app"
-      },
-      "createdAt": "2026-09-19T11:24:30.225Z"
-    },
     {
       "id": "act_climb_1",
       "brandId": "brand_veloce",
@@ -1355,7 +1173,7 @@
         "newRank": 2,
         "slug": "veloce-dev"
       },
-      "createdAt": "2026-09-19T11:09:29.690Z"
+      "createdAt": "2026-10-06T17:52:44.054Z"
     },
     {
       "id": "act_bid_1",
@@ -1367,7 +1185,7 @@
         "newTotal": 10000,
         "slug": "synthetix-ai"
       },
-      "createdAt": "2026-09-19T10:39:29.690Z"
+      "createdAt": "2026-10-06T17:22:44.054Z"
     },
     {
       "id": "act_pay_seed_synthetix",
@@ -1379,7 +1197,7 @@
         "amount": 10000,
         "slug": "synthetix-ai"
       },
-      "createdAt": "2026-09-05T11:24:29.690Z"
+      "createdAt": "2026-09-22T18:07:44.054Z"
     },
     {
       "id": "act_pay_seed_veloce",
@@ -1391,7 +1209,7 @@
         "amount": 7500,
         "slug": "veloce-dev"
       },
-      "createdAt": "2026-09-07T12:24:29.690Z"
+      "createdAt": "2026-09-24T19:07:44.054Z"
     },
     {
       "id": "act_pay_seed_hyperflow",
@@ -1403,7 +1221,7 @@
         "amount": 5800,
         "slug": "hyperflow"
       },
-      "createdAt": "2026-09-09T13:24:29.690Z"
+      "createdAt": "2026-09-26T20:07:44.054Z"
     },
     {
       "id": "act_pay_seed_payzen",
@@ -1415,7 +1233,7 @@
         "amount": 4200,
         "slug": "payzen"
       },
-      "createdAt": "2026-09-10T14:24:29.690Z"
+      "createdAt": "2026-09-27T21:07:44.054Z"
     },
     {
       "id": "act_pay_seed_kubecraft",
@@ -1427,7 +1245,7 @@
         "amount": 3500,
         "slug": "kubecraft"
       },
-      "createdAt": "2026-09-11T15:24:29.690Z"
+      "createdAt": "2026-09-28T22:07:44.054Z"
     },
     {
       "id": "act_pay_seed_omnitrack",
@@ -1439,7 +1257,7 @@
         "amount": 2800,
         "slug": "omnitrack"
       },
-      "createdAt": "2026-09-12T16:24:29.690Z"
+      "createdAt": "2026-09-29T23:07:44.054Z"
     },
     {
       "id": "act_pay_seed_draftwave",
@@ -1451,7 +1269,7 @@
         "amount": 2200,
         "slug": "draftwave"
       },
-      "createdAt": "2026-09-13T17:24:29.690Z"
+      "createdAt": "2026-10-01T00:07:44.054Z"
     },
     {
       "id": "act_pay_seed_zenithos",
@@ -1463,7 +1281,7 @@
         "amount": 1800,
         "slug": "zenith-os"
       },
-      "createdAt": "2026-09-14T18:24:29.690Z"
+      "createdAt": "2026-10-02T01:07:44.054Z"
     },
     {
       "id": "act_pay_seed_pulsegraph",
@@ -1475,7 +1293,7 @@
         "amount": 1500,
         "slug": "pulsegraph"
       },
-      "createdAt": "2026-09-14T19:24:29.690Z"
+      "createdAt": "2026-10-02T02:07:44.054Z"
     },
     {
       "id": "act_pay_seed_cartlogic",
@@ -1487,7 +1305,7 @@
         "amount": 1200,
         "slug": "cartlogic"
       },
-      "createdAt": "2026-09-15T20:24:29.690Z"
+      "createdAt": "2026-10-03T03:07:44.054Z"
     },
     {
       "id": "act_pay_seed_skillforge",
@@ -1499,7 +1317,7 @@
         "amount": 1000,
         "slug": "skillforge"
       },
-      "createdAt": "2026-09-15T21:24:29.690Z"
+      "createdAt": "2026-10-03T04:07:44.054Z"
     },
     {
       "id": "act_pay_seed_byteforge",
@@ -1511,7 +1329,7 @@
         "amount": 850,
         "slug": "byteforge"
       },
-      "createdAt": "2026-09-16T22:24:29.690Z"
+      "createdAt": "2026-10-04T05:07:44.054Z"
     },
     {
       "id": "act_pay_seed_aeromail",
@@ -1523,7 +1341,7 @@
         "amount": 750,
         "slug": "aeromail"
       },
-      "createdAt": "2026-09-16T23:24:29.690Z"
+      "createdAt": "2026-10-04T06:07:44.054Z"
     },
     {
       "id": "act_pay_seed_lumina",
@@ -1535,7 +1353,7 @@
         "amount": 650,
         "slug": "lumina-ai"
       },
-      "createdAt": "2026-09-18T00:24:29.690Z"
+      "createdAt": "2026-10-05T07:07:44.054Z"
     },
     {
       "id": "act_pay_seed_finstack",
@@ -1547,7 +1365,7 @@
         "amount": 550,
         "slug": "finstack"
       },
-      "createdAt": "2026-09-18T01:24:29.690Z"
+      "createdAt": "2026-10-05T08:07:44.054Z"
     },
     {
       "id": "act_pay_seed_nordic",
@@ -1559,7 +1377,7 @@
         "amount": 480,
         "slug": "nordic-design"
       },
-      "createdAt": "2026-09-18T02:24:29.690Z"
+      "createdAt": "2026-10-05T09:07:44.054Z"
     },
     {
       "id": "act_pay_seed_pixelcraft",
@@ -1571,7 +1389,7 @@
         "amount": 420,
         "slug": "pixelcraft"
       },
-      "createdAt": "2026-09-19T03:24:29.690Z"
+      "createdAt": "2026-10-06T10:07:44.054Z"
     },
     {
       "id": "act_pay_seed_cloudnest",
@@ -1583,7 +1401,7 @@
         "amount": 360,
         "slug": "cloudnest"
       },
-      "createdAt": "2026-09-19T04:24:29.690Z"
+      "createdAt": "2026-10-06T11:07:44.054Z"
     },
     {
       "id": "act_pay_seed_nexuspay",
@@ -1595,7 +1413,7 @@
         "amount": 300,
         "slug": "nexuspay"
       },
-      "createdAt": "2026-09-19T05:24:29.690Z"
+      "createdAt": "2026-10-06T12:07:44.054Z"
     },
     {
       "id": "act_pay_seed_algotutor",
@@ -1607,7 +1425,7 @@
         "amount": 250,
         "slug": "algotutor"
       },
-      "createdAt": "2026-09-19T06:24:29.690Z"
+      "createdAt": "2026-10-06T13:07:44.054Z"
     },
     {
       "id": "act_pay_seed_shopvibe",
@@ -1619,7 +1437,7 @@
         "amount": 200,
         "slug": "shopvibe"
       },
-      "createdAt": "2026-09-19T07:24:29.690Z"
+      "createdAt": "2026-10-06T14:07:44.054Z"
     },
     {
       "id": "act_pay_seed_datapulse",
@@ -1631,7 +1449,7 @@
         "amount": 160,
         "slug": "datapulse"
       },
-      "createdAt": "2026-09-20T08:24:29.690Z"
+      "createdAt": "2026-10-07T15:07:44.054Z"
     },
     {
       "id": "act_pay_seed_vectorstudio",
@@ -1643,7 +1461,7 @@
         "amount": 120,
         "slug": "vectorstudio"
       },
-      "createdAt": "2026-09-20T09:24:29.690Z"
+      "createdAt": "2026-10-07T16:07:44.054Z"
     },
     {
       "id": "act_pay_seed_codesprint",
@@ -1655,7 +1473,7 @@
         "amount": 90,
         "slug": "codesprint"
       },
-      "createdAt": "2026-09-20T10:24:29.690Z"
+      "createdAt": "2026-10-07T17:07:44.054Z"
     },
     {
       "id": "act_pay_seed_launchpad",
@@ -1667,7 +1485,7 @@
         "amount": 60,
         "slug": "launchpad"
       },
-      "createdAt": "2026-09-20T11:24:29.690Z"
+      "createdAt": "2026-10-07T18:07:44.054Z"
     },
     {
       "id": "act_pay_seed_syncpoint",
@@ -1679,7 +1497,7 @@
         "amount": 30,
         "slug": "syncpoint"
       },
-      "createdAt": "2026-09-20T12:24:29.690Z"
+      "createdAt": "2026-10-07T19:07:44.054Z"
     }
   ]
 }

@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     }
 
     const { brandId, additionalBid, managementToken } = parseResult.data;
-    const brand = db.getBrandById(brandId);
+    const brand = await db.getBrandById(brandId);
 
     if (!brand) {
       return NextResponse.json(
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     }
 
     const projectedTotal = brand.totalBid + additionalBid;
-    const allBrands = db.getAllBrands();
+    const allBrands = await db.getAllBrands();
     const projectedRank = estimateRankForBid(projectedTotal, allBrands, brand.id);
 
     // Create Dodo payment checkout session

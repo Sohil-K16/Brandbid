@@ -11,7 +11,7 @@ export async function GET(
   try {
     const { token } = await params;
     const tokenHash = hashToken(token);
-    const brand = db.getBrandByTokenHash(tokenHash);
+    const brand = await db.getBrandByTokenHash(tokenHash);
 
     if (!brand) {
       return NextResponse.json(
@@ -20,13 +20,13 @@ export async function GET(
       );
     }
 
-    const allBrands = db.getAllBrands();
+    const allBrands = await db.getAllBrands();
     const ranked = calculateRankings(allBrands);
     const rankedBrand = ranked.find((b) => b.id === brand.id);
     const currentRank = rankedBrand ? rankedBrand.rank : null;
     const climbInfo = getNextRank(brand.id, allBrands);
-    const payments = db.getPaymentsByBrandId(brand.id);
-    const bidHistory = db.getBidHistoryByBrandId(brand.id);
+    const payments = await db.getPaymentsByBrandId(brand.id);
+    const bidHistory = await db.getBidHistoryByBrandId(brand.id);
 
     return NextResponse.json({
       success: true,
@@ -54,7 +54,7 @@ export async function PUT(
   try {
     const { token } = await params;
     const tokenHash = hashToken(token);
-    const brand = db.getBrandByTokenHash(tokenHash);
+    const brand = await db.getBrandByTokenHash(tokenHash);
 
     if (!brand) {
       return NextResponse.json(
@@ -76,7 +76,7 @@ export async function PUT(
       );
     }
 
-    const updated = db.updateBrand(brand.id, parseResult.data);
+    const updated = await db.updateBrand(brand.id, parseResult.data);
 
     return NextResponse.json({
       success: true,

@@ -69,7 +69,8 @@ describe("Production Dodo Payments Webhook Endpoint (/api/payments/webhook)", ()
   });
 
   it("3. Processes verified payment.succeeded event, extracts amount from Dodo data only, and updates rankings", async () => {
-    const brand = db.getAllBrands()[0];
+    const all = await db.getAllBrands();
+    const brand = all[0];
     const initialBid = brand.totalBid;
     const testPaymentId = `pay_dodo_verified_${Date.now()}`;
     const testAttemptId = `att_attempt_${Date.now()}`;
@@ -112,11 +113,11 @@ describe("Production Dodo Payments Webhook Endpoint (/api/payments/webhook)", ()
     expect(json.amount).toBe(500);
 
     // Verify brand bid increased by exactly verified Dodo amount
-    const updatedBrand = db.getBrandById(brand.id);
+    const updatedBrand = await db.getBrandById(brand.id);
     expect(updatedBrand?.totalBid).toBe(initialBid + 500);
 
     // Verify payment record in DB
-    const payment = db.getPaymentByProviderId(testPaymentId);
+    const payment = await db.getPaymentByProviderId(testPaymentId);
     expect(payment).toBeDefined();
     expect(payment?.status).toBe("verified");
     expect(payment?.amount).toBe(500);
@@ -125,7 +126,8 @@ describe("Production Dodo Payments Webhook Endpoint (/api/payments/webhook)", ()
   });
 
   it("4. Enforces strict idempotency across duplicate webhook deliveries", async () => {
-    const brand = db.getAllBrands()[0];
+    const all = await db.getAllBrands();
+    const brand = all[0];
     const initialBid = brand.totalBid;
     const duplicatePaymentId = `pay_dodo_duplicate_${Date.now()}`;
 
@@ -160,7 +162,7 @@ describe("Production Dodo Payments Webhook Endpoint (/api/payments/webhook)", ()
     const res1 = await handleWebhook(req1);
     expect(res1.status).toBe(200);
 
-    const brandAfterDelivery1 = db.getBrandById(brand.id);
+    const brandAfterDelivery1 = await db.getBrandById(brand.id);
     expect(brandAfterDelivery1?.totalBid).toBe(initialBid + 100);
 
     // Delivery 2 (Duplicate Webhook with same payment_id)
@@ -180,16 +182,18 @@ describe("Production Dodo Payments Webhook Endpoint (/api/payments/webhook)", ()
     expect(json2.message).toContain("idempotent skip");
 
     // Brand totalBid must remain initialBid + 100 (NOT + 200)
-    const brandAfterDelivery2 = db.getBrandById(brand.id);
+    const brandAfterDelivery2 = await db.getBrandById(brand.id);
     expect(brandAfterDelivery2?.totalBid).toBe(initialBid + 100);
 
     // Only one payment record should exist
-    const allMatching = db.getAllPayments().filter((p) => p.providerPaymentId === duplicatePaymentId);
+    const allPayments = await db.getAllPayments();
+    const allMatching = allPayments.filter((p) => p.providerPaymentId === duplicatePaymentId);
     expect(allMatching).toHaveLength(1);
   });
 
   it("5. Handles payment.failed and payment.cancelled without increasing brand bid", async () => {
-    const brand = db.getAllBrands()[0];
+    const all = await db.getAllBrands();
+    const brand = all[0];
     const initialBid = brand.totalBid;
     const failedPaymentId = `pay_failed_${Date.now()}`;
 
@@ -223,17 +227,18 @@ describe("Production Dodo Payments Webhook Endpoint (/api/payments/webhook)", ()
     expect(res.status).toBe(200);
 
     // Verify brand bid did NOT increase
-    const brandAfterFail = db.getBrandById(brand.id);
+    const brandAfterFail = await db.getBrandById(brand.id);
     expect(brandAfterFail?.totalBid).toBe(initialBid);
 
     // Verify failed payment record exists
-    const failedPayment = db.getPaymentByProviderId(failedPaymentId);
+    const failedPayment = await db.getPaymentByProviderId(failedPaymentId);
     expect(failedPayment).toBeDefined();
     expect(failedPayment?.status).toBe("failed");
   });
 
   it("6. Rebid flow: adds verified rebid amount to existing total bid via webhook", async () => {
-    const brand = db.getAllBrands()[1];
+    const all = await db.getAllBrands();
+    const brand = all[1];
     const initialBid = brand.totalBid;
     const rebidPaymentId = `pay_rebid_${Date.now()}`;
 
@@ -268,12 +273,13 @@ describe("Production Dodo Payments Webhook Endpoint (/api/payments/webhook)", ()
     const res = await handleWebhook(req);
     expect(res.status).toBe(200);
 
-    const updatedBrand = db.getBrandById(brand.id);
+    const updatedBrand = await db.getBrandById(brand.id);
     expect(updatedBrand?.totalBid).toBe(initialBid + 150);
   });
 
   it("7. /api/payments/status returns accurate payment and brand details without modifying state", async () => {
-    const brand = db.getAllBrands()[0];
+    const all = await db.getAllBrands();
+    const brand = all[0];
     const initialBid = brand.totalBid;
 
     // Test querying status with brand_id
@@ -288,7 +294,7 @@ describe("Production Dodo Payments Webhook Endpoint (/api/payments/webhook)", ()
     expect(statusJson.data.rank).toBe(1);
 
     // Verify calling status did NOT alter brand bids
-    const afterQueryBrand = db.getBrandById(brand.id);
+    const afterQueryBrand = await db.getBrandById(brand.id);
     expect(afterQueryBrand?.totalBid).toBe(initialBid);
   });
 });

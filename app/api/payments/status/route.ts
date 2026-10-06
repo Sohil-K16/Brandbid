@@ -36,10 +36,10 @@ export async function GET(req: NextRequest) {
     }
 
     // 1. Locate payment record in database
-    const allPayments = db.getAllPayments();
+    const allPayments = await db.getAllPayments();
     let payment =
-      (paymentId && db.getPaymentByProviderId(paymentId)) ||
-      (paymentAttemptId && db.getPaymentByAttemptId(paymentAttemptId)) ||
+      (paymentId ? await db.getPaymentByProviderId(paymentId) : null) ||
+      (paymentAttemptId ? await db.getPaymentByAttemptId(paymentAttemptId) : null) ||
       (sessionId &&
         allPayments.find(
           (p) =>
@@ -71,8 +71,8 @@ export async function GET(req: NextRequest) {
 
           // Reload updated payment record
           payment =
-            (paymentId && db.getPaymentByProviderId(paymentId)) ||
-            (dodoPaymentData.payment_id && db.getPaymentByProviderId(dodoPaymentData.payment_id)) ||
+            (paymentId ? await db.getPaymentByProviderId(paymentId) : null) ||
+            (dodoPaymentData.payment_id ? await db.getPaymentByProviderId(dodoPaymentData.payment_id) : null) ||
             null;
         }
       } catch (err: any) {
@@ -81,12 +81,12 @@ export async function GET(req: NextRequest) {
     }
 
     const resolvedBrandId = payment?.brandId || brandIdParam;
-    const brand = resolvedBrandId ? db.getBrandById(resolvedBrandId) : null;
+    const brand = resolvedBrandId ? await db.getBrandById(resolvedBrandId) : null;
 
     // Calculate current ranking if brand exists
     let currentRank: number | null = null;
     if (brand) {
-      const allBrands = db.getAllBrands();
+      const allBrands = await db.getAllBrands();
       const rankings = calculateRankings(allBrands);
       const rankedBrand = rankings.find((b) => b.id === brand.id);
       currentRank = rankedBrand?.rank || null;

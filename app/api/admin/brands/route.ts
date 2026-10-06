@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const brand = db.getBrandById(brandId);
+    const brand = await db.getBrandById(brandId);
     if (!brand) {
       return NextResponse.json(
         { success: false, error: "Brand not found" },
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     if (action === "delete") newStatus = "deleted";
     if (action === "approve" || action === "publish") newStatus = "published";
 
-    const updated = db.updateBrand(brand.id, { status: newStatus });
+    const updated = await db.updateBrand(brand.id, { status: newStatus });
 
     return NextResponse.json({
       success: true,

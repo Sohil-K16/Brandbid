@@ -1,11 +1,12 @@
 import { Pool, PoolClient } from "pg";
-import { Brand, Payment, BidHistoryItem, ActivityItem } from "./schema";
+import { Brand, Payment, BidHistoryItem, ActivityItem, DatabaseState } from "./schema";
 import { calculateRankings } from "../ranking/ranking-engine";
 import { assessBrandSafety } from "../security/url-security";
 import crypto from "crypto";
 
 let pool: Pool | null = null;
 let isInitialized = false;
+let initPromise: Promise<void> | null = null;
 
 /**
  * Returns whether a PostgreSQL database URL is configured.
@@ -26,7 +27,8 @@ export function getPostgresPool(): Pool {
     connectionString.includes("supabase.co") ||
     connectionString.includes("aws.neon.tech") ||
     connectionString.includes("amazonaws.com") ||
-    connectionString.includes("render.com");
+    connectionString.includes("render.com") ||
+    connectionString.includes("sslmode=require");
 
   pool = new Pool({
     connectionString,
@@ -37,6 +39,29 @@ export function getPostgresPool(): Pool {
   });
 
   return pool;
+}
+
+/**
+ * Closes the PostgreSQL connection pool (useful for test cleanup).
+ */
+export async function closePostgresPool(): Promise<void> {
+  if (pool) {
+    await pool.end();
+    pool = null;
+    isInitialized = false;
+    initPromise = null;
+  }
+}
+
+/**
+ * Ensures the PostgreSQL schema is initialized before query execution.
+ */
+export async function ensurePostgresInitialized(): Promise<void> {
+  if (isInitialized) return;
+  if (!initPromise) {
+    initPromise = initPostgresSchema();
+  }
+  await initPromise;
 }
 
 /**
@@ -212,11 +237,13 @@ function mapActivityRow(row: any): ActivityItem {
 
 export const postgresDb = {
   async getAllBrands(): Promise<Brand[]> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM brands ORDER BY total_bid DESC, created_at ASC");
     return res.rows.map(mapBrandRow);
   },
 
   async getPublishedBrands(): Promise<Brand[]> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query(
       "SELECT * FROM brands WHERE status = 'published' AND total_bid > 0 ORDER BY total_bid DESC, created_at ASC"
     );
@@ -224,30 +251,35 @@ export const postgresDb = {
   },
 
   async getBrandById(id: string): Promise<Brand | null> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM brands WHERE id = $1", [id]);
     if (res.rows.length === 0) return null;
     return mapBrandRow(res.rows[0]);
   },
 
   async getBrandBySlug(slug: string): Promise<Brand | null> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM brands WHERE LOWER(slug) = LOWER($1)", [slug]);
     if (res.rows.length === 0) return null;
     return mapBrandRow(res.rows[0]);
   },
 
   async getBrandByCanonicalUrl(canonicalUrl: string): Promise<Brand | null> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM brands WHERE canonical_url = $1", [canonicalUrl]);
     if (res.rows.length === 0) return null;
     return mapBrandRow(res.rows[0]);
   },
 
   async getBrandByTokenHash(tokenHash: string): Promise<Brand | null> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM brands WHERE management_token_hash = $1", [tokenHash]);
     if (res.rows.length === 0) return null;
     return mapBrandRow(res.rows[0]);
   },
 
   async insertBrand(brand: Brand): Promise<Brand> {
+    await ensurePostgresInitialized();
     const query = `
       INSERT INTO brands (
         id, website_url, canonical_url, slug, name, category,
@@ -285,7 +317,7 @@ export const postgresDb = {
       brand.status,
       brand.managementTokenHash,
       brand.template,
-      brand.clickCount,
+      brand.clickCount ?? 0,
       brand.createdAt,
       brand.updatedAt,
     ];
@@ -294,6 +326,7 @@ export const postgresDb = {
   },
 
   async updateBrand(id: string, updates: Partial<Brand>): Promise<Brand | null> {
+    await ensurePostgresInitialized();
     const current = await this.getBrandById(id);
     if (!current) return null;
 
@@ -302,15 +335,18 @@ export const postgresDb = {
   },
 
   async incrementBrandClicks(id: string): Promise<void> {
+    await ensurePostgresInitialized();
     await getPostgresPool().query("UPDATE brands SET click_count = click_count + 1 WHERE id = $1", [id]);
   },
 
   async getAllPayments(): Promise<Payment[]> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM payments ORDER BY created_at DESC");
     return res.rows.map(mapPaymentRow);
   },
 
   async getPaymentByProviderId(providerPaymentId: string): Promise<Payment | null> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM payments WHERE provider_payment_id = $1", [
       providerPaymentId,
     ]);
@@ -319,6 +355,7 @@ export const postgresDb = {
   },
 
   async getPaymentByAttemptId(paymentAttemptId: string): Promise<Payment | null> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM payments WHERE payment_attempt_id = $1", [
       paymentAttemptId,
     ]);
@@ -327,6 +364,7 @@ export const postgresDb = {
   },
 
   async getPaymentsByBrandId(brandId: string): Promise<Payment[]> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM payments WHERE brand_id = $1 ORDER BY created_at DESC", [
       brandId,
     ]);
@@ -334,6 +372,7 @@ export const postgresDb = {
   },
 
   async insertPayment(payment: Payment): Promise<Payment> {
+    await ensurePostgresInitialized();
     const query = `
       INSERT INTO payments (
         id, brand_id, provider, provider_payment_id, provider_session_id,
@@ -369,6 +408,7 @@ export const postgresDb = {
     status: Payment["status"],
     verifiedAt: string | null = null
   ): Promise<Payment | null> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query(
       "UPDATE payments SET status = $1, verified_at = $2 WHERE provider_payment_id = $3 RETURNING *",
       [status, verifiedAt, providerPaymentId]
@@ -378,6 +418,7 @@ export const postgresDb = {
   },
 
   async getBidHistoryByBrandId(brandId: string): Promise<BidHistoryItem[]> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query(
       "SELECT * FROM bid_history WHERE brand_id = $1 ORDER BY created_at DESC",
       [brandId]
@@ -386,6 +427,7 @@ export const postgresDb = {
   },
 
   async insertBidHistory(item: BidHistoryItem): Promise<BidHistoryItem> {
+    await ensurePostgresInitialized();
     const query = `
       INSERT INTO bid_history (
         id, brand_id, payment_id, amount, total_after,
@@ -411,11 +453,13 @@ export const postgresDb = {
   },
 
   async getActivity(limit = 20): Promise<ActivityItem[]> {
+    await ensurePostgresInitialized();
     const res = await getPostgresPool().query("SELECT * FROM activity ORDER BY created_at DESC LIMIT $1", [limit]);
     return res.rows.map(mapActivityRow);
   },
 
   async insertActivity(item: ActivityItem): Promise<ActivityItem> {
+    await ensurePostgresInitialized();
     const query = `
       INSERT INTO activity (id, brand_id, event_type, metadata, created_at)
       VALUES ($1, $2, $3, $4, $5)
@@ -430,6 +474,37 @@ export const postgresDb = {
     ];
     const res = await getPostgresPool().query(query, values);
     return mapActivityRow(res.rows[0]);
+  },
+
+  async clearAll(): Promise<void> {
+    await ensurePostgresInitialized();
+    await getPostgresPool().query("TRUNCATE TABLE activity, bid_history, payments, brands CASCADE");
+  },
+
+  async resetState(state: DatabaseState): Promise<void> {
+    await this.clearAll();
+    for (const b of state.brands) {
+      await this.insertBrand(b);
+    }
+    for (const p of state.payments) {
+      await this.insertPayment(p);
+    }
+    for (const h of state.bidHistory) {
+      await this.insertBidHistory(h);
+    }
+    for (const a of state.activity) {
+      await this.insertActivity(a);
+    }
+  },
+
+  async getState(): Promise<DatabaseState> {
+    await ensurePostgresInitialized();
+    const brands = await this.getAllBrands();
+    const payments = await this.getAllPayments();
+    const activity = await this.getActivity(100);
+    const bidHistoryRes = await getPostgresPool().query("SELECT * FROM bid_history ORDER BY created_at DESC");
+    const bidHistory = bidHistoryRes.rows.map(mapBidHistoryRow);
+    return { brands, payments, bidHistory, activity };
   },
 
   /**
@@ -452,6 +527,8 @@ export const postgresDb = {
     paymentAttemptId?: string;
     amount: number;
     currency: string;
+    brandName?: string;
+    websiteUrl?: string;
   }): Promise<{
     success: boolean;
     message?: string;
@@ -459,6 +536,7 @@ export const postgresDb = {
     brandId?: string;
     amount?: number;
   }> {
+    await ensurePostgresInitialized();
     const {
       brandId,
       providerPaymentId,
@@ -467,6 +545,8 @@ export const postgresDb = {
       paymentAttemptId,
       amount,
       currency,
+      brandName: customBrandName,
+      websiteUrl: customWebsiteUrl,
     } = params;
 
     return await withPostgresTransaction(async (client) => {
@@ -487,19 +567,68 @@ export const postgresDb = {
       }
 
       // 2. Lock brand row FOR UPDATE (prevents race conditions across simultaneous rebids)
-      const brandRes = await client.query(
+      let brandRes = await client.query(
         "SELECT * FROM brands WHERE id = $1 FOR UPDATE",
         [brandId]
       );
 
+      const now = new Date().toISOString();
+
       if (brandRes.rows.length === 0) {
-        return { success: false, message: `Brand not found: ${brandId}` };
+        // Auto-recover brand if not found locally
+        const bName = (customBrandName || "Claimed Brand").trim();
+        const slug = `brand-${brandId.replace(/^brand_/, "")}`;
+        const newBrand: Brand = {
+          id: brandId,
+          websiteUrl: customWebsiteUrl || `https://${bName.toLowerCase().replace(/[^a-z0-9]/g, "") || "brand"}.com`,
+          canonicalUrl: bName.toLowerCase().replace(/[^a-z0-9]/g, "") || "brand.com",
+          slug,
+          name: bName,
+          category: "General",
+          logoUrl: null,
+          description: `Verified brand placement for ${bName}`,
+          tagline: null,
+          totalBid: 0,
+          status: "published",
+          managementTokenHash: "",
+          template: "typography",
+          clickCount: 0,
+          createdAt: now,
+          updatedAt: now,
+        };
+
+        await client.query(
+          `INSERT INTO brands (
+            id, website_url, canonical_url, slug, name, category,
+            logo_url, description, tagline, total_bid, status,
+            management_token_hash, template, click_count, created_at, updated_at
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)`,
+          [
+            newBrand.id,
+            newBrand.websiteUrl,
+            newBrand.canonicalUrl,
+            newBrand.slug,
+            newBrand.name,
+            newBrand.category,
+            newBrand.logoUrl,
+            newBrand.description,
+            newBrand.tagline,
+            newBrand.totalBid,
+            newBrand.status,
+            newBrand.managementTokenHash,
+            newBrand.template,
+            newBrand.clickCount,
+            newBrand.createdAt,
+            newBrand.updatedAt,
+          ]
+        );
+
+        brandRes = await client.query("SELECT * FROM brands WHERE id = $1 FOR UPDATE", [brandId]);
       }
 
       const brand = mapBrandRow(brandRes.rows[0]);
       const previousTotal = brand.totalBid;
       const newTotal = Math.round((previousTotal + amount) * 100) / 100;
-      const now = new Date().toISOString();
 
       // 3. Evaluate safety check
       const safetyCheck = assessBrandSafety(brand.websiteUrl, brand.name, brand.description || "");

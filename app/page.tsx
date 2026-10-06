@@ -9,7 +9,7 @@ import Leaderboard from "@/components/board/Leaderboard";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const allBrands = db.getAllBrands();
+  const allBrands = await db.getAllBrands();
   const rankedBrands = calculateRankings(allBrands);
 
   const totalBidVolume = rankedBrands.reduce((sum, b) => sum + b.totalBid, 0);

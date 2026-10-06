@@ -1,51 +1,24 @@
 import fs from "fs";
 import path from "path";
 import { Brand, Payment, BidHistoryItem, ActivityItem, DatabaseState } from "./schema";
-import { isPostgresConfigured } from "./postgres";
+import { isPostgresConfigured, postgresDb, withPostgresTransaction } from "./postgres";
 
 const DB_DIR = path.join(process.cwd(), "data");
-const DB_FILE =
-  process.env.NODE_ENV === "test"
-    ? path.join(DB_DIR, "brandbid.test.json")
-    : path.join(DB_DIR, "brandbid.json");
+const DB_FILE = path.join(DB_DIR, "brandbid.json");
 
 let memoryCache: DatabaseState | null = null;
 
 function ensureDbFile(): DatabaseState {
-  if (memoryCache) {
-    return memoryCache;
-  }
-
-  if (!fs.existsSync(DB_DIR)) {
-    fs.mkdirSync(DB_DIR, { recursive: true });
-  }
-
-  if (!fs.existsSync(DB_FILE)) {
-    const initialState: DatabaseState = {
-      brands: [],
-      payments: [],
-      bidHistory: [],
-      activity: [],
-    };
-    try {
-      fs.writeFileSync(DB_FILE, JSON.stringify(initialState, null, 2), "utf8");
-    } catch {
-      // Best-effort in restricted environments
-    }
-    memoryCache = initialState;
-    return initialState;
-  }
-
-  for (let attempt = 0; attempt < 5; attempt++) {
+  if (fs.existsSync(DB_FILE)) {
     try {
       const content = fs.readFileSync(DB_FILE, "utf8");
-      if (content && content.trim() !== "") {
-        memoryCache = JSON.parse(content) as DatabaseState;
+      const state = JSON.parse(content);
+      memoryCache = state;
+      return state;
+    } catch {
+      if (memoryCache) {
         return memoryCache;
       }
-    } catch {
-      const start = Date.now();
-      while (Date.now() - start < 15) {}
     }
   }
 
@@ -110,18 +83,7 @@ async function withDbLock<T>(action: () => Promise<T> | T): Promise<T> {
   }
 }
 
-export const db = {
-  /**
-   * Atomic database transaction wrapper.
-   * Serializes execution via in-memory mutex to ensure concurrent operations
-   * cannot interleave read-modify-write cycles.
-   */
-  async transaction<T>(action: () => Promise<T> | T): Promise<T> {
-    return withDbLock(async () => {
-      return await action();
-    });
-  },
-
+const fileDb = {
   // Brand Queries
   getAllBrands(): Brand[] {
     const state = ensureDbFile();
@@ -283,7 +245,7 @@ export const db = {
     return item;
   },
 
-  // Complete state management for seeding & tests
+  // State management
   getState(): DatabaseState {
     return ensureDbFile();
   },
@@ -294,6 +256,183 @@ export const db = {
 
   clearAll(): void {
     writeDbFile({ brands: [], payments: [], bidHistory: [], activity: [] });
+  },
+};
+
+/**
+ * Unified Database Interface for BrandBid.
+ * Automatically connects to PostgreSQL / Supabase in production (when DATABASE_URL is set),
+ * and gracefully falls back to local file-based storage for local development.
+ */
+export const db = {
+  // Brand Queries
+  async getAllBrands(): Promise<Brand[]> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getAllBrands();
+    }
+    return fileDb.getAllBrands();
+  },
+
+  async getPublishedBrands(): Promise<Brand[]> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getPublishedBrands();
+    }
+    return fileDb.getPublishedBrands();
+  },
+
+  async getBrandById(id: string): Promise<Brand | null> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getBrandById(id);
+    }
+    return fileDb.getBrandById(id);
+  },
+
+  async getBrandBySlug(slug: string): Promise<Brand | null> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getBrandBySlug(slug);
+    }
+    return fileDb.getBrandBySlug(slug);
+  },
+
+  async getBrandByCanonicalUrl(canonicalUrl: string): Promise<Brand | null> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getBrandByCanonicalUrl(canonicalUrl);
+    }
+    return fileDb.getBrandByCanonicalUrl(canonicalUrl);
+  },
+
+  async getBrandByTokenHash(tokenHash: string): Promise<Brand | null> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getBrandByTokenHash(tokenHash);
+    }
+    return fileDb.getBrandByTokenHash(tokenHash);
+  },
+
+  async insertBrand(brand: Brand): Promise<Brand> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.insertBrand(brand);
+    }
+    return fileDb.insertBrand(brand);
+  },
+
+  async updateBrand(id: string, updates: Partial<Brand>): Promise<Brand | null> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.updateBrand(id, updates);
+    }
+    return fileDb.updateBrand(id, updates);
+  },
+
+  async incrementBrandClicks(id: string): Promise<void> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.incrementBrandClicks(id);
+    }
+    return fileDb.incrementBrandClicks(id);
+  },
+
+  // Payment Queries
+  async getAllPayments(): Promise<Payment[]> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getAllPayments();
+    }
+    return fileDb.getAllPayments();
+  },
+
+  async getPaymentByProviderId(providerPaymentId: string): Promise<Payment | null> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getPaymentByProviderId(providerPaymentId);
+    }
+    return fileDb.getPaymentByProviderId(providerPaymentId);
+  },
+
+  async getPaymentByAttemptId(paymentAttemptId: string): Promise<Payment | null> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getPaymentByAttemptId(paymentAttemptId);
+    }
+    return fileDb.getPaymentByAttemptId(paymentAttemptId);
+  },
+
+  async getPaymentsByBrandId(brandId: string): Promise<Payment[]> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getPaymentsByBrandId(brandId);
+    }
+    return fileDb.getPaymentsByBrandId(brandId);
+  },
+
+  async insertPayment(payment: Payment): Promise<Payment> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.insertPayment(payment);
+    }
+    return fileDb.insertPayment(payment);
+  },
+
+  async updatePaymentStatus(
+    providerPaymentId: string,
+    status: Payment["status"],
+    verifiedAt: string | null = null
+  ): Promise<Payment | null> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.updatePaymentStatus(providerPaymentId, status, verifiedAt);
+    }
+    return fileDb.updatePaymentStatus(providerPaymentId, status, verifiedAt);
+  },
+
+  // Bid History Queries
+  async getBidHistoryByBrandId(brandId: string): Promise<BidHistoryItem[]> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getBidHistoryByBrandId(brandId);
+    }
+    return fileDb.getBidHistoryByBrandId(brandId);
+  },
+
+  async insertBidHistory(item: BidHistoryItem): Promise<BidHistoryItem> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.insertBidHistory(item);
+    }
+    return fileDb.insertBidHistory(item);
+  },
+
+  // Activity Queries
+  async getActivity(limit = 20): Promise<ActivityItem[]> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getActivity(limit);
+    }
+    return fileDb.getActivity(limit);
+  },
+
+  async insertActivity(item: ActivityItem): Promise<ActivityItem> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.insertActivity(item);
+    }
+    return fileDb.insertActivity(item);
+  },
+
+  // Transaction & State Management
+  async transaction<T>(action: () => Promise<T> | T): Promise<T> {
+    if (isPostgresConfigured()) {
+      return await withPostgresTransaction(async () => await action());
+    }
+    return await withDbLock(async () => await action());
+  },
+
+  async clearAll(): Promise<void> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.clearAll();
+    }
+    return fileDb.clearAll();
+  },
+
+  async resetState(newState: DatabaseState): Promise<void> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.resetState(newState);
+    }
+    return fileDb.resetState(newState);
+  },
+
+  async getState(): Promise<DatabaseState> {
+    if (isPostgresConfigured()) {
+      return await postgresDb.getState();
+    }
+    return fileDb.getState();
   },
 
   isPostgres(): boolean {

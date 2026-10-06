@@ -8,7 +8,7 @@ export async function GET(
 ) {
   try {
     const { slug } = await params;
-    const brand = db.getBrandBySlug(slug);
+    const brand = await db.getBrandBySlug(slug);
 
     if (!brand || brand.status !== "published") {
       return NextResponse.json(
@@ -17,7 +17,7 @@ export async function GET(
       );
     }
 
-    const allBrands = db.getAllBrands();
+    const allBrands = await db.getAllBrands();
     const ranked = calculateRankings(allBrands);
     const rankedBrand = ranked.find((b) => b.id === brand.id);
 
@@ -29,7 +29,7 @@ export async function GET(
     }
 
     const climbInfo = getNextRank(brand.id, allBrands);
-    const bidHistory = db.getBidHistoryByBrandId(brand.id);
+    const bidHistory = await db.getBidHistoryByBrandId(brand.id);
 
     return NextResponse.json({
       success: true,
@@ -54,10 +54,10 @@ export async function POST(
 ) {
   try {
     const { slug } = await params;
-    const brand = db.getBrandBySlug(slug);
+    const brand = await db.getBrandBySlug(slug);
 
     if (brand) {
-      db.incrementBrandClicks(brand.id);
+      await db.incrementBrandClicks(brand.id);
     }
 
     return NextResponse.json({ success: true });

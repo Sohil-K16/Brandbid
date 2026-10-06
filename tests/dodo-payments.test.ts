@@ -126,10 +126,10 @@ describe("Dodo Payments Architecture & Idempotency", () => {
     });
   });
 
-  it("enforces database payment idempotency for Dodo Payments", () => {
+  it("enforces database payment idempotency for Dodo Payments", async () => {
     const testPaymentId = "pay_dodo_idem_" + Date.now();
 
-    const payment1 = db.insertPayment({
+    const payment1 = await db.insertPayment({
       id: testPaymentId,
       brandId: "brand_synthetix",
       providerPaymentId: testPaymentId,
@@ -144,7 +144,7 @@ describe("Dodo Payments Architecture & Idempotency", () => {
     expect(payment1.providerPaymentId).toBe(testPaymentId);
 
     // Attempt duplicate insert with same providerPaymentId
-    const payment2 = db.insertPayment({
+    const payment2 = await db.insertPayment({
       id: "another_dodo_id",
       brandId: "brand_synthetix",
       providerPaymentId: testPaymentId,
@@ -158,9 +158,8 @@ describe("Dodo Payments Architecture & Idempotency", () => {
 
     expect(payment2.id).toBe(testPaymentId);
 
-    const allWithId = db
-      .getAllPayments()
-      .filter((p) => p.providerPaymentId === testPaymentId);
+    const allPayments = await db.getAllPayments();
+    const allWithId = allPayments.filter((p) => p.providerPaymentId === testPaymentId);
     expect(allWithId).toHaveLength(1);
   });
 });

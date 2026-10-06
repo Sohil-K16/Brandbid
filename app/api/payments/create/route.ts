@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const formattedUrl = formatFullUrl(data.websiteUrl);
 
     // Check if canonical URL already exists in brands
-    const existing = db.getBrandByCanonicalUrl(canonical);
+    const existing = await db.getBrandByCanonicalUrl(canonical);
     let brandId: string;
     let managementToken: string;
     let isRebid = false;
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
       // Generate unique slug
       let slug = existing ? existing.slug : generateSlug(data.name || canonical);
       let count = 1;
-      while (!existing && db.getBrandBySlug(slug)) {
+      while (!existing && (await db.getBrandBySlug(slug))) {
         slug = `${generateSlug(data.name)}-${count++}`;
       }
 
@@ -69,7 +69,7 @@ export async function POST(request: Request) {
         updatedAt: now,
       };
 
-      db.insertBrand(newBrand);
+      await db.insertBrand(newBrand);
     }
 
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";

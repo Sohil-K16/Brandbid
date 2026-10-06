@@ -4,6 +4,7 @@ import path from "path";
 export default defineConfig({
   test: {
     environment: "node",
+    fileParallelism: false,
     env: {
       DODO_PAYMENTS_API_KEY: "dodo_test_brandbid_local",
       DODO_PAYMENTS_PRODUCT_ID: "pdt_brandbid_spot",

@@ -39,10 +39,10 @@ export async function GET(request: Request) {
   }
 
   try {
-    const allBrands = db.getAllBrands();
+    const allBrands = await db.getAllBrands();
     const ranked = calculateRankings(allBrands);
-    const payments: Payment[] = db.getAllPayments();
-    const activity = db.getActivity(50);
+    const payments: Payment[] = await db.getAllPayments();
+    const activity = await db.getActivity(50);
 
     const verifiedPayments = payments.filter((p: Payment) => p.status === "verified");
     const totalVolume = verifiedPayments.reduce((sum: number, p: Payment) => sum + p.amount, 0);

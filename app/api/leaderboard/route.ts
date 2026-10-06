@@ -8,7 +8,7 @@ export async function GET(request: Request) {
     const category = searchParams.get("category");
     const search = searchParams.get("search");
 
-    const allBrands = db.getAllBrands();
+    const allBrands = await db.getAllBrands();
     let ranked = calculateRankings(allBrands);
 
     // Platform statistics
